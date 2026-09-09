@@ -17,8 +17,8 @@ export async function generateMetadata({
   const comp = getCompetitor(slug);
   if (!comp) return { title: "Not Found" };
   return {
-    title: `AskShop vs ${comp.name} — Comparison`,
-    description: `Compare AskShop and ${comp.name} for building a Shopify mobile app. Features, pricing, and which is right for your store.`,
+    title: `AskShop vs ${comp.name} — Shopify Mobile App Builder Comparison`,
+    description: `Compare AskShop and ${comp.name} as Shopify mobile app builders: features, pricing, AI shopping assistant, and which is right for your store.`,
   };
 }
 
@@ -183,12 +183,12 @@ export default async function ComparePage({
           <div className="mt-16 text-center">
             <h3 className="text-2xl font-bold text-foreground">Try AskShop free for 14 days</h3>
             <p className="mt-2 text-muted">No credit card required. See the difference for yourself.</p>
-            <a
-              href="https://apps.shopify.com"
+            <Link
+              href="/#waitlist"
               className="mt-6 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary-dark transition-colors"
             >
               Join Waitlist
-            </a>
+            </Link>
           </div>
         </div>
       </section>

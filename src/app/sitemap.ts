@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/privacy`, changeFrequency: "yearly" as const, priority: 0.3 },
     { url: `${baseUrl}/terms`, changeFrequency: "yearly" as const, priority: 0.3 },
     { url: `${baseUrl}/dpa`, changeFrequency: "yearly" as const, priority: 0.3 },
+    { url: `${baseUrl}/imprint`, changeFrequency: "yearly" as const, priority: 0.3 },
   ];
 
   const blogPages = blogPosts.map((post) => ({

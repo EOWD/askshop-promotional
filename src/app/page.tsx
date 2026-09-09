@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
-  MessageSquare,
   Globe,
   Zap,
   ShoppingCart,
@@ -20,12 +19,13 @@ import {
   TrendingUp,
   Network,
   Rocket,
-  DollarSign,
-  Users,
-  Target,
-  LineChart,
-  Mail,
+  Heart,
+  Eye,
+  Repeat,
 } from "lucide-react";
+import Image from "next/image";
+import { site, mailto } from "@/lib/site";
+import { FirstCustomer } from "@/components/FirstCustomer";
 import { ParticleNetwork } from "@/components/ParticleNetwork";
 import { GlobeVisualization } from "@/components/GlobeVisualization";
 
@@ -133,6 +133,17 @@ function BentoCard({
 // MAIN PAGE
 // ==================================================
 export default function HomePage() {
+  // Waitlist: until a form backend exists, submitting opens a pre-filled email to
+  // the site contact (src/lib/site.ts) so nothing is silently dropped.
+  const [waitlistEmail, setWaitlistEmail] = useState("");
+  const submitWaitlist = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    window.location.href = mailto(
+      "AskShop waitlist",
+      `Please add me to the AskShop waitlist.\n\nEmail: ${waitlistEmail}\nStore: \nWhat I'm looking for: `
+    );
+  };
+
   return (
     <div className="bg-[#06050e] text-white overflow-hidden">
 
@@ -178,7 +189,7 @@ export default function HomePage() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-400" />
                   </span>
-                  The Future of E-Commerce is Here
+                  Mobile AI commerce for Shopify stores
                 </span>
               </motion.div>
 
@@ -187,10 +198,10 @@ export default function HomePage() {
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[0.95]"
               >
                 <span className="block text-white/70 font-light text-2xl sm:text-3xl lg:text-4xl mb-2">
-                  Shop with
+                  Turn your Shopify store into
                 </span>
                 <span className="block bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
-                  AI Intelligence
+                  a mobile AI shopping app
                 </span>
                 <motion.div
                   initial={{ width: 0 }}
@@ -201,7 +212,7 @@ export default function HomePage() {
               </motion.h1>
 
               <motion.p variants={fadeUp} className="mt-6 text-base sm:text-lg text-white/50 max-w-xl leading-relaxed">
-                A global AI marketplace where customers discover products across thousands of stores through natural conversation. The next generation of mobile commerce.
+                AskShop is the Shopify mobile app builder with an AI shopping assistant built in: a native app where your customers chat, discover and buy. Built on Shopify and designed for the Universal Commerce Protocol.
               </motion.p>
 
               <motion.div variants={fadeUp} className="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
@@ -213,7 +224,7 @@ export default function HomePage() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <Rocket className="relative z-10 w-5 h-5" />
-                  <span className="relative z-10">Join the Waitlist</span>
+                  <span className="relative z-10">Get your mobile AI app</span>
                   <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </motion.a>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
@@ -228,7 +239,7 @@ export default function HomePage() {
               </motion.div>
 
               <motion.p variants={fadeIn} className="mt-4 text-sm text-white/30">
-                Launching Q2 2026 &middot; Free for first 100 merchants &middot; Plans from $99/mo
+                First merchant app live on iOS &amp; Android &middot; Plans from $99/mo &middot; No success fees
               </motion.p>
             </motion.div>
 
@@ -241,11 +252,64 @@ export default function HomePage() {
       <AnimatedSection className="py-20 border-y border-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
-            <AnimatedStat value="12.3%" label="AI Chat Conversion Rate" sublabel="vs 3.1% without AI" />
-            <AnimatedStat value="90%" label="Push Notification Opens" sublabel="vs 20% email" />
-            <AnimatedStat value="3.5x" label="More Purchases Per Year" sublabel="from app customers" />
+            <AnimatedStat value="iOS + Android" label="Native Apps" sublabel="one codebase, both stores" />
+            <AnimatedStat value="2" label="App Experiences" sublabel="AI chat and classic store" />
             <AnimatedStat value="$0" label="Success Fees" sublabel="no commissions, ever" />
+            <AnimatedStat value="$99" label="Starting Price" sublabel="per month, billed via Shopify" />
           </div>
+        </div>
+      </AnimatedSection>
+
+      {/* ===== OUTCOMES ===== */}
+      <AnimatedSection className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <motion.div variants={fadeUp} className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold">
+              AI ecommerce is here.{" "}
+              <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+                Don&apos;t get left behind.
+              </span>
+            </h2>
+            <p className="mt-6 text-lg text-white/40 max-w-2xl mx-auto leading-relaxed">
+              Shoppers are moving from browsing to asking — on their phones today, through AI agents
+              tomorrow. In times like these businesses evolve, and some fall behind. The stores that
+              move now own the customer relationship; the rest keep renting it. AskShop gives you the
+              three things that matter in the new age of ecommerce.
+            </p>
+          </motion.div>
+
+          <motion.div variants={stagger} className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: Heart,
+                title: "Retention",
+                desc: "An icon on the home screen, push notifications customers opt into, and an assistant that remembers each of them. Repeat purchases stop depending on paid re-acquisition.",
+              },
+              {
+                icon: Eye,
+                title: "AI visibility",
+                desc: "When shoppers ask instead of search, your catalog has to be readable by AI. AskShop structures it for the agent in your app — and, through UCP, for the agent surfaces beyond it.",
+              },
+              {
+                icon: Repeat,
+                title: "Recurring revenue",
+                desc: "Subscriptions, reorder reminders and one-tap buy-again turn one-off orders into predictable monthly revenue — MRR for physical goods.",
+              },
+            ].map((item) => (
+              <motion.div
+                key={item.title}
+                variants={scaleIn}
+                whileHover={{ y: -4 }}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-500/20 flex items-center justify-center mb-4">
+                  <item.icon className="w-6 h-6 text-indigo-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </AnimatedSection>
 
@@ -254,7 +318,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-bold">
-              Two experiences.{" "}
+              Two mobile shopping experiences.{" "}
               <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
                 One platform.
               </span>
@@ -286,10 +350,10 @@ export default function HomePage() {
                 <ul className="space-y-3 mb-8">
                   {[
                     "Natural language product search",
-                    "Smart recommendations (+47% AOV)",
+                    "Smart recommendations from your own catalog",
                     "In-chat product cards with add-to-cart",
                     "Conversational checkout",
-                    "3.2x higher conversion than browse-and-buy",
+                    "Remembers preferences between visits",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-white/60">
                       <div className="w-5 h-5 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0 mt-0.5">
@@ -381,236 +445,40 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold">
-              See it{" "}
+              Your AI shopping assistant{" "}
               <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
                 in action
               </span>
             </h2>
             <p className="mt-6 text-lg text-white/40 max-w-2xl mx-auto">
-              Real app screens. Real AI conversations. Real product discovery.
+              Real screens from Organic&apos;s Best, the first AskShop app — live on the App Store and Google Play.
             </p>
           </motion.div>
 
-          {/* 3 Phone Mockups */}
+          {/* Real screens from the first live AskShop app (see site.customers) */}
           <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
-
-            {/* Phone 1: AI Chat conversation */}
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0 }}
-              className="flex flex-col items-center"
-            >
-              <div className="w-[260px] sm:w-[280px] rounded-[2.5rem] border-[3px] border-white/10 bg-gradient-to-b from-[#0f0d1a] to-[#0a0913] p-3 shadow-2xl shadow-indigo-500/10">
-                {/* Status bar */}
-                <div className="flex items-center justify-between px-4 pt-2 pb-3 text-[10px] text-white/40">
-                  <span>9:41</span>
-                  <div className="w-20 h-5 rounded-full bg-black mx-auto" />
-                  <span>100%</span>
+            {site.customers[0].screenshots.slice(0, 3).map((shot, i) => (
+              <motion.figure
+                key={shot.src}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: i * 0.15 }}
+                className="flex flex-col items-center"
+              >
+                <div className="w-[260px] sm:w-[280px] rounded-[2.5rem] border-[3px] border-white/10 overflow-hidden shadow-2xl shadow-indigo-500/10 bg-[#0a0913]">
+                  <Image
+                    src={shot.src}
+                    alt={shot.alt}
+                    width={640}
+                    height={1385}
+                    sizes="(min-width: 640px) 280px, 260px"
+                    className="w-full h-auto"
+                  />
                 </div>
-                {/* Header */}
-                <div className="px-3 pb-3 border-b border-white/5">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-semibold text-white">AskShop AI</div>
-                      <div className="text-[10px] text-green-400">Online</div>
-                    </div>
-                  </div>
-                </div>
-                {/* Chat messages */}
-                <div className="py-3 px-1 space-y-2.5 min-h-[300px]">
-                  <div className="flex justify-end">
-                    <div className="rounded-2xl rounded-br-sm bg-indigo-600 px-3 py-2 text-[11px] text-white max-w-[85%]">
-                      Looking for running shoes under $120, size 10
-                    </div>
-                  </div>
-                  <div className="flex justify-start">
-                    <div className="rounded-2xl rounded-bl-sm bg-white/10 px-3 py-2 text-[11px] text-white/80 max-w-[85%]">
-                      I found 3 great options from Nike and Adidas in your size! Here are the top picks:
-                    </div>
-                  </div>
-                  {/* Product cards in chat */}
-                  <div className="flex gap-2 overflow-hidden pl-1">
-                    {[
-                      { name: "Nike Air Zoom", price: "$109.99", color: "from-indigo-500/20 to-violet-500/20" },
-                      { name: "Adidas Ultra", price: "$119.99", color: "from-cyan-500/20 to-blue-500/20" },
-                    ].map((p) => (
-                      <div key={p.name} className="w-[110px] shrink-0 rounded-xl border border-white/10 bg-white/[0.03] overflow-hidden">
-                        <div className={`h-[70px] bg-gradient-to-br ${p.color} flex items-center justify-center`}>
-                          <Smartphone className="w-6 h-6 text-white/30" />
-                        </div>
-                        <div className="p-2">
-                          <div className="text-[10px] font-medium text-white truncate">{p.name}</div>
-                          <div className="text-[10px] font-bold text-indigo-400">{p.price}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex justify-start">
-                    <div className="rounded-2xl rounded-bl-sm bg-white/10 px-3 py-2 text-[11px] text-white/80 max-w-[85%]">
-                      Want me to add any of these to your cart?
-                    </div>
-                  </div>
-                  <div className="flex justify-end">
-                    <div className="rounded-2xl rounded-br-sm bg-indigo-600 px-3 py-2 text-[11px] text-white max-w-[85%]">
-                      Add the Nike Air Zoom please!
-                    </div>
-                  </div>
-                </div>
-                {/* Input bar */}
-                <div className="flex items-center gap-2 border-t border-white/5 pt-2 px-2">
-                  <div className="flex-1 rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-[10px] text-white/30">
-                    Ask anything...
-                  </div>
-                  <div className="w-7 h-7 rounded-full bg-indigo-600 flex items-center justify-center">
-                    <ArrowRight className="w-3 h-3 text-white" />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-5 text-sm font-medium text-white/60 text-center">AI Chat Shopping</p>
-              <p className="text-xs text-white/30 text-center">Natural conversation to cart</p>
-            </motion.div>
-
-            {/* Phone 2: Product recommendation cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="flex flex-col items-center"
-            >
-              <div className="w-[260px] sm:w-[280px] rounded-[2.5rem] border-[3px] border-white/10 bg-gradient-to-b from-[#0f0d1a] to-[#0a0913] p-3 shadow-2xl shadow-violet-500/10">
-                {/* Status bar */}
-                <div className="flex items-center justify-between px-4 pt-2 pb-3 text-[10px] text-white/40">
-                  <span>9:41</span>
-                  <div className="w-20 h-5 rounded-full bg-black mx-auto" />
-                  <span>100%</span>
-                </div>
-                {/* Header */}
-                <div className="px-3 pb-3 border-b border-white/5">
-                  <div className="text-sm font-bold text-white">Recommended For You</div>
-                  <div className="text-[10px] text-white/40 mt-0.5">Based on your style</div>
-                </div>
-                {/* Product grid */}
-                <div className="py-3 px-1 space-y-3 min-h-[300px]">
-                  {[
-                    { name: "Merino Wool Sweater", price: "$89.00", badge: "Trending", badgeColor: "bg-violet-500/80", gradient: "from-violet-500/20 to-purple-500/20" },
-                    { name: "Leather Crossbody Bag", price: "$129.00", badge: "-20%", badgeColor: "bg-red-500/80", gradient: "from-amber-500/20 to-orange-500/20" },
-                    { name: "Ceramic Vase Set", price: "$45.00", badge: "New", badgeColor: "bg-emerald-500/80", gradient: "from-emerald-500/20 to-teal-500/20" },
-                  ].map((p) => (
-                    <div key={p.name} className="flex gap-3 items-center rounded-xl border border-white/5 bg-white/[0.02] p-2.5">
-                      <div className={`w-16 h-16 shrink-0 rounded-lg bg-gradient-to-br ${p.gradient} flex items-center justify-center relative`}>
-                        <ShoppingCart className="w-5 h-5 text-white/30" />
-                        <span className={`absolute -top-1 -right-1 ${p.badgeColor} text-[8px] font-bold text-white px-1.5 py-0.5 rounded-full`}>
-                          {p.badge}
-                        </span>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-[11px] font-medium text-white truncate">{p.name}</div>
-                        <div className="text-[11px] font-bold text-indigo-400 mt-0.5">{p.price}</div>
-                        <div className="flex gap-1 mt-1">
-                          {[1,2,3,4,5].map((s) => (
-                            <svg key={s} className="w-2.5 h-2.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-indigo-600/20 flex items-center justify-center shrink-0">
-                        <ArrowRight className="w-3 h-3 text-indigo-400" />
-                      </div>
-                    </div>
-                  ))}
-                  {/* AI suggestion banner */}
-                  <div className="rounded-xl bg-gradient-to-r from-indigo-600/10 to-violet-600/10 border border-indigo-500/20 p-3 flex items-center gap-2">
-                    <BrainCircuit className="w-5 h-5 text-indigo-400 shrink-0" />
-                    <div>
-                      <div className="text-[10px] font-semibold text-indigo-300">AI Picked For You</div>
-                      <div className="text-[9px] text-white/40">Based on your browsing history</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p className="mt-5 text-sm font-medium text-white/60 text-center">Smart Recommendations</p>
-              <p className="text-xs text-white/30 text-center">AI-powered product discovery</p>
-            </motion.div>
-
-            {/* Phone 3: Store browsing / product detail */}
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="flex flex-col items-center"
-            >
-              <div className="w-[260px] sm:w-[280px] rounded-[2.5rem] border-[3px] border-white/10 bg-gradient-to-b from-[#0f0d1a] to-[#0a0913] p-3 shadow-2xl shadow-cyan-500/10">
-                {/* Status bar */}
-                <div className="flex items-center justify-between px-4 pt-2 pb-3 text-[10px] text-white/40">
-                  <span>9:41</span>
-                  <div className="w-20 h-5 rounded-full bg-black mx-auto" />
-                  <span>100%</span>
-                </div>
-                {/* Product image area */}
-                <div className="rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-white/5 h-[160px] flex items-center justify-center relative overflow-hidden mb-3">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0913] via-transparent to-transparent" />
-                  <Smartphone className="w-12 h-12 text-white/15" />
-                  {/* Dot indicators */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                  </div>
-                  {/* Wishlist */}
-                  <div className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
-                    <svg className="w-3.5 h-3.5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-                {/* Product info */}
-                <div className="px-2 space-y-2 min-h-[140px]">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="text-xs font-bold text-white">Premium Canvas Sneakers</div>
-                      <div className="text-[10px] text-white/40">Urban Street Co.</div>
-                    </div>
-                    <div className="text-sm font-bold text-indigo-400">$84.00</div>
-                  </div>
-                  {/* Size selector */}
-                  <div>
-                    <div className="text-[9px] text-white/40 mb-1.5 uppercase tracking-wider">Size</div>
-                    <div className="flex gap-1.5">
-                      {["8", "9", "10", "11"].map((s, i) => (
-                        <div key={s} className={`w-8 h-8 rounded-lg border text-[10px] font-medium flex items-center justify-center ${i === 2 ? "border-indigo-500 bg-indigo-500/20 text-indigo-300" : "border-white/10 text-white/40"}`}>
-                          {s}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  {/* Color selector */}
-                  <div>
-                    <div className="text-[9px] text-white/40 mb-1.5 uppercase tracking-wider">Color</div>
-                    <div className="flex gap-2">
-                      <div className="w-5 h-5 rounded-full bg-white border-2 border-indigo-500" />
-                      <div className="w-5 h-5 rounded-full bg-gray-800 border border-white/10" />
-                      <div className="w-5 h-5 rounded-full bg-blue-900 border border-white/10" />
-                    </div>
-                  </div>
-                  {/* Add to cart */}
-                  <div className="pt-1">
-                    <div className="w-full rounded-xl bg-indigo-600 py-2.5 text-center text-[11px] font-bold text-white">
-                      Add to Cart
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p className="mt-5 text-sm font-medium text-white/60 text-center">Product Experience</p>
-              <p className="text-xs text-white/30 text-center">Native feel, instant checkout</p>
-            </motion.div>
+                <figcaption className="mt-5 text-sm font-medium text-white/60 text-center">{shot.caption}</figcaption>
+              </motion.figure>
+            ))}
           </div>
         </div>
       </AnimatedSection>
@@ -621,10 +489,11 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-bold">
-              Everything for{" "}
+              Everything a{" "}
               <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-                mobile commerce
-              </span>
+                Shopify mobile app
+              </span>{" "}
+              needs
             </h2>
             <p className="mt-6 text-lg text-white/40 max-w-2xl mx-auto">
               Built on Shopify&apos;s Storefront API. Products, inventory, and orders stay perfectly in sync.
@@ -642,13 +511,13 @@ export default function HomePage() {
             <BentoCard
               icon={ShoppingCart}
               title="Native Checkout"
-              description="Apple Pay, Google Pay, and Shop Pay. One-tap checkout that converts 35% better than mobile web."
+              description="Apple Pay, Google Pay, and Shop Pay through Shopify's Checkout Sheet Kit. Payment stays with Shopify."
               gradient="bg-gradient-to-br from-violet-600/10 to-transparent"
             />
             <BentoCard
               icon={Bell}
               title="Push Notifications"
-              description="90% open rates. Abandoned cart recovery, back-in-stock alerts, and personalized recommendations."
+              description="Order and shipping updates, back-in-stock alerts, and campaigns sent from your Shopify admin."
               gradient="bg-gradient-to-br from-purple-600/10 to-transparent"
             />
             <BentoCard
@@ -666,19 +535,19 @@ export default function HomePage() {
             <BentoCard
               icon={BarChart3}
               title="Analytics Dashboard"
-              description="Track installs, active users, push performance, and revenue attribution — all inside Shopify admin."
+              description="Mobile sales, revenue attribution, and push performance — all inside your Shopify admin."
               gradient="bg-gradient-to-br from-emerald-600/10 to-transparent"
             />
             <BentoCard
               icon={Network}
               title="AI Marketplace"
-              description="Multi-store discovery. Customers explore across thousands of stores through a single AI-powered app."
+              description="Multi-store discovery. Shoppers explore every participating store through one AI app — and, through UCP, from other agent surfaces."
               gradient="bg-gradient-to-br from-pink-600/10 to-transparent"
             />
             <BentoCard
               icon={Shield}
-              title="Enterprise Security"
-              description="End-to-end encryption, SOC 2 compliant, GDPR ready. Your customer data is always protected."
+              title="Privacy by Design"
+              description="Payments and customer accounts stay on Shopify. Data handling built for GDPR, with a DPA available."
               gradient="bg-gradient-to-br from-teal-600/10 to-transparent"
             />
           </motion.div>
@@ -690,9 +559,9 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-bold">
-              Live in the App Store in{" "}
+              How to turn your Shopify store into a{" "}
               <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                under a week
+                mobile app
               </span>
             </h2>
           </motion.div>
@@ -734,6 +603,9 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
+      {/* ===== FIRST CUSTOMER ===== */}
+      <FirstCustomer />
+
       {/* ===== GLOBAL NETWORK SECTION ===== */}
       <AnimatedSection className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-950/10 to-transparent" />
@@ -744,14 +616,14 @@ export default function HomePage() {
                 variants={fadeUp}
                 className="text-4xl sm:text-5xl font-bold mb-6"
               >
-                A global{" "}
+                An AI shopping marketplace{" "}
                 <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                  commerce network
+                  for every store
                 </span>
               </motion.h2>
               <motion.p variants={fadeUp} className="text-lg text-white/40 mb-10 leading-relaxed">
-                The AskShop universal marketplace connects customers to stores worldwide.
-                AI-powered discovery means your products are found by the right shoppers, no matter where they are.
+                The AskShop marketplace app brings participating stores into one AI-guided shopping
+                experience, so your products are found by shoppers who simply describe what they need.
               </motion.p>
               <motion.div variants={stagger} className="space-y-6">
                 {[
@@ -792,94 +664,65 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      {/* ===== INVEST IN ASKSHOP ===== */}
+      {/* ===== AGENTIC COMMERCE / UCP ===== */}
       <AnimatedSection className="py-24 sm:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div>
-              <motion.div variants={fadeUp}>
-                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-300 mb-6">
-                  <DollarSign className="w-4 h-4" />
-                  Investment Opportunity
-                </span>
-              </motion.div>
-              <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold mb-6">
-                Invest in the{" "}
-                <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-                  future of commerce
-                </span>
-              </motion.h2>
-              <motion.p variants={fadeUp} className="text-lg text-white/50 mb-8 leading-relaxed">
-                AskShop is building the infrastructure layer for AI-powered mobile commerce.
-                We&apos;re raising our pre-seed round and looking for strategic investors who believe
-                in the next generation of e-commerce.
-              </motion.p>
-              <motion.div variants={stagger} className="space-y-4 mb-10">
-                {[
-                  { icon: Target, text: "$1.2T mobile commerce market growing 25% YoY" },
-                  { icon: TrendingUp, text: "AI commerce expected to be $200B+ by 2030" },
-                  { icon: Users, text: "5.7M+ Shopify merchants — massive addressable market" },
-                  { icon: LineChart, text: "SaaS model: recurring revenue, zero transaction fees" },
-                ].map((item) => (
-                  <motion.div
-                    key={item.text}
-                    variants={fadeUp}
-                    className="flex items-center gap-3"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
-                      <item.icon className="w-5 h-5 text-emerald-400" />
-                    </div>
-                    <p className="text-sm text-white/60">{item.text}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
-              <motion.a
-                variants={fadeUp}
-                href="mailto:invest@askshop.app"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(16,185,129,0.3)" }}
-                whileTap={{ scale: 0.98 }}
-                className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-600 px-8 py-4 text-base font-semibold text-white shadow-xl shadow-emerald-500/20 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <Mail className="relative z-10 w-5 h-5" />
-                <span className="relative z-10">Get the Investor Deck</span>
-                <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.a>
-            </div>
+          <motion.div variants={fadeUp} className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-sm font-medium text-indigo-300 mb-6">
+              <Network className="w-4 h-4" />
+              Universal Commerce Protocol (UCP)
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold">
+              Built for{" "}
+              <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+                agentic commerce
+              </span>
+            </h2>
+            <p className="mt-6 text-lg text-white/40 max-w-3xl mx-auto leading-relaxed">
+              UCP is the open standard Google and Shopify introduced in January 2026 so AI agents can
+              discover products, complete checkout and handle post-purchase support with any merchant.
+              AskShop is being built on it: the AI in your app speaks the same protocol as the agents
+              in Google, Gemini and beyond — and you stay the merchant of record.
+            </p>
+          </motion.div>
 
-            {/* Metrics cards */}
-            <motion.div
-              initial={{ opacity: 0, x: 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="grid grid-cols-2 gap-4"
+          <motion.div variants={stagger} className="grid md:grid-cols-3 gap-6">
+            {[
+              { icon: Globe, title: "Discover", desc: "Your catalog, structured for agents. Shoppers ask in plain language and get your products — in your app, or in any UCP-connected surface." },
+              { icon: ShoppingCart, title: "Transact", desc: "Checkout runs on Shopify, so you keep your business logic, your payment providers and your role as merchant of record." },
+              { icon: Shield, title: "Support", desc: "Order status, returns and questions handled in the same conversation, with a hand-off to your human team when it matters." },
+            ].map((item) => (
+              <motion.div
+                key={item.title}
+                variants={scaleIn}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 border border-indigo-500/20 flex items-center justify-center mb-4">
+                  <item.icon className="w-6 h-6 text-indigo-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.p variants={fadeIn} className="mt-10 text-center text-sm text-white/30">
+            UCP support is in development. Read Google&apos;s{" "}
+            <a
+              href="https://developers.googleblog.com/under-the-hood-universal-commerce-protocol-ucp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-300 hover:text-white transition-colors"
             >
-              {[
-                { label: "TAM", value: "$1.2T", desc: "Mobile commerce market", gradient: "from-emerald-500/20 to-cyan-500/20", border: "border-emerald-500/20" },
-                { label: "SAM", value: "$28B", desc: "Shopify mobile commerce", gradient: "from-cyan-500/20 to-blue-500/20", border: "border-cyan-500/20" },
-                { label: "Merchants", value: "5.7M+", desc: "Shopify stores worldwide", gradient: "from-violet-500/20 to-indigo-500/20", border: "border-violet-500/20" },
-                { label: "ARPU Target", value: "$249", desc: "Average revenue per user/mo", gradient: "from-indigo-500/20 to-purple-500/20", border: "border-indigo-500/20" },
-                { label: "Gross Margin", value: "85%+", desc: "Pure SaaS economics", gradient: "from-emerald-500/20 to-emerald-500/10", border: "border-emerald-500/20" },
-                { label: "Moat", value: "AI+Data", desc: "Network effects compound", gradient: "from-amber-500/20 to-orange-500/20", border: "border-amber-500/20" },
-              ].map((m) => (
-                <motion.div
-                  key={m.label}
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  className={`rounded-2xl border ${m.border} bg-gradient-to-br ${m.gradient} p-5 backdrop-blur-sm`}
-                >
-                  <div className="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-1">{m.label}</div>
-                  <div className="text-2xl sm:text-3xl font-bold text-white mb-1">{m.value}</div>
-                  <div className="text-xs text-white/40">{m.desc}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+              protocol overview
+            </a>
+            .
+          </motion.p>
         </div>
       </AnimatedSection>
 
-      {/* ===== PRE-LAUNCH CTA ===== */}
+      {/* ===== EARLY ACCESS CTA ===== */}
       <section id="waitlist" className="py-24 sm:py-32 relative scroll-mt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-600/10 to-transparent" />
         <div className="absolute inset-0">
@@ -895,27 +738,36 @@ export default function HomePage() {
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-sm font-medium text-indigo-300 mb-6">
             <Rocket className="w-4 h-4" />
-            Pre-Launch — Coming Soon
+            Early access
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Be first to{" "}
+            Step into the{" "}
             <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
-              experience the future
+              new age of ecommerce
             </span>
           </h2>
           <p className="text-lg text-white/40 max-w-2xl mx-auto mb-10">
-            We&apos;re building something extraordinary. Join the waitlist for early access
-            and launch pricing. Limited spots for founding merchants.
+            Businesses evolve, or they fall behind. The first AskShop app is live in both stores and
+            the next founding merchants are onboarding now — join the waitlist for early access and
+            founding-merchant pricing, and you&apos;ll hear back from the founder directly.
           </p>
 
-          {/* Email signup */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto mb-6">
+          {/* Waitlist form — see submitWaitlist above. */}
+          <form
+            onSubmit={submitWaitlist}
+            className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto mb-6"
+          >
             <input
               type="email"
+              required
+              value={waitlistEmail}
+              onChange={(e) => setWaitlistEmail(e.target.value)}
               placeholder="you@yourstore.com"
+              aria-label="Your email address"
               className="flex-1 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm px-5 py-4 text-base text-white placeholder:text-white/30 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/30"
             />
             <motion.button
+              type="submit"
               whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(99,102,241,0.4)" }}
               whileTap={{ scale: 0.98 }}
               className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-4 text-base font-bold text-white shadow-xl shadow-indigo-500/20 overflow-hidden shrink-0"
@@ -924,15 +776,18 @@ export default function HomePage() {
               <span className="relative z-10">Join Waitlist</span>
               <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.button>
-          </div>
+          </form>
           <p className="text-sm text-white/30">
-            Free forever for the first 100 merchants &middot; No credit card required
+            No credit card required &middot; Or email{" "}
+            <a href={mailto("Hello AskShop")} className="text-indigo-300 hover:text-white transition-colors">
+              {site.contact.email}
+            </a>
           </p>
 
           <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-white/30">
-            <span className="flex items-center gap-2"><Users className="w-4 h-4 text-indigo-400/60" /> 847 on waitlist</span>
-            <span className="flex items-center gap-2"><Rocket className="w-4 h-4 text-violet-400/60" /> Launching Q2 2026</span>
-            <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-emerald-400/60" /> Backed by Shopify Partners</span>
+            <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-indigo-400/60" /> Built on Shopify&apos;s Storefront API</span>
+            <span className="flex items-center gap-2"><Smartphone className="w-4 h-4 text-violet-400/60" /> Native iOS and Android</span>
+            <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-emerald-400/60" /> No success fees</span>
           </div>
         </motion.div>
       </section>

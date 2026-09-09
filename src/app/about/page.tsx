@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { site, mailto, founderInitials } from "@/lib/site";
 import { JsonLd, buildBreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "About — The Team Behind AskShop",
+  title: "About — Who Builds AskShop",
   description:
-    "AskShop is built by a team of mobile commerce specialists, Shopify experts, and AI engineers. Learn about our mission to democratize mobile commerce.",
+    "AskShop is designed and built by founder Eiad Oraby: dedicated native apps and an AI shopping marketplace for Shopify stores. Learn about the mission and how to get in touch.",
 };
 
 export default function AboutPage() {
@@ -18,7 +19,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
-              Making mobile commerce accessible to{" "}
+              The mobile commerce platform for{" "}
               <span className="text-primary">every Shopify store</span>
             </h1>
             <p className="mt-6 text-lg text-muted">
@@ -52,15 +53,42 @@ export default function AboutPage() {
               under the merchant&apos;s brand, with their own App Store listing.
             </p>
             <p>
-              We&apos;re a small, focused team that cares deeply about merchant success. Every feature
-              we build is driven by one question: will this help our merchants sell more on
-              mobile?
+              AskShop is founder-built and founder-run. Every feature is driven by one question:
+              will this help merchants sell more on mobile?
             </p>
           </div>
         </div>
       </section>
 
+      {/* Founder */}
       <section className="py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-foreground mb-12">Who builds AskShop</h2>
+          <div className="max-w-3xl rounded-2xl bg-surface border border-border p-8 flex flex-col sm:flex-row gap-6 items-start">
+            <div className="w-16 h-16 shrink-0 rounded-2xl bg-primary flex items-center justify-center text-white text-xl font-bold">
+              {founderInitials}
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-foreground">{site.founder.name}</h3>
+              <p className="mt-1 text-sm text-primary-light">{site.founder.role}</p>
+              <p className="mt-4 text-muted">
+                AskShop is designed, engineered and run by its founder. The platform grew out of
+                building the Organic&apos;s Best app — a European organic baby-formula retailer —
+                now live on the App Store and Google Play. Every part of it — the native apps, the
+                Shopify admin, and the AI assistant — is built in-house.
+              </p>
+              <a
+                href={mailto("Hello AskShop")}
+                className="mt-6 inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-surface-dark transition-colors"
+              >
+                {site.contact.email}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-surface-dark">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-foreground mb-12">What we believe</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -90,7 +118,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-surface-dark">
+      <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-foreground mb-12">Our tech stack</h2>
           <p className="text-muted max-w-2xl mb-8">
@@ -114,7 +142,7 @@ export default function AboutPage() {
       </section>
 
       {/* Contact */}
-      <section className="py-24">
+      <section className="py-24 bg-surface-dark">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground">Get in touch</h2>
           <p className="mt-4 text-lg text-muted max-w-xl mx-auto">
@@ -122,10 +150,10 @@ export default function AboutPage() {
             you.
           </p>
           <a
-            href="mailto:hello@askshop.app"
+            href={mailto("Hello AskShop")}
             className="mt-6 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary-dark transition-colors"
           >
-            hello@askshop.app
+            {site.contact.email}
           </a>
         </div>
       </section>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { mailto } from "@/lib/site";
 
 const navigation = [
   { name: "Features", href: "/features" },
@@ -47,13 +48,13 @@ export default function Header() {
 
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="https://apps.shopify.com"
+              href={mailto("Hello AskShop")}
               className="text-sm font-medium text-white/60 hover:text-white transition-colors"
             >
-              Log in
+              Contact
             </a>
             <motion.a
-              href="https://apps.shopify.com"
+              href="/#waitlist"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/20"
@@ -99,17 +100,17 @@ export default function Header() {
                 ))}
                 <div className="mt-4 flex flex-col gap-2">
                   <a
-                    href="https://apps.shopify.com"
+                    href={mailto("Hello AskShop")}
                     className="text-center rounded-lg border border-white/10 text-white px-4 py-2 text-sm font-medium"
                   >
-                    Log in
+                    Contact
                   </a>
-                  <a
-                    href="https://apps.shopify.com"
+                  <Link
+                    href="/#waitlist"
                     className="text-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white"
                   >
                     Join Waitlist
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

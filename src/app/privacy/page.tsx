@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { site, mailto } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -10,13 +11,13 @@ export default function PrivacyPage() {
     <section className="py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold tracking-tight text-foreground">Privacy Policy</h1>
-        <p className="mt-4 text-sm text-muted">Last updated: March 19, 2026</p>
+        <p className="mt-4 text-sm text-muted">Last updated: September 9, 2026</p>
 
         <div className="mt-12 space-y-8 text-sm text-muted leading-relaxed">
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-3">1. Introduction</h2>
             <p>
-              AskShop (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. This Privacy
+              AskShop, operated by {site.legal.operator} (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot; — see our Imprint), is committed to protecting your privacy. This Privacy
               Policy explains how we collect, use, disclose, and safeguard your information when
               you use our Shopify application and related services (collectively, the &quot;Service&quot;).
             </p>
@@ -114,8 +115,8 @@ export default function PrivacyPage() {
             </ul>
             <p className="mt-2">
               To exercise these rights, contact us at{" "}
-              <a href="mailto:privacy@askshop.app" className="text-primary hover:text-primary-dark">
-                privacy@askshop.app
+              <a href={mailto("Privacy request")} className="text-primary hover:text-primary-dark">
+                {site.contact.email}
               </a>.
             </p>
           </div>
@@ -163,8 +164,8 @@ export default function PrivacyPage() {
             <p>
               For privacy-related inquiries:<br />
               Email:{" "}
-              <a href="mailto:privacy@askshop.app" className="text-primary hover:text-primary-dark">
-                privacy@askshop.app
+              <a href={mailto("Privacy request")} className="text-primary hover:text-primary-dark">
+                {site.contact.email}
               </a>
               <br />
               Website: askshop.app

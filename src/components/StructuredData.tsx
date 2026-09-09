@@ -1,3 +1,5 @@
+import { site } from "@/lib/site";
+
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
     <script
@@ -13,15 +15,16 @@ export const organizationSchema = {
   "@type": "Organization",
   name: "AskShop",
   url: "https://askshop.app",
-  logo: "https://askshop.app/logo.png",
+  logo: `${site.url}/logo.svg`,
   description:
     "Turn your Shopify store into a native mobile app with AI-powered chat shopping or a classic store experience.",
   foundingDate: "2025",
+  founder: { "@type": "Person", name: site.founder.name },
   sameAs: [],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
-    email: "support@askshop.app",
+    email: site.contact.email,
   },
 };
 
@@ -139,7 +142,7 @@ export function buildArticleSchema(post: {
       "@type": "Organization",
       name: "AskShop",
       url: "https://askshop.app",
-      logo: { "@type": "ImageObject", url: "https://askshop.app/logo.png" },
+      logo: { "@type": "ImageObject", url: `${site.url}/logo.svg` },
     },
     mainEntityOfPage: `https://askshop.app/blog/${post.slug}`,
     articleSection: post.category,

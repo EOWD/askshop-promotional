@@ -17,14 +17,18 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "AskShop — Turn Your Shopify Store Into a Native Mobile App",
+    default: "AskShop — Shopify Mobile App Builder with AI Shopping",
     template: "%s | AskShop",
   },
   description:
-    "Build a dedicated native mobile app for your Shopify store. Choose between an AI-powered chat shopping experience or a classic store app. Push notifications, native checkout, white-label builds.",
+    "Turn your Shopify store into a native iOS and Android app with an AI shopping assistant built in. Native checkout, push notifications, no success fees.",
   keywords: [
     "shopify mobile app builder",
     "shopify app builder",
+    "ai shopping",
+    "ai shopping app",
+    "turn shopify store into mobile app",
+    "shopify to mobile app",
     "convert shopify to mobile app",
     "shopify native app",
     "mobile commerce shopify",
@@ -34,21 +38,27 @@ export const metadata: Metadata = {
     "white label mobile app",
     "shopify to ios app",
     "shopify to android app",
+    "universal commerce protocol",
+    "ucp shopify",
+    "agentic commerce",
+    "ai shopping agent",
+    "ai visibility ecommerce",
+    "ecommerce retention app",
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://askshop.app",
     siteName: "AskShop",
-    title: "AskShop — Turn Your Shopify Store Into a Native Mobile App",
+    title: "AskShop — Shopify Mobile App Builder with AI Shopping",
     description:
-      "Build a dedicated native mobile app for your Shopify store. AI chat shopping or classic store experience.",
+      "Turn your Shopify store into a native app with an AI shopping assistant built in. Native checkout, push notifications, no success fees.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AskShop — Shopify Mobile App Builder",
+    title: "AskShop — Shopify Mobile App Builder with AI Shopping",
     description:
-      "Build a dedicated native mobile app for your Shopify store. AI chat shopping or classic store experience.",
+      "Turn your Shopify store into a native app with an AI shopping assistant built in. Native checkout, push notifications, no success fees.",
   },
   robots: {
     index: true,

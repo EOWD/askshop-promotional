@@ -4,9 +4,9 @@ import { blogPosts } from "@/lib/blog-data";
 import { JsonLd, buildBlogListSchema, buildBreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Blog — Mobile Commerce Insights & Guides",
+  title: "Blog — AI Shopping, Agentic Commerce & Shopify Mobile Apps",
   description:
-    "Learn about mobile commerce, AI shopping, push notification strategies, and how to grow your Shopify store with a native mobile app.",
+    "Guides on AI shopping, agentic commerce, the Universal Commerce Protocol, push notifications, and turning your Shopify store into a native mobile app.",
 };
 
 export default function BlogPage() {
@@ -21,11 +21,12 @@ export default function BlogPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-16">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
-            Blog
+            AI shopping and mobile commerce for{" "}
+            <span className="text-primary">Shopify stores</span>
           </h1>
           <p className="mt-4 text-lg text-muted">
-            Insights on mobile commerce, AI shopping, and growing your Shopify store with a
-            native mobile app.
+            Guides on AI shopping assistants, agentic commerce and the Universal Commerce
+            Protocol, push notifications, and turning your Shopify store into a native mobile app.
           </p>
         </div>
 

@@ -133,12 +133,12 @@ export default async function BlogPostPage({
           <p className="mt-2 text-sm text-muted">
             Start your 14-day free trial. No credit card required.
           </p>
-          <a
-            href="https://apps.shopify.com"
+          <Link
+            href="/#waitlist"
             className="mt-4 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
           >
             Join Waitlist
-          </a>
+          </Link>
         </div>
       </div>
     </article>

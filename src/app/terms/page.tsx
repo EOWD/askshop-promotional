@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { site, mailto } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -10,13 +11,13 @@ export default function TermsPage() {
     <section className="py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold tracking-tight text-foreground">Terms of Service</h1>
-        <p className="mt-4 text-sm text-muted">Last updated: March 19, 2026</p>
+        <p className="mt-4 text-sm text-muted">Last updated: September 9, 2026</p>
 
         <div className="mt-12 space-y-8 text-sm text-muted leading-relaxed">
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-3">1. Acceptance of Terms</h2>
             <p>
-              By installing, accessing, or using AskShop (the &quot;Service&quot;), you agree to be bound
+              By installing, accessing, or using AskShop (the &quot;Service&quot;), operated by {site.legal.operator}, you agree to be bound
               by these Terms of Service (&quot;Terms&quot;). If you do not agree, do not use the Service.
               These Terms supplement any terms agreed upon between you and Shopify.
             </p>
@@ -151,8 +152,8 @@ export default function TermsPage() {
             <p>
               For questions about these Terms:<br />
               Email:{" "}
-              <a href="mailto:legal@askshop.app" className="text-primary hover:text-primary-dark">
-                legal@askshop.app
+              <a href={mailto("Terms of Service question")} className="text-primary hover:text-primary-dark">
+                {site.contact.email}
               </a>
             </p>
           </div>

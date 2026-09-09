@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { site, mailto } from "@/lib/site";
 
 const footerLinks = {
   Product: [
@@ -18,12 +19,13 @@ const footerLinks = {
   Resources: [
     { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
-    { name: "Shopify App Store", href: "https://apps.shopify.com" },
+    { name: "Contact", href: mailto("Hello AskShop") },
   ],
   Legal: [
     { name: "Privacy Policy", href: "/privacy" },
     { name: "Terms of Service", href: "/terms" },
     { name: "DPA", href: "/dpa" },
+    { name: "Imprint", href: "/imprint" },
   ],
 };
 
@@ -42,7 +44,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-white/40">
-              The future of mobile commerce. AI-powered shopping experiences for Shopify stores worldwide.
+              {site.tagline}. Dedicated native apps and an AI shopping marketplace, built on Shopify.
             </p>
           </div>
 
@@ -67,11 +69,11 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-white/30">
-            &copy; {new Date().getFullYear()} AskShop. All rights reserved.
+            &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
-          <p className="text-sm text-white/30">
-            Built for the next generation of mobile commerce.
-          </p>
+          <a href={mailto("Hello AskShop")} className="text-sm text-white/30 hover:text-white transition-colors">
+            {site.contact.email}
+          </a>
         </div>
       </div>
     </footer>

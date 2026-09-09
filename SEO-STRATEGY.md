@@ -1,5 +1,61 @@
 # AskShop SEO & Marketing Strategy
 
+## Ahrefs keyword check — US, 2026-09-09
+
+Volumes are monthly US searches; KD is Ahrefs Keyword Difficulty (0–100). Pulled via the
+Ahrefs API (Keywords Explorer overview + matching terms).
+
+| Keyword | Volume | KD | Intent | Target |
+|---|---|---|---|---|
+| agentic commerce | 5,900 | 54 | info/commercial | Home UCP section (H2), blog pillar |
+| what is agentic commerce | 2,400 | **1** | informational | **New blog post** — easiest high-volume win |
+| ai visibility | 3,300 | 28 | info/commercial | Home outcomes card; blog "AI visibility for Shopify stores" |
+| ai shopping | 2,700 | **6** | info/commercial | Home (H1, showcase H2), blog index H1 |
+| ai for ecommerce | 1,700 | 55 | info/commercial | Blog |
+| ai shopping assistant | 1,600 | 29 | info/commercial | Home showcase H2, features H1/H2, title tags |
+| ai ecommerce | 1,300 | 57 | info/commercial | Home outcomes H2 |
+| conversational commerce | 1,000 | 85 | informational | Skip as a target (too hard) |
+| universal commerce protocol | 600 | 69 | branded (Google) | Home UCP eyebrow; blog explainer for Shopify merchants |
+| shopify mobile app | 500 | 55 | branded (Shopify's own app) | Secondary only — SERP is Shopify's admin app |
+| shopify app builder | 400 | 24 | commercial | Parent topic of the primary keyword |
+| ecommerce mobile app | 400 | 0 | commercial | Features / home body copy |
+| shopify mobile app builder | 350 | **8** | commercial | **Primary keyword** — site title, home H1 area |
+| shopify to mobile app | 350 | 23 | commercial | Home how-it-works H2 |
+| mobile commerce platform | 350 | 3 | commercial | About H1, footer tagline |
+| shopify mobile app creator | 200 | 18 | commercial | Body copy variant |
+| ai shopping agent | 200 | 19 | commercial | Body copy variant |
+| shopify ai assistant | 200 | 5 | commercial | Features H2 |
+| turn shopify store into mobile app | 150 | 8 | commercial | Home H1 + how-it-works H2 |
+| mobile app for shopify store | 150 | 9 | commercial | Body copy variant |
+| shopify push notifications | 150 | 4 | commercial | Features H2 |
+| white label mobile app | 150 | 0 | commercial | Features body copy |
+| convert shopify store to mobile app | 100 | 4 | commercial | Body copy variant |
+| best mobile app builder for shopify | 90 | 4 | commercial (CPC $13) | Comparison pages |
+| shopify mobile app pricing | 100 | — | commercial | Pricing title + H1 |
+| ucp shopify / shopify universal commerce protocol | 70 / 50 | — | branded | UCP blog post |
+| tapcart alternative | 20 | — | commercial | Existing compare page (low volume) |
+
+### On-page mapping applied 2026-09-09
+
+| Page | Primary keyword | Title tag | H1 |
+|---|---|---|---|
+| `/` | shopify mobile app builder, ai shopping | AskShop — Shopify Mobile App Builder with AI Shopping | Turn your Shopify store into a mobile AI shopping app |
+| `/features` | shopify mobile app (features), ai shopping assistant | Shopify Mobile App Features & AI Shopping Assistant | Every feature your Shopify mobile app needs |
+| `/pricing` | shopify mobile app pricing | Shopify Mobile App Pricing — Plans from $99/month | Shopify mobile app pricing, without success fees |
+| `/about` | mobile commerce platform | About — Who Builds AskShop | The mobile commerce platform for every Shopify store |
+| `/blog` | ai shopping, agentic commerce | Blog — AI Shopping, Agentic Commerce & Shopify Mobile Apps | AI shopping and mobile commerce for Shopify stores |
+| `/compare/*` | [competitor] alternative | AskShop vs X — Shopify Mobile App Builder Comparison | AskShop vs X |
+
+Home H2s now carry: "AI ecommerce", "mobile shopping experiences", "AI shopping assistant",
+"Shopify mobile app", "turn your Shopify store into a mobile app", "AI shopping marketplace",
+"agentic commerce" + "Universal Commerce Protocol (UCP)".
+
+### Next content to write (by opportunity)
+1. **What is agentic commerce?** — 2,400/mo, KD 1. Explainer for merchants; link to UCP post.
+2. **AI visibility for Shopify stores** — 3,300/mo, KD 28. How agents "see" a catalog; UCP, Agentic Storefronts, structured data.
+3. **Universal Commerce Protocol explained for Shopify merchants** — 600/mo + long tail (ucp shopify, shopify universal commerce protocol).
+4. **AI shopping assistants: what they can do in 2026** — 1,600/mo, KD 29 ("ai shopping assistant capabilities" 450/mo).
+
 ## Competitive Positioning
 
 ### Key Differentiators vs All Competitors

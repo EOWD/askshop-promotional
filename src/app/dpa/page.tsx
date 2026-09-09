@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { site, mailto } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Data Processing Agreement (DPA)",
@@ -13,13 +14,13 @@ export default function DPAPage() {
         <h1 className="text-4xl font-bold tracking-tight text-foreground">
           Data Processing Agreement
         </h1>
-        <p className="mt-4 text-sm text-muted">Last updated: March 19, 2026</p>
+        <p className="mt-4 text-sm text-muted">Last updated: September 9, 2026</p>
 
         <div className="mt-8 p-4 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-sm text-muted">
           This DPA is automatically included with all AskShop Enterprise plans. Starter and
           Growth plan merchants may request execution of this DPA by contacting{" "}
-          <a href="mailto:privacy@askshop.app" className="text-primary hover:text-primary-dark">
-            privacy@askshop.app
+          <a href={mailto("DPA request")} className="text-primary hover:text-primary-dark">
+            {site.contact.email}
           </a>.
         </div>
 
@@ -28,7 +29,7 @@ export default function DPAPage() {
             <h2 className="text-lg font-semibold text-foreground mb-3">1. Definitions</h2>
             <ul className="list-disc pl-6 space-y-2">
               <li><strong className="text-foreground">&quot;Controller&quot;</strong> means the Merchant who determines the purposes and means of processing Personal Data through the AskShop Service.</li>
-              <li><strong className="text-foreground">&quot;Processor&quot;</strong> means AskShop, which processes Personal Data on behalf of the Controller.</li>
+              <li><strong className="text-foreground">&quot;Processor&quot;</strong> means AskShop (operated by {site.legal.operator}), which processes Personal Data on behalf of the Controller.</li>
               <li><strong className="text-foreground">&quot;Personal Data&quot;</strong> means any information relating to an identified or identifiable natural person processed through the Service.</li>
               <li><strong className="text-foreground">&quot;Sub-processor&quot;</strong> means any third party engaged by AskShop to process Personal Data on behalf of the Controller.</li>
               <li><strong className="text-foreground">&quot;Data Subject&quot;</strong> means the identified or identifiable person to whom Personal Data relates (i.e., the Merchant&apos;s customers).</li>
@@ -192,8 +193,8 @@ export default function DPAPage() {
             <p>
               For DPA-related inquiries or to request execution of this agreement:<br />
               Email:{" "}
-              <a href="mailto:privacy@askshop.app" className="text-primary hover:text-primary-dark">
-                privacy@askshop.app
+              <a href={mailto("DPA request")} className="text-primary hover:text-primary-dark">
+                {site.contact.email}
               </a>
             </p>
           </div>

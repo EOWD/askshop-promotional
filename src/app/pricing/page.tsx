@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { mailto } from "@/lib/site";
 import { JsonLd, buildFaqSchema, buildPricingSchemas, buildBreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Pricing — Plans Starting at $99/month",
+  title: "Shopify Mobile App Pricing — Plans from $99/month",
   description:
-    "AskShop pricing: Starter ($99/mo), Growth ($249/mo), and Enterprise ($599/mo). All plans include a 14-day free trial. Build a native mobile app for your Shopify store.",
+    "AskShop Shopify mobile app pricing: Starter ($99/mo), Growth ($249/mo) and Enterprise ($599/mo). 14-day free trial, no success fees. Build a native app for your Shopify store.",
 };
 
 const plans = [
@@ -83,7 +84,7 @@ const faqs = [
   },
   {
     q: "How long does it take to publish my app?",
-    a: "After you submit your build request, we typically have your app ready within 3-5 business days. App Store review adds 1-2 additional days.",
+    a: "After you submit your build request, we typically have your app ready within 3-5 business days. Apple and Google review times vary — usually a few days, sometimes longer if they have questions.",
   },
   {
     q: "Do I own the app?",
@@ -118,7 +119,7 @@ export default function PricingPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
-              Simple, transparent pricing
+              Shopify mobile app pricing, without success fees
             </h1>
             <p className="mt-4 text-lg text-muted max-w-2xl mx-auto">
               All plans include a 14-day free trial. No credit card required. No success fees
@@ -169,7 +170,7 @@ export default function PricingPage() {
                 </p>
 
                 <a
-                  href="https://apps.shopify.com"
+                  href={plan.cta === "Contact Sales" ? mailto("AskShop Enterprise plan") : "/#waitlist"}
                   className={`mt-6 block w-full rounded-lg py-2.5 text-center text-sm font-medium transition-colors ${
                     plan.highlighted
                       ? "bg-white text-indigo-600 hover:bg-gray-100"

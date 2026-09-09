@@ -3,18 +3,19 @@ import Link from "next/link";
 import { JsonLd, buildBreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Features — AI Chat & Classic Store Mobile Apps",
+  title: "Shopify Mobile App Features & AI Shopping Assistant",
   description:
-    "Explore AskShop's features: AI-powered conversational shopping, native checkout, push notifications, white-label builds, and full Shopify integration.",
+    "AskShop features: an AI shopping assistant that knows your catalog, a classic native store app, Shopify push notifications, native checkout with Apple Pay and Google Pay, and white-label builds.",
 };
 
 const aiFeatures = [
   { title: "Natural Language Search", description: "Customers describe what they want in plain English. The AI finds the perfect products from your catalog." },
-  { title: "Smart Recommendations", description: "AI learns customer preferences and suggests relevant products. Average order value increases 47%." },
+  { title: "Smart Recommendations", description: "Suggestions come from your own catalog and each shopper's stated preferences — no generic upsells." },
   { title: "In-Chat Product Cards", description: "Products appear inline with images, prices, variants, and add-to-cart — no context switching." },
   { title: "Conversational Checkout", description: "Customers can complete their purchase right in the conversation flow." },
   { title: "Memory & Personalization", description: "The AI remembers previous conversations and purchases to personalize future interactions." },
   { title: "Brand Voice Training", description: "Train the AI to speak in your brand's tone — casual, professional, playful, or premium." },
+  { title: "Agent-Ready (UCP)", description: "Being built on the Universal Commerce Protocol, the open standard from Google and Shopify, so AI agents in your app and beyond can discover, buy, and support." },
 ];
 
 const classicFeatures = [
@@ -46,8 +47,8 @@ export default function FeaturesPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
-              Two app experiences.{" "}
-              <span className="text-primary">Unlimited potential.</span>
+              Every feature your{" "}
+              <span className="text-primary">Shopify mobile app</span> needs
             </h1>
             <p className="mt-6 text-lg text-muted">
               Whether your customers prefer chatting with AI or browsing product grids, AskShop
@@ -66,7 +67,7 @@ export default function FeaturesPage() {
             </div>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            AI Chat App
+            AI Shopping Assistant App
           </h2>
           <p className="text-lg text-muted max-w-2xl mb-12">
             A personal shopping assistant for every customer. Powered by AI that knows your
@@ -88,7 +89,7 @@ export default function FeaturesPage() {
       <section className="py-24" id="classic">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Classic Store App
+            Classic Mobile Store App
           </h2>
           <p className="text-lg text-muted max-w-2xl mb-12">
             The traditional mobile shopping experience, perfected. Fast, beautiful, and built
@@ -110,7 +111,7 @@ export default function FeaturesPage() {
       <section className="py-24 bg-surface-dark">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Included in every app
+            Push notifications, native checkout and more — in every app
           </h2>
           <p className="text-lg text-muted max-w-2xl mb-12">
             Core features that power both app experiences.
@@ -132,15 +133,15 @@ export default function FeaturesPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground">See it in action</h2>
           <p className="mt-4 text-lg text-muted max-w-xl mx-auto">
-            Start your free trial and explore both app experiences with your own products.
+            Join the waitlist and we&apos;ll walk you through both experiences with your own products.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://apps.shopify.com"
+            <Link
+              href="/#waitlist"
               className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary-dark transition-colors"
             >
               Join Waitlist
-            </a>
+            </Link>
             <Link
               href="/pricing"
               className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-base font-medium text-foreground hover:bg-surface-dark transition-colors"
