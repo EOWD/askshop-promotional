@@ -15,7 +15,7 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Tapmerce",
-  url: "https://tapmerce.com",
+  url: "https://tapmerce.ai",
   logo: `${site.url}/logo.svg`,
   description:
     "AI shopping for nutrition brands on Shopify and other ecommerce platforms (supplements, infant formula, sports nutrition, healthy food): an AI shopping assistant for the website, branded iOS and Android apps, and AI marketplace listings.",
@@ -34,10 +34,10 @@ export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Tapmerce",
-  url: "https://tapmerce.com",
+  url: "https://tapmerce.ai",
   potentialAction: {
     "@type": "SearchAction",
-    target: "https://tapmerce.com/blog?q={search_term_string}",
+    target: "https://tapmerce.ai/blog?q={search_term_string}",
     "query-input": "required name=search_term_string",
   },
 };
@@ -49,7 +49,7 @@ export const softwareAppSchema = {
   name: "Tapmerce",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web, iOS, Android",
-  url: "https://tapmerce.com",
+  url: "https://tapmerce.ai",
   description:
     "AI shopping assistant and branded mobile apps for nutrition brands on Shopify and other ecommerce platforms. Website AI chatbot, native iOS and Android apps, subscriptions, push notifications and native checkout.",
   offers: {
@@ -153,18 +153,18 @@ export function buildArticleSchema(post: {
     author: {
       "@type": "Organization",
       name: post.author,
-      url: "https://tapmerce.com",
+      url: "https://tapmerce.ai",
     },
     publisher: {
       "@type": "Organization",
       name: "Tapmerce",
-      url: "https://tapmerce.com",
+      url: "https://tapmerce.ai",
       logo: { "@type": "ImageObject", url: `${site.url}/logo.svg` },
     },
-    mainEntityOfPage: `https://tapmerce.com/blog/${post.slug}`,
+    mainEntityOfPage: `https://tapmerce.ai/blog/${post.slug}`,
     articleSection: post.category,
     wordCount: Math.round(parseInt(post.readTime) * 250),
-    url: `https://tapmerce.com/blog/${post.slug}`,
+    url: `https://tapmerce.ai/blog/${post.slug}`,
   };
 }
 
@@ -177,14 +177,14 @@ export function buildBlogListSchema(
     "@type": "CollectionPage",
     name: "Tapmerce Blog",
     description: "Guides, tips, and insights on mobile commerce, AI shopping, and growing your Shopify store.",
-    url: "https://tapmerce.com/blog",
+    url: "https://tapmerce.ai/blog",
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: posts.length,
       itemListElement: posts.map((post, i) => ({
         "@type": "ListItem",
         position: i + 1,
-        url: `https://tapmerce.com/blog/${post.slug}`,
+        url: `https://tapmerce.ai/blog/${post.slug}`,
         name: post.title,
       })),
     },
@@ -202,7 +202,7 @@ export function buildComparisonSchema(competitor: {
     "@type": "WebPage",
     name: `Tapmerce vs ${competitor.name} — Comparison`,
     description: `Compare Tapmerce and ${competitor.name} for building a Shopify mobile app. Features, pricing, and which is right for your store.`,
-    url: `https://tapmerce.com/compare/${competitor.slug}`,
+    url: `https://tapmerce.ai/compare/${competitor.slug}`,
     mainEntity: {
       "@type": "ItemList",
       name: `Tapmerce vs ${competitor.name} Feature Comparison`,
@@ -215,7 +215,7 @@ export function buildComparisonSchema(competitor: {
             "@type": "SoftwareApplication",
             name: "Tapmerce",
             applicationCategory: "BusinessApplication",
-            url: "https://tapmerce.com",
+            url: "https://tapmerce.ai",
           },
         },
         {

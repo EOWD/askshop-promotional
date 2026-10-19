@@ -38,9 +38,9 @@ export default async function ComparePage({
     <>
       <JsonLd data={buildComparisonSchema(comp)} />
       <JsonLd data={buildBreadcrumbSchema([
-        { name: "Home", url: "https://tapmerce.com" },
-        { name: "Compare", url: "https://tapmerce.com/compare/tapcart" },
-        { name: `vs ${comp.name}`, url: `https://tapmerce.com/compare/${comp.slug}` },
+        { name: "Home", url: "https://tapmerce.ai" },
+        { name: "Compare", url: "https://tapmerce.ai/compare/tapcart" },
+        { name: `vs ${comp.name}`, url: `https://tapmerce.ai/compare/${comp.slug}` },
       ])} />
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -53,7 +53,7 @@ export default function PrivacyPage() {
               <li>IP addresses (anonymized after 30 days)</li>
               <li>Browser type and version (for web analytics)</li>
               <li>Referring URLs</li>
-              <li>Pages viewed on tapmerce.com</li>
+              <li>Pages viewed on tapmerce.ai</li>
             </ul>
           </div>
 
@@ -128,7 +128,7 @@ export default function PrivacyPage() {
               legitimate interest, and consent. Our Data Processing Agreement (DPA) is available
               at{" "}
               <a href="/dpa" className="text-primary hover:text-primary-dark">
-                tapmerce.com/dpa
+                tapmerce.ai/dpa
               </a>.
             </p>
           </div>
@@ -168,7 +168,7 @@ export default function PrivacyPage() {
                 {site.contact.email}
               </a>
               <br />
-              Website: tapmerce.com
+              Website: tapmerce.ai
             </p>
           </div>
         </div>

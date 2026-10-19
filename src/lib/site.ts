@@ -5,17 +5,17 @@
  */
 export const site = {
   name: "Tapmerce",
-  domain: "tapmerce.com",
-  url: "https://tapmerce.com",
+  domain: "tapmerce.ai",
+  url: "https://tapmerce.ai",
   tagline: "AI shopping and mobile apps for nutrition brands",
   founder: {
     name: "Eiad Oraby",
     role: "Founder & developer",
   },
   contact: {
-    // TEMPORARY: the @tapmerce.com mailboxes do not exist yet (the domain has no
+    // TEMPORARY: the @tapmerce.ai mailboxes do not exist yet (the domain has no
     // MX records), so every contact link points at the founder's inbox. Swap this
-    // for hello@tapmerce.com once mail is set up — nothing else needs to change.
+    // for hello@tapmerce.ai once mail is set up — nothing else needs to change.
     email: "eiadoraby@gmail.com",
   },
   legal: {

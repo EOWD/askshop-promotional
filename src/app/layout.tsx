@@ -27,7 +27,7 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tapmerce.com"),
+  metadataBase: new URL("https://tapmerce.ai"),
   title: {
     default: "AI Shopping Assistant & Mobile Apps for Nutrition Brands | Tapmerce",
     template: "%s | Tapmerce",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://tapmerce.com",
+    url: "https://tapmerce.ai",
     siteName: "Tapmerce",
     title: "AI Shopping Assistant & Mobile Apps for Nutrition Brands",
     description:
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://tapmerce.com",
+    canonical: "https://tapmerce.ai",
   },
 };
 

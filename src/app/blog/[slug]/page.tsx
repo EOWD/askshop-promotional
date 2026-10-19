@@ -41,9 +41,9 @@ export default async function BlogPostPage({
     <>
     <JsonLd data={buildArticleSchema(post)} />
     <JsonLd data={buildBreadcrumbSchema([
-      { name: "Home", url: "https://tapmerce.com" },
-      { name: "Blog", url: "https://tapmerce.com/blog" },
-      { name: post.title, url: `https://tapmerce.com/blog/${post.slug}` },
+      { name: "Home", url: "https://tapmerce.ai" },
+      { name: "Blog", url: "https://tapmerce.ai/blog" },
+      { name: post.title, url: `https://tapmerce.ai/blog/${post.slug}` },
     ])} />
     <article className="py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

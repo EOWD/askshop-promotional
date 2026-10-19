@@ -5,7 +5,7 @@ import { JsonLd, buildBreadcrumbSchema } from "@/components/StructuredData";
 export const metadata: Metadata = {
   title: "Imprint — Legal Notice",
   description:
-    "Legal notice (Impressum) for tapmerce.com: who operates the site, how to reach them, and who is responsible for its content.",
+    "Legal notice (Impressum) for tapmerce.ai: who operates the site, how to reach them, and who is responsible for its content.",
 };
 
 /** Imprint / Impressum. Operator details come from src/lib/site.ts — the street

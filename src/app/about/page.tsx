@@ -12,8 +12,8 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={buildBreadcrumbSchema([
-        { name: "Home", url: "https://tapmerce.com" },
-        { name: "About", url: "https://tapmerce.com/about" },
+        { name: "Home", url: "https://tapmerce.ai" },
+        { name: "About", url: "https://tapmerce.ai/about" },
       ])} />
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

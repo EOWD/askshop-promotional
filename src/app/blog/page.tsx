@@ -13,8 +13,8 @@ export default function BlogPage() {
   return (
     <>
     <JsonLd data={buildBreadcrumbSchema([
-      { name: "Home", url: "https://tapmerce.com" },
-      { name: "Blog", url: "https://tapmerce.com/blog" },
+      { name: "Home", url: "https://tapmerce.ai" },
+      { name: "Blog", url: "https://tapmerce.ai/blog" },
     ])} />
     <JsonLd data={buildBlogListSchema(blogPosts)} />
     <section className="py-24">
