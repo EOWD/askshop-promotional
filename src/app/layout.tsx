@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | Tapmerce",
   },
   description:
-    "AI shopping for nutrition brands (supplements, infant formula, sports nutrition, healthy food): an AI chatbot for your online store and your own iOS and Android app. Shopify and other platforms.",
+    "AI shopping for nutrition brands: a branded AI assistant for your online store and your own iOS and Android app. Supplements, formula, sports nutrition, food.",
   keywords: [
     "ai shopping assistant",
     "ai chatbot for ecommerce",
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://tapmerce.ai",
+    canonical: "./",
   },
 };
 

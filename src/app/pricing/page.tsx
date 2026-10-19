@@ -18,7 +18,7 @@ import { PricingPlans, type PlanCard } from "@/components/pricing/PricingPlans";
 
 export const metadata: Metadata = {
   title: `Pricing: AI Shopping Assistant from ${aiPlanFrom}, Branded App ${appFrom}`,
-  description: `Tapmerce pricing for nutrition brands: an AI shopping assistant from ${aiPlanFrom} priced per shopper conversation, a branded iOS and Android app with AI built in for ${appFrom}, and an AI marketplace listing included. No commission on your sales.`,
+  description: `AI shopping assistant from ${aiPlanFrom}, priced per conversation. Branded iOS and Android app with AI built in ${appFrom}. Marketplace listing included, 0% commission.`,
 };
 
 const common = [

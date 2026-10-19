@@ -19,7 +19,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Shopify Mobile App Features: AI Chatbot, Push & Order Tracking",
   description:
-    "Every feature in an Tapmerce Shopify mobile app, live today: an AI shopping assistant built for your store, push notifications, order tracking, app-only discounts, subscriptions, reviews with photos and live support chat.",
+    "Every feature in a Tapmerce app: an AI shopping assistant for your store, push notifications, order tracking, subscriptions, app-only discounts and live support chat.",
 };
 
 interface Feature {
