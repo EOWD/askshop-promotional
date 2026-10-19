@@ -1,795 +1,722 @@
-"use client";
-
-import Link from "next/link";
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import {
-  Globe,
-  Zap,
-  ShoppingCart,
-  Bell,
-  Palette,
-  BarChart3,
-  Sparkles,
-  ArrowRight,
-  Store,
-  BrainCircuit,
-  Smartphone,
-  Shield,
-  TrendingUp,
-  Network,
-  Rocket,
-  Heart,
-  Eye,
-  Repeat,
-} from "lucide-react";
 import Image from "next/image";
-import { site, mailto } from "@/lib/site";
-import { FirstCustomer } from "@/components/FirstCustomer";
-import { ParticleNetwork } from "@/components/ParticleNetwork";
-import { GlobeVisualization } from "@/components/GlobeVisualization";
+import Link from "next/link";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Baby,
+  Bell,
+  Database,
+  FileCheck2,
+  Headset,
+  MessageCircle,
+  Pill,
+  Repeat,
+  Sparkles,
+  Stethoscope,
+} from "lucide-react";
+import { site } from "@/lib/site";
+import { aiPlans, app, appSetupPrice, formatEur, overagePerConversationEur, formatEurCents } from "@/lib/pricing";
+import { StoreBadges } from "@/components/StoreBadges";
+import { JsonLd, buildFaqSchema } from "@/components/StructuredData";
+import { Reveal } from "@/components/home/Reveal";
+import { DemoRequestForm } from "@/components/home/DemoRequestForm";
+import { HeroField } from "@/components/home/HeroField";
+import { AssistantDemo } from "@/components/home/AssistantDemo";
+import { ServicesSwitcher, type Service } from "@/components/home/ServicesSwitcher";
+import { PlanPicker } from "@/components/home/PlanPicker";
+import { SectionDock } from "@/components/home/SectionDock";
+import { Lifestyles } from "@/components/home/Lifestyles";
+import { BrandLogo, SAMPLE_BRANDS } from "@/components/home/SampleBrands";
 
-// --- Animation variants ---
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" as const } },
-};
+const flagship = site.customers[0];
+const shot = (key: string) => flagship.screenshots.find((s) => s.src.includes(key))!;
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1 } },
-};
+// ---------- Content ----------
 
-const stagger = {
-  visible: { transition: { staggerChildren: 0.1 } },
-};
+const questions = [
+  "Is this safe while breastfeeding?",
+  "Can I take iron and magnesium together?",
+  "Which protein has no stevia?",
+  "Is the vitamin D3 from lichen or lanolin?",
+  "My toddler is 14 months. Which formula stage?",
+  "Do you ship to Canada?",
+  "What's the difference between your two collagens?",
+  "Can I pause my subscription for a month?",
+  "Is this granola nut free?",
+  "How much protein per serving?",
+  "Is the fish oil tested for heavy metals?",
+  "Which creatine dissolves best?",
+];
 
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" as const } },
-};
+const services: Service[] = [
+  {
+    id: "website",
+    tab: "Your website",
+    title: "An AI chatbot for your online store",
+    body: "A shopping assistant on every page of your site, trained on your catalog, ingredient lists, FAQs and policies. It answers in your brand's voice, shows products as cards and adds them to the shopper's real cart. Shopify or any other ecommerce platform.",
+    points: [
+      "Guided finders that narrow by goal, diet and allergens",
+      "Ingredient, dosage and sourcing answers from your product data",
+      "Order status from the customer's real orders",
+      "Hand-off to your support team in the same chat",
+      "Styled in your logo, colors, fonts and voice",
+    ],
+  },
+  {
+    id: "app",
+    tab: "Your app",
+    title: "Your own app, with AI shopping built in",
+    body: "An iOS and Android app in your brand, published under your name, with the AI shopping assistant in its own tab. Shoppers ask, compare and add to cart in a conversation, and since formula, protein and vitamins run out every few weeks, the reorder is one tap away.",
+    points: [
+      "An Ask AI tab: the same assistant as your website, in your brand's voice",
+      "Subscribe & Save from your subscription plans",
+      "Buy again, order tracking and shipping push notifications",
+      "An app-only discount applied automatically at checkout",
+    ],
+  },
+  {
+    id: "marketplace",
+    tab: "AI marketplace",
+    title: "Found by AI shopping agents",
+    body: "More shoppers now ask an AI what to buy. The Tapmerce marketplace lists your store for shoppers who describe what they need, and we're building on the Universal Commerce Protocol so agents beyond our app can find you too.",
+    points: [
+      "A store page with your logo, products and story",
+      "Your catalog structured so AI agents can read it",
+      "Checkout stays on your store; you stay the merchant of record",
+    ],
+  },
+];
 
-// --- Section wrapper with inView animation ---
-function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+const guardrails = [
+  {
+    icon: FileCheck2,
+    title: "Your approved claims only",
+    body: "It uses the wording your brand already uses and never promises to treat, cure or prevent anything.",
+  },
+  {
+    icon: Stethoscope,
+    title: "Medical questions go to a professional",
+    body: "Pregnancy, medication, children's health and symptoms get a careful answer and a pointer to a doctor or pharmacist.",
+  },
+  {
+    icon: Database,
+    title: "Answers come from your data",
+    body: "Catalog, metafields and policies. When the data doesn't have the answer, it says so instead of guessing.",
+  },
+  {
+    icon: Headset,
+    title: "A person when it matters",
+    body: "Any conversation can move to your support team in the same chat, history attached.",
+  },
+];
 
-  return (
-    <motion.section
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={{
-        hidden: { opacity: 0, y: 60 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut", delay } },
-      }}
-      className={className}
-    >
-      {children}
-    </motion.section>
+const steps = [
+  { when: "Week 1", title: "Connect and brief", body: "Connect your store, share your brand, approved claims and your support team's most common questions." },
+  { when: "Week 2", title: "Train and review", body: "We set up the assistant on your catalog and build your app. You test both before anything goes live." },
+  { when: "Week 3", title: "Go live", body: "The assistant goes live on your site and your apps go to the App Store and Google Play." },
+  { when: "After launch", title: "Learn and improve", body: "See what shoppers ask, which answers lead to orders, and where product pages need more detail." },
+];
+
+const faqs = [
+  {
+    q: "Can I use the AI assistant on my website without the mobile app?",
+    a: "Yes. The website assistant, the mobile app and the marketplace listing are separate services. Most brands start with the assistant on their online store and add the app when they want more repeat orders.",
+  },
+  {
+    q: "Will the AI make health claims about my products?",
+    a: "No. It uses your approved product wording, explains ingredients and how customers use a product, and refers medical questions, including pregnancy, medication and children's health, to a doctor or pharmacist.",
+  },
+  {
+    q: "Where does the assistant get its answers?",
+    a: "From your product catalog, product attributes such as ingredients and allergens, your FAQs, articles and store policies. It recommends only products you sell, at your prices and stock levels.",
+  },
+  {
+    q: "Which ecommerce platforms do you support?",
+    a: "Shopify and other ecommerce platforms. The assistant connects to your catalog, orders, subscriptions and policies wherever your store runs. Tell us your platform when you book a demo.",
+  },
+  {
+    q: "Does it work with subscriptions?",
+    a: "Yes. It reads your subscription plans, so shoppers can choose Subscribe & Save frequencies in the chat, on product pages and in the cart.",
+  },
+  {
+    q: "Is Tapmerce only for nutrition brands?",
+    a: "It's built for nutrition brands first: supplements and vitamins, infant formula, sports nutrition and healthy food, because their shoppers ask the most questions before buying. It works for any online store.",
+  },
+  {
+    q: "How much does it cost?",
+    a: `The AI assistant starts at ${formatEur(aiPlans[0].priceEur)} a month for ${aiPlans[0].conversations} shopper conversations, then ${formatEurCents(overagePerConversationEur)} per extra conversation. Your branded app adds ${formatEur(app.monthlyEur)} a month plus a one-time ${appSetupPrice} setup, waived on annual billing. No commission on your sales, ever.`,
+  },
+];
+
+
+const plans = aiPlans.map((p) => ({
+  id: p.id,
+  name: p.name,
+  blurb: p.blurb,
+  price: formatEur(p.priceEur),
+  conversations: p.conversations.toLocaleString("en-US"),
+}));
+
+// ---------- Shared bits ----------
+
+const h2 = "display text-[2.5rem] font-bold leading-[1.04] tracking-[-0.022em] text-ink sm:text-6xl";
+const cardShadow = "shadow-[0_30px_60px_-45px_rgba(60,40,20,0.5)]";
+
+function Bubble({ from, children }: { from: "user" | "ai"; children: React.ReactNode }) {
+  return from === "user" ? (
+    <div className="flex justify-end">
+      <p className="max-w-[85%] rounded-[18px] rounded-br-md bg-ink px-3.5 py-2.5 text-[14px] leading-snug text-card">{children}</p>
+    </div>
+  ) : (
+    <div className="flex justify-start">
+      <p className="max-w-[88%] rounded-[18px] rounded-bl-md bg-card px-3.5 py-2.5 text-[14px] leading-snug text-ink">{children}</p>
+    </div>
   );
 }
 
-// --- Stats Counter ---
-function AnimatedStat({ value, label, sublabel }: { value: string; label: string; sublabel: string }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
+function QuestionRow({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
+  const loop = [...items, ...items];
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-      className="text-center group"
-    >
-      <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent group-hover:from-violet-400 group-hover:to-cyan-400 transition-all duration-500">
-        {value}
-      </div>
-      <div className="mt-2 text-sm font-medium text-white/80">{label}</div>
-      <div className="text-xs text-white/40">{sublabel}</div>
-    </motion.div>
+    <div className="flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+      <ul className={`flex shrink-0 gap-3 pr-3 hover:[animation-play-state:paused] ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+        {loop.map((q, i) => (
+          <li
+            key={i}
+            aria-hidden={i >= items.length || undefined}
+            className="flex shrink-0 items-center gap-2.5 rounded-full bg-card px-5 py-3 text-[16px] text-ink shadow-[0_8px_20px_-16px_rgba(60,40,20,0.6)]"
+          >
+            <MessageCircle className="h-4 w-4 text-ink-3" strokeWidth={1.75} />
+            {q}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-// --- Bento Feature Card ---
-function BentoCard({
-  icon: Icon,
-  title,
-  description,
-  className = "",
-  gradient,
-}: {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-  className?: string;
-  gradient: string;
-}) {
-  return (
-    <motion.div
-      variants={scaleIn}
-      whileHover={{ scale: 1.02, y: -4 }}
-      transition={{ type: "spring", stiffness: 300 }}
-      className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6 ${className}`}
-    >
-      {/* Glow effect */}
-      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${gradient}`} />
-      {/* Shine sweep */}
-      <div className="absolute top-0 left-[-150%] h-full w-[50%] bg-[linear-gradient(to_right,transparent_0%,rgba(255,255,255,0.05)_50%,transparent_100%)] skew-x-[-25deg] group-hover:left-[125%] transition-all duration-700 ease-in-out" />
+// ---------- Service visuals ----------
 
-      <div className="relative z-10">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-500/20 flex items-center justify-center mb-4 group-hover:border-indigo-400/40 transition-colors">
-          <Icon className="w-6 h-6 text-indigo-400" />
+function FinderPreview() {
+  return (
+    <div className="rounded-[22px] bg-stone p-5 sm:p-7">
+      <div className="rounded-[18px] bg-card p-5">
+        <div className="flex items-baseline justify-between">
+          <div className="text-[16px] font-semibold text-ink">Find your magnesium</div>
+          <div className="text-[13px] tabular-nums text-ink-3">Step 2 of 3</div>
         </div>
-        <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
-        <p className="text-sm text-white/50 leading-relaxed">{description}</p>
+        <div className="mt-2 h-1 overflow-hidden rounded-full bg-stone">
+          <div className="h-full w-2/3 rounded-full bg-ink" />
+        </div>
+        <div className="mt-5 text-[15px] text-ink">What matters most to you?</div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {["Evening routine", "Muscle recovery", "Gentle on stomach", "Vegan", "No fillers"].map((c, i) => (
+            <span
+              key={c}
+              className={`rounded-full border px-3.5 py-1.5 text-[14px] ${
+                i === 0 || i === 3 ? "border-ink bg-ink font-medium text-card" : "border-line text-ink-2"
+              }`}
+            >
+              {c}
+            </span>
+          ))}
+        </div>
+        <div className="mt-6 flex items-center gap-4 rounded-[14px] bg-stone p-3">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-card">
+            <Pill className="h-6 w-6 text-ink-2" strokeWidth={1.75} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="truncate text-[15px] font-semibold text-ink">Magnesium Glycinate 400</div>
+            <div className="text-[13px] text-ink-3">Vegan, 90 capsules, in stock</div>
+          </div>
+          <span className="rounded-full bg-action px-3.5 py-1.5 text-[13px] font-semibold text-ink">Add</span>
+        </div>
       </div>
-    </motion.div>
+      <p className="mt-4 text-center text-[13px] text-ink-2">Sample products. Every pick is checked against your product data.</p>
+    </div>
   );
 }
 
-// ==================================================
-// MAIN PAGE
-// ==================================================
+function AppPreview() {
+  return (
+    <div className="relative flex items-end justify-center gap-4 overflow-hidden rounded-[22px] bg-stone px-6 pt-10">
+      {["ai-chat", "home"].map((key, i) => {
+        const s = shot(key);
+        return (
+          <div
+            key={key}
+            className={`w-[44%] max-w-[210px] overflow-hidden rounded-t-[26px] border-[6px] border-b-0 border-ink bg-ink ${i === 1 ? "translate-y-6" : ""}`}
+          >
+            <Image src={s.src} alt={s.alt} width={640} height={1385} sizes="210px" className="h-auto w-full" />
+          </div>
+        );
+      })}
+      <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-card px-3 py-2 text-[13px] font-medium text-ink shadow-sm sm:left-6 sm:top-6">
+        <Bell className="h-4 w-4 text-ink" strokeWidth={2} />
+        Built by Tapmerce: the {flagship.name} app
+      </div>
+    </div>
+  );
+}
+
+function MarketplacePreview() {
+  return (
+    <div className="rounded-[22px] bg-stone p-5 sm:p-7">
+      <div className="space-y-3">
+        <Bubble from="user">Unflavoured plant protein without stevia, under €40</Bubble>
+        <Bubble from="ai">Three stores sell one that matches. The best rated:</Bubble>
+        {[
+          { store: "Your store", name: "Pea & Rice Protein, Unflavoured", price: "€34.90", you: true },
+          { store: "Another store", name: "Organic Pea Protein 1 kg", price: "€38.50", you: false },
+        ].map((r) => (
+          <div
+            key={r.name}
+            className={`flex items-center gap-3 rounded-[14px] bg-card p-3 ${r.you ? "ring-2 ring-ink" : ""}`}
+          >
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-stone">
+              <Pill className="h-5 w-5 text-ink-2" strokeWidth={1.75} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-[12px] text-ink-3">{r.store}</div>
+              <div className="truncate text-[14px] font-semibold text-ink">{r.name}</div>
+            </div>
+            <div className="text-[14px] font-semibold tabular-nums text-ink">{r.price}</div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-center text-[13px] text-ink-2">
+        UCP support is in development.{" "}
+        <Link href="/blog" className="font-medium text-ink underline decoration-line underline-offset-4 hover:decoration-ink">
+          Read about agentic commerce
+        </Link>
+      </p>
+    </div>
+  );
+}
+
+// ---------- Page ----------
+
 export default function HomePage() {
-  // Waitlist: until a form backend exists, submitting opens a pre-filled email to
-  // the site contact (src/lib/site.ts) so nothing is silently dropped.
-  const [waitlistEmail, setWaitlistEmail] = useState("");
-  const submitWaitlist = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    window.location.href = mailto(
-      "AskShop waitlist",
-      `Please add me to the AskShop waitlist.\n\nEmail: ${waitlistEmail}\nStore: \nWhat I'm looking for: `
-    );
-  };
-
   return (
-    <div className="bg-[#06050e] text-white overflow-hidden">
+    <div className="home-world overflow-x-clip bg-stone text-ink">
+      <JsonLd data={buildFaqSchema(faqs)} />
+      <SectionDock />
 
-      {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden">
-        {/* Particle network background */}
-        <div className="absolute inset-0 z-0">
-          <ParticleNetwork />
-        </div>
-
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#06050e] via-transparent to-[#06050e] z-[1]" />
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px] z-[1]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[100px] z-[1]" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-
-            {/* Globe — on top for mobile, right side on desktop */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-              className="flex items-center justify-center lg:order-2"
-            >
-              <div className="relative w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] lg:w-[460px] lg:h-[460px]">
-                <div className="absolute inset-0 rounded-full border border-indigo-500/10 animate-pulse" />
-                <div className="absolute -inset-3 rounded-full border border-violet-500/5" />
-                <GlobeVisualization />
-              </div>
-            </motion.div>
-
-            {/* Copy — below globe on mobile, left side on desktop */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={stagger}
-              className="lg:order-1 text-center lg:text-left"
-            >
-              <motion.div variants={fadeUp}>
-                <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-sm font-medium text-indigo-300 backdrop-blur-sm mb-6">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-400" />
-                  </span>
-                  Mobile AI commerce for Shopify stores
-                </span>
-              </motion.div>
-
-              <motion.h1
-                variants={fadeUp}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[0.95]"
+      {/* ===== HERO + LIVE DEMO ===== */}
+      <section className="relative isolate">
+        <HeroField className="absolute inset-0 -z-10 h-full w-full" />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[760px] bg-[radial-gradient(ellipse_70%_52%_at_50%_40%,rgba(239,234,228,0.94)_0%,rgba(239,234,228,0.78)_45%,rgba(239,234,228,0)_100%)]"
+          aria-hidden
+        />
+        <div className="mx-auto max-w-7xl px-4 pb-20 pt-10 text-center sm:px-6 sm:pt-14 lg:px-8 lg:pb-28">
+          <Reveal>
+            <h1 className="display mx-auto max-w-5xl text-[3.1rem] font-extrabold leading-[0.95] tracking-[-0.035em] text-ink sm:text-7xl lg:text-[5.25rem]">
+              AI shopping for nutrition brands
+            </h1>
+            <p className="mx-auto mt-5 max-w-[40rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+              A branded AI assistant for your online store and your own app that answers supplement, formula and food questions.
+            </p>
+            <div id="hero-cta" className="mt-7 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+              <a
+                href="#demo"
+                className="group inline-flex items-center gap-2 rounded-full bg-action px-8 py-4 text-[17px] font-semibold text-ink shadow-[0_16px_30px_-14px_rgba(240,74,16,0.9)] transition-all duration-200 hover:bg-action-press active:scale-[0.98]"
               >
-                <span className="block text-white/70 font-light text-2xl sm:text-3xl lg:text-4xl mb-2">
-                  Turn your Shopify store into
-                </span>
-                <span className="block bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
-                  a mobile AI shopping app
-                </span>
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: "60%" }}
-                  transition={{ duration: 1.5, delay: 1, ease: "easeOut" }}
-                  className="h-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-transparent rounded-full mt-3"
-                />
-              </motion.h1>
+                Book a demo
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
+              </a>
+              <a
+                href="#case-study"
+                className="text-[17px] font-medium text-ink underline decoration-ink/25 decoration-2 underline-offset-[6px] transition-colors hover:decoration-ink"
+              >
+                See what we built for {flagship.name}
+              </a>
+            </div>
+          </Reveal>
 
-              <motion.p variants={fadeUp} className="mt-6 text-base sm:text-lg text-white/50 max-w-xl leading-relaxed">
-                AskShop is the Shopify mobile app builder with an AI shopping assistant built in: a native app where your customers chat, discover and buy. Built on Shopify and designed for the Universal Commerce Protocol.
-              </motion.p>
-
-              <motion.div variants={fadeUp} className="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <motion.a
-                  href="#waitlist"
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(99,102,241,0.4)" }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-7 py-3.5 text-base font-semibold text-white shadow-xl shadow-indigo-500/20 overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <Rocket className="relative z-10 w-5 h-5" />
-                  <span className="relative z-10">Get your mobile AI app</span>
-                  <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </motion.a>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                  <Link
-                    href="/features"
-                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm px-7 py-3.5 text-base font-semibold text-white hover:bg-white/10 transition-all"
-                  >
-                    <Sparkles className="w-5 h-5" />
-                    See How It Works
-                  </Link>
-                </motion.div>
-              </motion.div>
-
-              <motion.p variants={fadeIn} className="mt-4 text-sm text-white/30">
-                First merchant app live on iOS &amp; Android &middot; Plans from $99/mo &middot; No success fees
-              </motion.p>
-            </motion.div>
-
-
+          <div id="try" className="mx-auto mt-10 max-w-3xl scroll-mt-28 sm:mt-12">
+            <Reveal delay={0.15}>
+              <AssistantDemo />
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ===== TRUSTED / STATS MARQUEE ===== */}
-      <AnimatedSection className="py-20 border-y border-white/5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
-            <AnimatedStat value="iOS + Android" label="Native Apps" sublabel="one codebase, both stores" />
-            <AnimatedStat value="2" label="App Experiences" sublabel="AI chat and classic store" />
-            <AnimatedStat value="$0" label="Success Fees" sublabel="no commissions, ever" />
-            <AnimatedStat value="$99" label="Starting Price" sublabel="per month, billed via Shopify" />
+      {/* ===== PROOF ===== */}
+      <section className="px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 rounded-[28px] bg-card/70 px-6 py-4 text-center backdrop-blur sm:flex-row sm:justify-between sm:rounded-full sm:text-left">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white p-1.5 ring-1 ring-line">
+              <Image src={flagship.logo} alt={`${flagship.name} logo`} width={34} height={34} className="object-contain" />
+            </div>
+            <p className="text-[15px] text-ink-2">
+              We built <span className="font-semibold text-ink">{flagship.name}</span> its AI shopping assistant and its
+              own app.
+            </p>
           </div>
+          <StoreBadges appStoreUrl={flagship.appStore.url} playStoreUrl={flagship.googlePlay.url} size="sm" />
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* ===== OUTCOMES ===== */}
-      <AnimatedSection className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp} className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold">
-              AI ecommerce is here.{" "}
-              <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
-                Don&apos;t get left behind.
-              </span>
-            </h2>
-            <p className="mt-6 text-lg text-white/40 max-w-2xl mx-auto leading-relaxed">
-              Shoppers are moving from browsing to asking — on their phones today, through AI agents
-              tomorrow. In times like these businesses evolve, and some fall behind. The stores that
-              move now own the customer relationship; the rest keep renting it. AskShop gives you the
-              three things that matter in the new age of ecommerce.
+      {/* ===== THE QUESTIONS ===== */}
+      <section className="py-16 sm:py-32">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-20 lg:px-8">
+          <Reveal className="order-2 lg:order-1">
+            <div className={`overflow-hidden rounded-[28px] ${cardShadow}`}>
+              <Image
+                src="/home/kitchen.webp"
+                alt="A woman in her kitchen reading a supplement bottle and asking a question on her phone"
+                width={1600}
+                height={1067}
+                sizes="(min-width: 1024px) 620px, 100vw"
+                className="aspect-[5/4] h-auto w-full object-cover object-[60%_center]"
+              />
+            </div>
+          </Reveal>
+          <Reveal className="order-1 lg:order-2">
+            <h2 className={h2}>Nutrition shoppers ask before they buy</h2>
+            <p className="mt-6 max-w-[32rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+              What&apos;s in it, does it suit my diet, is it right for my baby. Product pages answer some of it. Your
+              support inbox answers the rest, hours later, after the shopper has gone.
             </p>
-          </motion.div>
-
-          <motion.div variants={stagger} className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: Heart,
-                title: "Retention",
-                desc: "An icon on the home screen, push notifications customers opt into, and an assistant that remembers each of them. Repeat purchases stop depending on paid re-acquisition.",
-              },
-              {
-                icon: Eye,
-                title: "AI visibility",
-                desc: "When shoppers ask instead of search, your catalog has to be readable by AI. AskShop structures it for the agent in your app — and, through UCP, for the agent surfaces beyond it.",
-              },
-              {
-                icon: Repeat,
-                title: "Recurring revenue",
-                desc: "Subscriptions, reorder reminders and one-tap buy-again turn one-off orders into predictable monthly revenue — MRR for physical goods.",
-              },
-            ].map((item) => (
-              <motion.div
-                key={item.title}
-                variants={scaleIn}
-                whileHover={{ y: -4 }}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-500/20 flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-indigo-400" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+            <p className="mt-4 max-w-[32rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+              Your assistant answers while they&apos;re still on the page, and puts the right product in their cart.
+            </p>
+          </Reveal>
         </div>
-      </AnimatedSection>
+        <div className="mt-12 space-y-3 sm:mt-20" aria-label="Questions nutrition shoppers ask">
+          <QuestionRow items={questions.slice(0, 6)} />
+          <QuestionRow items={questions.slice(6)} reverse />
+        </div>
+      </section>
 
-      {/* ===== TWO PRODUCTS ===== */}
-      <AnimatedSection className="py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp} className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-bold">
-              Two mobile shopping experiences.{" "}
-              <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
-                One platform.
-              </span>
-            </h2>
-            <p className="mt-6 text-lg text-white/40 max-w-2xl mx-auto">
-              Choose the experience that fits your customers — or offer both simultaneously.
+      {/* ===== SERVICES ===== */}
+      <section id="services" className="scroll-mt-24 px-4 pb-24 sm:px-6 sm:pb-32 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="mb-8 max-w-3xl sm:mb-12">
+            <h2 className={h2}>One AI shopping assistant, on your website and in your app</h2>
+            <p className="mt-6 max-w-[36rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+              Start with the assistant on your online store. Add a branded app for repeat buyers and a listing where
+              shoppers ask AI what to buy. Trained once, the same everywhere.
             </p>
-          </motion.div>
+          </Reveal>
+          <Reveal>
+            <ServicesSwitcher
+              services={services}
+              visuals={{ website: <FinderPreview />, app: <AppPreview />, marketplace: <MarketplacePreview /> }}
+            />
+          </Reveal>
+        </div>
+      </section>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* AI Chat App */}
-            <motion.div
-              variants={scaleIn}
-              whileHover={{ y: -8 }}
-              className="group relative rounded-3xl border border-indigo-500/20 bg-gradient-to-b from-indigo-500/[0.05] to-transparent p-8 sm:p-10 overflow-hidden"
+      {/* ===== YOUR BRAND EVERYWHERE ===== */}
+      <section className="pb-16 sm:pb-32">
+        <Reveal className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className={`${h2} max-w-3xl`}>Every piece ships in your brand</h2>
+          <p className="mt-6 max-w-[38rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+            The assistant on your website, the app on your shoppers&apos; phones and your marketplace store page all carry
+            your logo, colors, fonts and tone of voice. On your site and in your app, shoppers only ever see you.
+          </p>
+        </Reveal>
+
+        <div className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-4 [scrollbar-width:none] sm:scroll-px-6 sm:px-6 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-8 lg:pb-10 [&::-webkit-scrollbar]:hidden">
+          {Object.values(SAMPLE_BRANDS).map((b, i) => (
+            <article
+              key={b.id}
+              className={`flex min-h-[470px] w-[78vw] max-w-[320px] shrink-0 snap-start flex-col rounded-[28px] p-6 text-white lg:w-auto lg:max-w-none ${
+                i % 2 === 1 ? "lg:translate-y-10" : ""
+              }`}
+              style={{ background: b.color, ["--brand-cut" as string]: b.color } as React.CSSProperties}
             >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-[80px] group-hover:bg-indigo-600/20 transition-colors duration-500" />
-
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 text-xs font-bold text-indigo-300 uppercase tracking-wider mb-6">
-                  <Sparkles className="w-3 h-3" /> NEW &mdash; AI Powered
-                </div>
-                <h3 className="text-3xl font-bold text-white mb-4">AI Chat App</h3>
-                <p className="text-white/50 mb-8 leading-relaxed">
-                  A conversational shopping experience. Customers chat with an AI that knows your entire catalog,
-                  understands preferences, and guides them to the perfect product.
-                </p>
-
-                <ul className="space-y-3 mb-8">
-                  {[
-                    "Natural language product search",
-                    "Smart recommendations from your own catalog",
-                    "In-chat product cards with add-to-cart",
-                    "Conversational checkout",
-                    "Remembers preferences between visits",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-white/60">
-                      <div className="w-5 h-5 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                        <svg className="w-3 h-3 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Chat mockup */}
-                <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
-                  <div className="space-y-3">
-                    <div className="flex justify-end">
-                      <div className="rounded-2xl rounded-br-sm bg-indigo-600 px-4 py-2.5 text-sm text-white max-w-[80%]">
-                        I need a gift for my mom who loves gardening, under $50
-                      </div>
-                    </div>
-                    <div className="flex justify-start">
-                      <div className="rounded-2xl rounded-bl-sm bg-white/10 px-4 py-2.5 text-sm text-white/80 max-w-[80%]">
-                        Great choice! Here are 3 perfect picks for a gardening enthusiast under $50...
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="flex items-start justify-between gap-3">
+                <BrandLogo id={b.id} color="#ffffff" size={24} />
+                <span className="pt-1 text-[12px] font-medium text-white/75">{b.category}</span>
               </div>
-            </motion.div>
 
-            {/* Classic Store App */}
-            <motion.div
-              variants={scaleIn}
-              whileHover={{ y: -8 }}
-              className="group relative rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.02] to-transparent p-8 sm:p-10 overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-600/5 rounded-full blur-[80px] group-hover:bg-cyan-600/10 transition-colors duration-500" />
-
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs font-bold text-white/50 uppercase tracking-wider mb-6">
-                  <Store className="w-3 h-3" /> Classic
-                </div>
-                <h3 className="text-3xl font-bold text-white mb-4">Dedicated Store App</h3>
-                <p className="text-white/50 mb-8 leading-relaxed">
-                  Your brand, your App Store listing. A traditional mobile shopping experience done right —
-                  beautiful product grids, smooth navigation, and native checkout.
-                </p>
-
-                <ul className="space-y-3 mb-8">
-                  {[
-                    "Customizable home screen sections",
-                    "Collection browsing with infinite scroll",
-                    "Full product pages with variant selection",
-                    "Native cart with discount & gift cards",
-                    "Apple Pay / Google Pay / Shop Pay",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-white/60">
-                      <div className="w-5 h-5 rounded-full bg-cyan-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                        <svg className="w-3 h-3 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Store mockup */}
-                <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
-                  <div className="grid grid-cols-3 gap-2">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="aspect-square rounded-lg bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/5 flex items-center justify-center">
-                        <Smartphone className="w-6 h-6 text-white/20" />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-3 h-3 bg-white/5 rounded-full w-2/3" />
-                  <div className="mt-2 h-2 bg-white/[0.03] rounded-full w-1/3" />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* ===== APP EXPERIENCE SHOWCASE ===== */}
-      <AnimatedSection className="py-24 sm:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-950/10 to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp} className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold">
-              Your AI shopping assistant{" "}
-              <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                in action
-              </span>
-            </h2>
-            <p className="mt-6 text-lg text-white/40 max-w-2xl mx-auto">
-              Real screens from Organic&apos;s Best, the first AskShop app — live on the App Store and Google Play.
-            </p>
-          </motion.div>
-
-          {/* Real screens from the first live AskShop app (see site.customers) */}
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-10">
-            {site.customers[0].screenshots.slice(0, 3).map((shot, i) => (
-              <motion.figure
-                key={shot.src}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.15 }}
-                className="flex flex-col items-center"
-              >
-                <div className="w-[260px] sm:w-[280px] rounded-[2.5rem] border-[3px] border-white/10 overflow-hidden shadow-2xl shadow-indigo-500/10 bg-[#0a0913]">
-                  <Image
-                    src={shot.src}
-                    alt={shot.alt}
-                    width={640}
-                    height={1385}
-                    sizes="(min-width: 640px) 280px, 260px"
-                    className="w-full h-auto"
-                  />
-                </div>
-                <figcaption className="mt-5 text-sm font-medium text-white/60 text-center">{shot.caption}</figcaption>
-              </motion.figure>
-            ))}
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* ===== BENTO GRID FEATURES ===== */}
-      <AnimatedSection className="py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp} className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-bold">
-              Everything a{" "}
-              <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-                Shopify mobile app
-              </span>{" "}
-              needs
-            </h2>
-            <p className="mt-6 text-lg text-white/40 max-w-2xl mx-auto">
-              Built on Shopify&apos;s Storefront API. Products, inventory, and orders stay perfectly in sync.
-            </p>
-          </motion.div>
-
-          <motion.div variants={stagger} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <BentoCard
-              icon={BrainCircuit}
-              title="AI Chat Shopping"
-              description="Customers chat with an AI assistant to find products, get recommendations, and check out — all in natural conversation."
-              gradient="bg-gradient-to-br from-indigo-600/10 to-transparent"
-              className="sm:col-span-2 lg:col-span-1 lg:row-span-2"
-            />
-            <BentoCard
-              icon={ShoppingCart}
-              title="Native Checkout"
-              description="Apple Pay, Google Pay, and Shop Pay through Shopify's Checkout Sheet Kit. Payment stays with Shopify."
-              gradient="bg-gradient-to-br from-violet-600/10 to-transparent"
-            />
-            <BentoCard
-              icon={Bell}
-              title="Push Notifications"
-              description="Order and shipping updates, back-in-stock alerts, and campaigns sent from your Shopify admin."
-              gradient="bg-gradient-to-br from-purple-600/10 to-transparent"
-            />
-            <BentoCard
-              icon={Palette}
-              title="White-Label Builds"
-              description="Your brand, your App Store listing. Custom icon, name, colors, and bundle ID — a fully dedicated app."
-              gradient="bg-gradient-to-br from-cyan-600/10 to-transparent"
-            />
-            <BentoCard
-              icon={Zap}
-              title="Shopify Native"
-              description="Built on Storefront API. Real-time inventory, discount codes, gift cards — everything just works."
-              gradient="bg-gradient-to-br from-amber-600/10 to-transparent"
-            />
-            <BentoCard
-              icon={BarChart3}
-              title="Analytics Dashboard"
-              description="Mobile sales, revenue attribution, and push performance — all inside your Shopify admin."
-              gradient="bg-gradient-to-br from-emerald-600/10 to-transparent"
-            />
-            <BentoCard
-              icon={Network}
-              title="AI Marketplace"
-              description="Multi-store discovery. Shoppers explore every participating store through one AI app — and, through UCP, from other agent surfaces."
-              gradient="bg-gradient-to-br from-pink-600/10 to-transparent"
-            />
-            <BentoCard
-              icon={Shield}
-              title="Privacy by Design"
-              description="Payments and customer accounts stay on Shopify. Data handling built for GDPR, with a DPA available."
-              gradient="bg-gradient-to-br from-teal-600/10 to-transparent"
-            />
-          </motion.div>
-        </div>
-      </AnimatedSection>
-
-      {/* ===== HOW IT WORKS ===== */}
-      <AnimatedSection className="py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp} className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-bold">
-              How to turn your Shopify store into a{" "}
-              <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                mobile app
-              </span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { step: "01", title: "Install", description: "Add AskShop from the Shopify App Store. Connect your Storefront API token.", icon: Zap },
-              { step: "02", title: "Customize", description: "Set brand colors, logo, fonts, and home screen. Preview changes in real time.", icon: Palette },
-              { step: "03", title: "Submit", description: "Submit your build request. We review, build your dedicated app, and publish.", icon: Globe },
-              { step: "04", title: "Grow", description: "Send push campaigns, track analytics, and watch mobile revenue grow.", icon: TrendingUp },
-            ].map((item, i) => (
-              <motion.div
-                key={item.step}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="relative text-center group"
-              >
-                {/* Connector line */}
-                {i < 3 && (
-                  <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-px bg-gradient-to-r from-indigo-500/30 to-transparent" />
-                )}
-
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 3 }}
-                  className="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/20 flex items-center justify-center mx-auto mb-6 group-hover:border-indigo-400/40 transition-colors"
+              <div className="mt-8 flex items-end justify-between">
+                <span
+                  className="text-[72px] leading-[0.85] text-white"
+                  style={{ fontFamily: b.font.family, fontWeight: b.font.weight, fontStyle: b.font.style, fontVariationSettings: b.font.settings }}
                 >
-                  <item.icon className="w-8 h-8 text-indigo-400" />
-                </motion.div>
-                <div className="text-xs font-bold text-indigo-400/60 uppercase tracking-widest mb-2">
-                  Step {item.step}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-sm text-white/40 leading-relaxed">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* ===== FIRST CUSTOMER ===== */}
-      <FirstCustomer />
-
-      {/* ===== GLOBAL NETWORK SECTION ===== */}
-      <AnimatedSection className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-950/10 to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <motion.h2
-                variants={fadeUp}
-                className="text-4xl sm:text-5xl font-bold mb-6"
-              >
-                An AI shopping marketplace{" "}
-                <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                  for every store
+                  Aa
                 </span>
-              </motion.h2>
-              <motion.p variants={fadeUp} className="text-lg text-white/40 mb-10 leading-relaxed">
-                The AskShop marketplace app brings participating stores into one AI-guided shopping
-                experience, so your products are found by shoppers who simply describe what they need.
-              </motion.p>
-              <motion.div variants={stagger} className="space-y-6">
-                {[
-                  { icon: Globe, title: "Multi-Store Discovery", desc: "Customers explore products across all marketplace stores in one AI conversation." },
-                  { icon: BrainCircuit, title: "Smart Matching", desc: "AI understands intent and matches customers with the perfect products from the right stores." },
-                  { icon: ShoppingCart, title: "Per-Store Checkout", desc: "Multi-cart system with per-store native checkout via Shopify Checkout Sheet Kit." },
-                ].map((item) => (
-                  <motion.div
-                    key={item.title}
-                    variants={fadeUp}
-                    className="flex gap-4 group"
+                <div className="flex -space-x-2 pb-1">
+                  {b.palette.map((c) => (
+                    <span key={c} className="h-7 w-7 rounded-full ring-2 ring-white/90" style={{ background: c }} />
+                  ))}
+                </div>
+              </div>
+              <div className="mt-2 text-[12px] text-white/70">{b.font.label}</div>
+
+              <div className="mt-auto space-y-2.5 pt-8" style={{ ["--brand-cut" as string]: "#ffffff" } as React.CSSProperties}>
+                <p className="rounded-[18px] rounded-bl-md bg-white px-3.5 py-3 text-[14px] leading-snug text-ink">
+                  <span
+                    className="mb-1 flex items-center gap-1.5 text-[12px] font-semibold"
+                    style={{ color: b.color, fontFamily: b.font.family, fontStyle: b.font.style, fontVariationSettings: b.font.settings }}
                   >
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-500/20 flex items-center justify-center shrink-0 group-hover:border-indigo-400/40 transition-colors">
-                      <item.icon className="w-6 h-6 text-indigo-400" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">{item.title}</h4>
-                      <p className="text-sm text-white/40">{item.desc}</p>
-                    </div>
-                  </motion.div>
+                    <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
+                    {b.ask}
+                  </span>
+                  {b.answer}
+                </p>
+                <div className="flex items-center gap-2.5 rounded-full bg-white/95 py-1.5 pl-1.5 pr-1.5">
+                  <Image src={b.product.img} alt="" width={80} height={80} className="h-9 w-9 rounded-full object-cover" />
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-[12px] font-semibold text-ink">{b.product.name}</div>
+                    <div className="text-[12px] tabular-nums text-ink-2">{b.product.price}</div>
+                  </div>
+                  <span className="shrink-0 rounded-full px-3 py-2 text-[11px] font-semibold text-white" style={{ background: b.color }}>
+                    Add to cart
+                  </span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p className="mx-auto mt-4 max-w-7xl px-4 text-[13px] text-ink-2 sm:px-6 lg:mt-8 lg:px-8">
+          Sample brands designed to show the range. Yours ships with your own logo, colors, fonts and voice.
+        </p>
+      </section>
+
+      {/* ===== LIFESTYLES ===== */}
+      <section id="lifestyles" className="scroll-mt-24 pb-16 sm:pb-32">
+        <Reveal className="mx-auto mb-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className={`${h2} max-w-3xl`}>A nutrition app and AI assistant for every shopper</h2>
+          <p className="mt-6 max-w-[38rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+            Lifters, new parents, women planning a pregnancy, families cooking from scratch. Each asks different
+            questions, and each brand gets an assistant and an app in its own identity.
+          </p>
+        </Reveal>
+        <Lifestyles />
+      </section>
+
+      {/* ===== SAFETY ===== */}
+      <section id="safety" className="scroll-mt-24 px-4 pb-24 sm:px-6 sm:pb-32 lg:px-8">
+        <div className={`mx-auto grid max-w-7xl gap-12 rounded-[28px] bg-card p-6 sm:p-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:p-16 ${cardShadow}`}>
+          <Reveal>
+            <h2 className={h2}>An ecommerce AI chatbot that stays within your approved claims</h2>
+            <p className="mt-6 max-w-[32rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+              A generic chatbot will happily tell a shopper a product treats anxiety. Yours describes products the way
+              your brand and its regulators expect.
+            </p>
+            <div className="mt-10 max-w-md space-y-3 rounded-[22px] bg-stone p-5">
+              <Bubble from="user">Will this cure my anxiety?</Bubble>
+              <Bubble from="ai">
+                I can&apos;t say it treats any condition. I can tell you what&apos;s in it and how customers use it in
+                their evening routine. For anxiety, a doctor or pharmacist is the right person to ask.
+              </Bubble>
+            </div>
+          </Reveal>
+          <ul className="divide-y divide-line self-center">
+            {guardrails.map((g) => (
+              <li key={g.title} className="flex gap-5 py-7 first:pt-0 last:pb-0">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-stone">
+                  <g.icon className="h-6 w-6 text-ink" strokeWidth={1.75} />
+                </span>
+                <div>
+                  <h3 className="text-[19px] font-semibold text-ink">{g.title}</h3>
+                  <p className="mt-1.5 text-[16px] leading-relaxed text-ink-2">{g.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ===== CASE STUDY ===== */}
+      <section id="case-study" className="scroll-mt-24 px-4 pb-24 sm:px-6 sm:pb-32 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16 [&>*]:min-w-0">
+          <Reveal className="self-center">
+            <h2 className={h2}>We built {flagship.name}&apos;s AI assistant and its app</h2>
+            <p className="mt-6 max-w-[34rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+              {`${flagship.name} ships HiPP, Holle, Kendamil and other European organic baby formulas to parents worldwide. We built both: Organic's Best AI on their website, and their iOS and Android app with the same assistant inside. It answers from doctor-reviewed guides and live store data, and tells parents to check with their pediatrician on medical questions.`}
+            </p>
+
+            <div className="mt-8">
+              <p className="text-[14px] font-medium text-ink-2">Parents start with</p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {flagship.aiPrompts.map((q) => (
+                  <li key={q}>
+                    <a
+                      href={flagship.aiUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex rounded-full border border-line bg-card px-4 py-2 text-[15px] text-ink transition-colors hover:border-ink/30 hover:bg-white"
+                    >
+                      {q}
+                    </a>
+                  </li>
                 ))}
-              </motion.div>
+              </ul>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 80 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="flex items-center justify-center"
-            >
-              <div className="relative w-full max-w-[500px] aspect-square">
-                <div className="absolute inset-0 rounded-full border border-indigo-500/10 animate-pulse" />
-                <GlobeVisualization />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </AnimatedSection>
+            {flagship.results.length > 0 && (
+              <dl className="mt-10 grid grid-cols-2 gap-6">
+                {flagship.results.map((r) => (
+                  <div key={r.label}>
+                    <dt className="text-[15px] text-ink-2">{r.label}</dt>
+                    <dd className="display text-5xl font-bold tracking-[-0.03em] tabular-nums text-ink">{r.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
 
-      {/* ===== AGENTIC COMMERCE / UCP ===== */}
-      <AnimatedSection className="py-24 sm:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div variants={fadeUp} className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-sm font-medium text-indigo-300 mb-6">
-              <Network className="w-4 h-4" />
-              Universal Commerce Protocol (UCP)
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-bold">
-              Built for{" "}
-              <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-                agentic commerce
-              </span>
-            </h2>
-            <p className="mt-6 text-lg text-white/40 max-w-3xl mx-auto leading-relaxed">
-              UCP is the open standard Google and Shopify introduced in January 2026 so AI agents can
-              discover products, complete checkout and handle post-purchase support with any merchant.
-              AskShop is being built on it: the AI in your app speaks the same protocol as the agents
-              in Google, Gemini and beyond — and you stay the merchant of record.
-            </p>
-          </motion.div>
+            <ul className="mt-10 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+              {[
+                { icon: MessageCircle, text: "Organic's Best AI, built for organicsbestshop.com" },
+                { icon: Repeat, text: "Their own app, with subscriptions and buy again" },
+                { icon: Headset, text: "Hand-off to the human team in the same chat" },
+                { icon: Baby, text: "Formula, feeding and order questions answered" },
+              ].map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-start gap-3 text-[16px] text-ink">
+                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-ink-2" strokeWidth={1.75} />
+                  {text}
+                </li>
+              ))}
+            </ul>
 
-          <motion.div variants={stagger} className="grid md:grid-cols-3 gap-6">
-            {[
-              { icon: Globe, title: "Discover", desc: "Your catalog, structured for agents. Shoppers ask in plain language and get your products — in your app, or in any UCP-connected surface." },
-              { icon: ShoppingCart, title: "Transact", desc: "Checkout runs on Shopify, so you keep your business logic, your payment providers and your role as merchant of record." },
-              { icon: Shield, title: "Support", desc: "Order status, returns and questions handled in the same conversation, with a hand-off to your human team when it matters." },
-            ].map((item) => (
-              <motion.div
-                key={item.title}
-                variants={scaleIn}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6"
+            <div className="mt-10 flex flex-wrap items-center gap-6">
+              <StoreBadges appStoreUrl={flagship.appStore.url} playStoreUrl={flagship.googlePlay.url} />
+              <a
+                href={flagship.aiUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[16px] font-medium text-ink underline decoration-ink/25 decoration-2 underline-offset-[6px] transition-colors hover:decoration-ink"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 border border-indigo-500/20 flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-indigo-400" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
-              </motion.div>
+                Try the assistant on their site <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+              </a>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="relative flex min-h-[460px] items-center justify-center overflow-hidden rounded-[28px] bg-stone-deep px-6 py-12 sm:min-h-[560px]">
+              <div className="absolute left-5 top-5 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white p-1.5 shadow-sm">
+                <Image src={flagship.logo} alt={`${flagship.name} logo`} width={36} height={36} className="object-contain" />
+              </div>
+              {["ai-chat", "home", "cart"].map((key, i) => {
+                const s = shot(key);
+                const pose = ["-rotate-[7deg] translate-x-[18%] translate-y-4", "z-10 -translate-y-3", "rotate-[7deg] -translate-x-[18%] translate-y-4"][i];
+                return (
+                  <figure key={key} className={`w-[36%] max-w-[210px] transition-transform duration-500 hover:-translate-y-6 ${pose}`}>
+                    <div className="overflow-hidden rounded-[26px] border-[6px] border-ink bg-ink shadow-[0_40px_60px_-30px_rgba(29,29,31,0.7)]">
+                      <Image src={s.src} alt={s.alt} width={640} height={1385} sizes="(min-width: 1024px) 210px, 36vw" className="h-auto w-full" />
+                    </div>
+                    <figcaption className="sr-only">{s.caption}</figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ===== HOW IT WORKS ===== */}
+      <section className="px-4 pb-24 sm:px-6 sm:pb-32 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="max-w-3xl">
+            <h2 className={h2}>From kickoff to live in three weeks</h2>
+            <p className="mt-6 max-w-[36rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+              Your app is submitted to both stores within 21 days of kickoff, {site.guarantee.remedy}.
+            </p>
+          </Reveal>
+          <ol className={`mt-12 grid overflow-hidden rounded-[28px] bg-card sm:grid-cols-2 lg:grid-cols-4 ${cardShadow}`}>
+            {steps.map((step) => (
+              <li
+                key={step.when}
+                className="border-line p-6 sm:p-8 [&:not(:first-child)]:border-t sm:[&:nth-child(2)]:border-t-0 sm:[&:nth-child(even)]:border-l lg:[&:not(:first-child)]:border-l lg:[&:not(:first-child)]:border-t-0"
+              >
+                <div className="display text-[1.6rem] font-bold tracking-[-0.03em] text-ink sm:text-[2rem]">{step.when}</div>
+                <h3 className="mt-4 text-[19px] font-semibold text-ink">{step.title}</h3>
+                <p className="mt-2 text-[16px] leading-relaxed text-ink-2">{step.body}</p>
+              </li>
             ))}
-          </motion.div>
-
-          <motion.p variants={fadeIn} className="mt-10 text-center text-sm text-white/30">
-            UCP support is in development. Read Google&apos;s{" "}
-            <a
-              href="https://developers.googleblog.com/under-the-hood-universal-commerce-protocol-ucp/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-indigo-300 hover:text-white transition-colors"
-            >
-              protocol overview
-            </a>
-            .
-          </motion.p>
+          </ol>
+          <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-ink-2">{site.guarantee.conditions}</p>
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* ===== EARLY ACCESS CTA ===== */}
-      <section id="waitlist" className="py-24 sm:py-32 relative scroll-mt-20">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-600/10 to-transparent" />
-        <div className="absolute inset-0">
-          <ParticleNetwork />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center"
-        >
-          <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-sm font-medium text-indigo-300 mb-6">
-            <Rocket className="w-4 h-4" />
-            Early access
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Step into the{" "}
-            <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
-              new age of ecommerce
-            </span>
-          </h2>
-          <p className="text-lg text-white/40 max-w-2xl mx-auto mb-10">
-            Businesses evolve, or they fall behind. The first AskShop app is live in both stores and
-            the next founding merchants are onboarding now — join the waitlist for early access and
-            founding-merchant pricing, and you&apos;ll hear back from the founder directly.
-          </p>
-
-          {/* Waitlist form — see submitWaitlist above. */}
-          <form
-            onSubmit={submitWaitlist}
-            className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto mb-6"
-          >
-            <input
-              type="email"
-              required
-              value={waitlistEmail}
-              onChange={(e) => setWaitlistEmail(e.target.value)}
-              placeholder="you@yourstore.com"
-              aria-label="Your email address"
-              className="flex-1 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm px-5 py-4 text-base text-white placeholder:text-white/30 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/30"
-            />
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(99,102,241,0.4)" }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-4 text-base font-bold text-white shadow-xl shadow-indigo-500/20 overflow-hidden shrink-0"
+      {/* ===== PRICING ===== */}
+      <section id="pricing" className="scroll-mt-24 px-4 pb-24 sm:px-6 sm:pb-32 lg:px-8">
+        <div className={`mx-auto grid max-w-7xl overflow-hidden rounded-[28px] bg-card lg:grid-cols-[1.2fr_1fr] ${cardShadow}`}>
+          <Reveal className="p-6 sm:p-12 lg:p-16">
+            <h2 className={h2}>Simple pricing, no commission</h2>
+            <p className="mt-5 max-w-[30rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+              The website assistant is priced by the number of shopper conversations each month.
+            </p>
+            <div className="mt-10">
+              <PlanPicker plans={plans} initial={aiPlans.find((p) => p.highlighted)?.id ?? plans[0].id} />
+            </div>
+          </Reveal>
+          <div className="flex flex-col justify-between gap-10 bg-stone-deep/60 p-6 sm:p-12 lg:p-16">
+            <div>
+              <h3 className="text-[19px] font-semibold text-ink">Add your own app</h3>
+              <div className="mt-4 flex items-end gap-2">
+                <span className="display text-5xl font-bold tracking-[-0.035em] tabular-nums text-ink sm:text-6xl">+{formatEur(app.monthlyEur)}</span>
+                <span className="pb-2 text-[17px] text-ink-2">/month</span>
+              </div>
+              <p className="mt-2 text-[16px] text-ink-2">
+                iOS and Android in your brand, AI built in. {appSetupPrice} one-time setup, waived on annual billing.
+              </p>
+            </div>
+            <ul className="space-y-3 text-[16px] text-ink">
+              <li>No success fees or commission on your sales</li>
+              <li>AI marketplace listing included with every plan</li>
+              <li>Live in three weeks or the setup fee back</li>
+            </ul>
+            <Link
+              href="/pricing"
+              className="inline-flex w-fit items-center gap-1.5 text-[16px] font-semibold text-ink underline decoration-ink/25 decoration-2 underline-offset-[6px] hover:decoration-ink"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <span className="relative z-10">Join Waitlist</span>
-              <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </motion.button>
-          </form>
-          <p className="text-sm text-white/30">
-            No credit card required &middot; Or email{" "}
-            <a href={mailto("Hello AskShop")} className="text-indigo-300 hover:text-white transition-colors">
-              {site.contact.email}
-            </a>
-          </p>
-
-          <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-white/30">
-            <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-indigo-400/60" /> Built on Shopify&apos;s Storefront API</span>
-            <span className="flex items-center gap-2"><Smartphone className="w-4 h-4 text-violet-400/60" /> Native iOS and Android</span>
-            <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-emerald-400/60" /> No success fees</span>
+              See full pricing <ArrowRight className="h-4 w-4" strokeWidth={2} />
+            </Link>
           </div>
-        </motion.div>
+        </div>
+      </section>
+
+      {/* ===== FAQ ===== */}
+      <section className="px-4 pb-24 sm:px-6 sm:pb-32 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="max-w-3xl">
+            <h2 className={h2}>Questions from nutrition brands</h2>
+          </Reveal>
+          <div className="mt-8 columns-1 gap-5 sm:mt-12 md:columns-2">
+            {faqs.map((f) => (
+              <div key={f.q} className="mb-4 break-inside-avoid rounded-[24px] bg-card p-6 sm:mb-5 sm:p-8">
+                <h3 className="text-[17px] font-semibold leading-snug text-ink sm:text-[19px]">{f.q}</h3>
+                <p className="mt-3 text-[16px] leading-relaxed text-ink-2">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== BOOK A DEMO ===== */}
+      <section id="demo" className="scroll-mt-24 px-4 pb-28 sm:px-6 sm:pb-36 lg:px-8">
+        <div className={`relative mx-auto max-w-7xl overflow-hidden rounded-[32px] bg-[#d9d2c8] ${cardShadow}`}>
+          <Image
+            src="/home/capsules.webp"
+            alt=""
+            fill
+            sizes="(min-width: 1280px) 1280px, 100vw"
+            className="object-cover object-right"
+          />
+          <div className="absolute inset-0 bg-[#e9e3dc]/90 lg:bg-transparent lg:bg-gradient-to-r lg:from-[#e9e3dc] lg:via-[#e9e3dc]/70 lg:to-transparent" />
+          <div className="relative max-w-2xl p-6 py-14 sm:p-14 lg:p-20">
+            <h2 className={h2}>See the assistant answer your customers</h2>
+            <p className="mt-5 max-w-[32rem] text-[17px] leading-relaxed sm:text-[19px] text-ink-2">
+              Send us your store. We&apos;ll set the assistant up on a sample of your catalog and show you how it answers
+              the questions your support team gets every day. The founder replies personally.
+            </p>
+            <div className="mt-9">
+              <DemoRequestForm />
+            </div>
+            <p className="mt-5 text-[14px] text-ink-2">
+              Prefer email?{" "}
+              <a href={`mailto:${site.contact.email}`} className="font-medium text-ink underline decoration-ink/25 underline-offset-4 hover:decoration-ink">
+                {site.contact.email}
+              </a>
+            </p>
+          </div>
+        </div>
       </section>
     </div>
   );

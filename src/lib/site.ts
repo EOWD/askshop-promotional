@@ -1,21 +1,21 @@
 /**
- * Site identity and contact — the one place to edit when AskShop gets its own
+ * Site identity and contact — the one place to edit when Tapmerce gets its own
  * mailboxes (MX records) or a registered address. Everything on the site that
  * names a person, an email address or the brand reads from here.
  */
 export const site = {
-  name: "AskShop",
-  domain: "askshop.app",
-  url: "https://askshop.app",
-  tagline: "Mobile AI commerce platform for Shopify stores",
+  name: "Tapmerce",
+  domain: "tapmerce.com",
+  url: "https://tapmerce.com",
+  tagline: "AI shopping and mobile apps for nutrition brands",
   founder: {
     name: "Eiad Oraby",
     role: "Founder & developer",
   },
   contact: {
-    // TEMPORARY: the @askshop.app mailboxes do not exist yet (the domain has no
+    // TEMPORARY: the @tapmerce.com mailboxes do not exist yet (the domain has no
     // MX records), so every contact link points at the founder's inbox. Swap this
-    // for hello@askshop.app once mail is set up — nothing else needs to change.
+    // for hello@tapmerce.com once mail is set up — nothing else needs to change.
     email: "eiadoraby@gmail.com",
   },
   legal: {
@@ -25,15 +25,36 @@ export const site = {
     address: "" as string,
     country: "Germany",
   },
-  /** Merchants with a live AskShop app. First entry is featured on the home page. */
+  /** The launch guarantee — every mention on the site reads from here.
+   *  "Live" means submitted to both stores; review time is excluded (see conditions). */
+  guarantee: {
+    weeks: 3,
+    days: 21,
+    headline: "Your store app live within 3 weeks. Guaranteed.",
+    short: "Live in 3 weeks, guaranteed",
+    promise: "Your iOS and Android apps submitted to the App Store and Google Play within 21 days of kickoff",
+    remedy: "or your setup fee back",
+    conditions:
+      "The 21 days count from kickoff, once your brand assets and your Apple and Google developer accounts are in place. Store review typically adds a few days and is outside our control. If we miss the date, the app setup fee is refunded in full.",
+    reasons: [
+      "The platform is already built — your app is a configuration, not a software project",
+      "The first Tapmerce app is live in both stores today",
+      "We handle both store submissions and any reviewer questions",
+    ],
+  },
+  /** Merchants with a live Tapmerce app. First entry is featured on the home page. */
   customers: [
     {
       slug: "organics-best",
       name: "Organic's Best",
       tagline: "European organic baby formula, shipped worldwide",
       description:
-        "A Shopify retailer of HiPP, Holle, Kendamil and other EU-organic formulas. Their AskShop app pairs a branded store with an AI shopping assistant, live human support, subscriptions and order tracking.",
+        "A Shopify retailer of HiPP, Holle, Kendamil and other EU-organic formulas. Their Tapmerce app pairs a branded store with an AI shopping assistant, live human support, subscriptions and order tracking.",
       url: "https://organicsbestshop.com",
+      /** Their live AI shopping assistant page. */
+      aiUrl: "https://organicsbestshop.com/pages/organics-best-ai",
+      /** Starter questions shown on their live assistant (copied from the page, 2026-10-19). */
+      aiPrompts: ["Find the right formula", "I'm switching formulas", "Is this gentle on tummies?", "Goat or cow milk formula?"],
       logo: "/customers/organics-best/logo.webp",
       appStore: {
         name: "Organic's Best Shop",
@@ -43,6 +64,9 @@ export const site = {
         name: "Organic's Best: Baby Formula",
         url: "https://play.google.com/store/apps/details?id=com.organicsbestshop.app",
       },
+      /** Real results supplied by the merchant. The home page renders these only when present;
+       *  never add estimates. Example: { value: "18.4%", label: "of revenue from AI-assisted orders" } */
+      results: [] as { value: string; label: string }[],
       highlights: [
         "Ask AI shopping assistant with hand-off to live human support",
         "Subscribe & Save, one-tap buy-again and an app-only discount",

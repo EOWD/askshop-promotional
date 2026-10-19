@@ -3,7 +3,7 @@ import { site, mailto } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "AskShop terms of service. Rules and guidelines for using our platform.",
+  description: "Tapmerce terms of service. Rules and guidelines for using our platform.",
 };
 
 export default function TermsPage() {
@@ -17,7 +17,7 @@ export default function TermsPage() {
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-3">1. Acceptance of Terms</h2>
             <p>
-              By installing, accessing, or using AskShop (the &quot;Service&quot;), operated by {site.legal.operator}, you agree to be bound
+              By installing, accessing, or using Tapmerce (the &quot;Service&quot;), operated by {site.legal.operator}, you agree to be bound
               by these Terms of Service (&quot;Terms&quot;). If you do not agree, do not use the Service.
               These Terms supplement any terms agreed upon between you and Shopify.
             </p>
@@ -26,7 +26,7 @@ export default function TermsPage() {
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-3">2. Description of Service</h2>
             <p>
-              AskShop provides a platform for Shopify merchants to create, customize, and publish
+              Tapmerce provides a platform for Shopify merchants to create, customize, and publish
               native mobile shopping applications. The Service includes:
             </p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
@@ -50,10 +50,11 @@ export default function TermsPage() {
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-3">4. Subscription and Billing</h2>
             <p>
-              The Service is offered on a subscription basis billed through Shopify&apos;s billing
-              system. Pricing is listed on our pricing page and is subject to change with 30
-              days&apos; notice. All plans include a 14-day free trial. Subscriptions renew
-              automatically unless cancelled.
+              The Service consists of a one-time app build fee and a monthly AI plan, both
+              invoiced by Tapmerce in euros and exclusive of VAT. Current prices are listed on our
+              pricing page and may change with 30 days&apos; notice; changes never apply to a
+              build already agreed. AI plans renew monthly unless cancelled, and usage beyond the
+              plan allowance is billed at the published per-conversation rate.
             </p>
           </div>
 
@@ -61,7 +62,7 @@ export default function TermsPage() {
             <h2 className="text-lg font-semibold text-foreground mb-3">5. App Store Accounts</h2>
             <p>
               You are responsible for maintaining your own Apple Developer and Google Play
-              Developer accounts. AskShop is not responsible for fees charged by Apple or Google,
+              Developer accounts. Tapmerce is not responsible for fees charged by Apple or Google,
               or for App Store or Play Store review decisions. We will make reasonable efforts to
               help resolve submission issues.
             </p>
@@ -70,9 +71,9 @@ export default function TermsPage() {
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-3">6. Intellectual Property</h2>
             <p>
-              You retain all rights to your brand assets (logos, images, product content). AskShop
+              You retain all rights to your brand assets (logos, images, product content). Tapmerce
               retains all rights to the platform technology, app framework, and AI models. Your
-              published app is powered by AskShop technology and requires an active subscription.
+              published app is powered by Tapmerce technology and requires an active subscription.
             </p>
           </div>
 
@@ -82,7 +83,7 @@ export default function TermsPage() {
               The AI Chat App uses artificial intelligence to assist customers with product
               discovery and recommendations. AI responses are generated automatically and may
               not always be accurate. You are responsible for ensuring your product data is
-              accurate. AskShop is not liable for purchase decisions made based on AI
+              accurate. Tapmerce is not liable for purchase decisions made based on AI
               recommendations.
             </p>
           </div>
@@ -112,7 +113,7 @@ export default function TermsPage() {
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-3">10. Limitation of Liability</h2>
             <p>
-              To the maximum extent permitted by law, AskShop shall not be liable for any
+              To the maximum extent permitted by law, Tapmerce shall not be liable for any
               indirect, incidental, special, consequential, or punitive damages, including loss
               of profits, data, or business opportunities, arising from your use of the Service.
               Our total liability shall not exceed the fees paid by you in the 12 months preceding

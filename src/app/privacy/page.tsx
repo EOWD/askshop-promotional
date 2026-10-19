@@ -3,7 +3,7 @@ import { site, mailto } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "AskShop privacy policy. Learn how we collect, use, and protect your data.",
+  description: "Tapmerce privacy policy. Learn how we collect, use, and protect your data.",
 };
 
 export default function PrivacyPage() {
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-3">1. Introduction</h2>
             <p>
-              AskShop, operated by {site.legal.operator} (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot; — see our Imprint), is committed to protecting your privacy. This Privacy
+              Tapmerce, operated by {site.legal.operator} (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot; — see our Imprint), is committed to protecting your privacy. This Privacy
               Policy explains how we collect, use, disclose, and safeguard your information when
               you use our Shopify application and related services (collectively, the &quot;Service&quot;).
             </p>
@@ -26,7 +26,7 @@ export default function PrivacyPage() {
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-3">2. Information We Collect</h2>
             <h3 className="text-base font-medium text-foreground mt-4 mb-2">2.1 Merchant Information</h3>
-            <p>When you install AskShop on your Shopify store, we collect:</p>
+            <p>When you install Tapmerce on your Shopify store, we collect:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>Store name and domain (myshopify.com URL)</li>
               <li>Shopify store owner contact information</li>
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
               <li>IP addresses (anonymized after 30 days)</li>
               <li>Browser type and version (for web analytics)</li>
               <li>Referring URLs</li>
-              <li>Pages viewed on askshop.app</li>
+              <li>Pages viewed on tapmerce.com</li>
             </ul>
           </div>
 
@@ -128,7 +128,7 @@ export default function PrivacyPage() {
               legitimate interest, and consent. Our Data Processing Agreement (DPA) is available
               at{" "}
               <a href="/dpa" className="text-primary hover:text-primary-dark">
-                askshop.app/dpa
+                tapmerce.com/dpa
               </a>.
             </p>
           </div>
@@ -168,7 +168,7 @@ export default function PrivacyPage() {
                 {site.contact.email}
               </a>
               <br />
-              Website: askshop.app
+              Website: tapmerce.com
             </p>
           </div>
         </div>

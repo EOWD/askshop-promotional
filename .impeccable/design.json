@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T09:05:11.533Z",
+  "title": "Design System: Tapmerce",
+  "extensions": {
+    "colorMeta": {
+      "stone": {
+        "role": "neutral",
+        "displayName": "Warm Stone",
+        "canonical": "oklch(93.9% 0.010 72.7)",
+        "tonalRamp": [
+          "#0e0b07",
+          "#27231f",
+          "#46423d",
+          "#67625d",
+          "#8a8580",
+          "#afaaa4",
+          "#d2cdc7",
+          "#f3eee8"
+        ]
+      },
+      "stone-deep": {
+        "role": "neutral",
+        "displayName": "Deep Stone",
+        "canonical": "oklch(90.4% 0.014 74.4)",
+        "tonalRamp": [
+          "#0f0a05",
+          "#28231c",
+          "#47413a",
+          "#68625a",
+          "#8b857d",
+          "#b0aaa1",
+          "#d3cdc4",
+          "#f4ede4"
+        ]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Card Cream",
+        "canonical": "oklch(99.5% 0.005 78.3)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#252422",
+          "#444240",
+          "#656360",
+          "#888683",
+          "#acaaa8",
+          "#cfcdca",
+          "#f0eeeb"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(89.4% 0.014 74.4)",
+        "tonalRamp": [
+          "#0f0a05",
+          "#28231c",
+          "#47413a",
+          "#68625a",
+          "#8b857d",
+          "#b0aaa1",
+          "#d3cdc4",
+          "#f4ede4"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(23.2% 0.004 286.1)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#242426",
+          "#424244",
+          "#636365",
+          "#868688",
+          "#aaaaad",
+          "#cdcdd0",
+          "#eeeef1"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "oklch(44.0% 0.008 75.3)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#262420",
+          "#45423e",
+          "#66635f",
+          "#898681",
+          "#aeaaa6",
+          "#d1cdc8",
+          "#f1eee9"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink Faint",
+        "canonical": "oklch(51.3% 0.013 76.5)",
+        "tonalRamp": [
+          "#0e0a06",
+          "#28231d",
+          "#46423b",
+          "#67625b",
+          "#8b857e",
+          "#afaaa2",
+          "#d2cdc5",
+          "#f3eee5"
+        ]
+      },
+      "action": {
+        "role": "primary",
+        "displayName": "Press Orange",
+        "canonical": "oklch(68.2% 0.211 37.7)",
+        "tonalRamp": [
+          "#3f0000",
+          "#650000",
+          "#8f0000",
+          "#b91800",
+          "#e44a0b",
+          "#ff7341",
+          "#ff9766",
+          "#ffb987"
+        ]
+      },
+      "action-press": {
+        "role": "primary",
+        "displayName": "Pressed Orange",
+        "canonical": "oklch(64.0% 0.211 36.4)",
+        "tonalRamp": [
+          "#3f0000",
+          "#650000",
+          "#8f0000",
+          "#b91600",
+          "#e44916",
+          "#ff7245",
+          "#ff976a",
+          "#ffb88a"
+        ]
+      },
+      "action-soft": {
+        "role": "primary",
+        "displayName": "Orange Blush",
+        "canonical": "oklch(93.8% 0.034 45.5)",
+        "tonalRamp": [
+          "#160602",
+          "#321f16",
+          "#523d33",
+          "#745e53",
+          "#988075",
+          "#bea599",
+          "#e2c7bc",
+          "#ffe8dc"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The single hero headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Every section h2, sentence case, balanced wrap."
+      },
+      "headline-sm": {
+        "displayName": "Headline Small",
+        "purpose": "Display-face h3 inside large components (service panels, lifestyle stories, step labels)."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Prices and result numbers in the display face, tabular digits."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card and list-item headings."
+      },
+      "body-lead": {
+        "displayName": "Body Lead",
+        "purpose": "Paragraph under each section headline, 30 to 40rem measure, ink-2."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Card body, lists, FAQ answers."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Chips, tabs, form labels, small buttons. Sentence case."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Sample-data disclaimers, source lines, conditions."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-floor",
+        "value": "0 30px 60px -45px rgba(60,40,20,0.5)",
+        "purpose": "Top-level containers on stone."
+      },
+      {
+        "name": "widget-lift",
+        "value": "0 40px 80px -40px rgba(60,40,20,0.45), 0 2px 6px rgba(60,40,20,0.06)",
+        "purpose": "Hero assistant widget."
+      },
+      {
+        "name": "chip-float",
+        "value": "0 8px 20px -16px rgba(60,40,20,0.6)",
+        "purpose": "Marquee question chips."
+      },
+      {
+        "name": "action-glow",
+        "value": "0 16px 30px -14px rgba(240,74,16,0.9)",
+        "purpose": "Large Book a demo buttons and the selected services tab."
+      },
+      {
+        "name": "device-drop",
+        "value": "0 40px 60px -30px rgba(29,29,31,0.7)",
+        "purpose": "Phone frames."
+      },
+      {
+        "name": "dock",
+        "value": "0 20px 40px -12px rgba(29,29,31,0.55)",
+        "purpose": "Floating bottom section dock."
+      }
+    ],
+    "motion": [
+      {
+        "name": "reveal",
+        "value": "spring(stiffness 90, damping 20); opacity 0 to 1, y 24px to 0; once, -80px margin",
+        "purpose": "Section-level entrance for every content block."
+      },
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Panel swaps (450ms) and price digit rolls (350ms, 30ms stagger)."
+      },
+      {
+        "name": "segment-spring",
+        "value": "spring(stiffness 420, damping 34)",
+        "purpose": "Shared-layout pill for the services tabs and plan picker."
+      },
+      {
+        "name": "stream-word",
+        "value": "250ms per word, 35ms stagger, blur 4px to 0",
+        "purpose": "Assistant answer streaming."
+      },
+      {
+        "name": "typing",
+        "value": "900ms indicator; dots bounce 4px, 600ms loop, 120ms stagger",
+        "purpose": "Assistant typing state before an answer."
+      },
+      {
+        "name": "press",
+        "value": "scale 0.97 to 0.98, 200ms",
+        "purpose": "Active state on buttons and chips."
+      },
+      {
+        "name": "marquee",
+        "value": "60s linear (68s reverse row)",
+        "purpose": "Question chip rows; pause on hover; off under reduced motion."
+      },
+      {
+        "name": "helix",
+        "value": "rAF loop, pauses offscreen and on hidden tab; single static frame under prefers-reduced-motion",
+        "purpose": "Hero three.js nutrition helix; scatters on assistant pulse."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "container",
+        "value": "1280px"
+      }
+    ],
+    "sampleBrands": {
+      "note": "White-label sample brand colors. Only inside lifestyle phone screens; not part of the Tapmerce palette.",
+      "forge": "#1f3b5c",
+      "little-oat": "#5f8a6b",
+      "verra": "#8a4a68",
+      "good-field": "#6b7a2e",
+      "app-canvas": "#f6f5f2"
+    },
+    "legacy": {
+      "note": "Non-home routes still use a dark indigo theme (background #06050e, primary #6366f1, secondary #06b6d4, accent #f59e0b, Geist). Pending redesign; not part of this system."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Press Orange pill with ink text; the only primary action style.",
+      "html": "<button class=\"ds-btn-primary\">Book a demo <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #ff5a1f; color: #1d1d1f; font-family: Figtree, system-ui, sans-serif; font-size: 17px; font-weight: 600; padding: 16px 32px; border: none; border-radius: 9999px; box-shadow: 0 16px 30px -14px rgba(240,74,16,0.9); cursor: pointer; transition: background 200ms, transform 200ms; } .ds-btn-primary svg { transition: transform 200ms; } .ds-btn-primary:hover { background: #f04a10; } .ds-btn-primary:hover svg { transform: translateX(2px); } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid #1d1d1f; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Secondary action beside a primary button.",
+      "html": "<a class=\"ds-link\" href=\"#\">See it live at Organic's Best</a>",
+      "css": ".ds-link { font-family: Figtree, system-ui, sans-serif; font-size: 17px; font-weight: 500; color: #1d1d1f; text-decoration: underline; text-decoration-color: rgba(29,29,31,0.25); text-decoration-thickness: 2px; text-underline-offset: 6px; transition: text-decoration-color 200ms; } .ds-link:hover { text-decoration-color: #1d1d1f; } .ds-link:focus-visible { outline: 2px solid #1d1d1f; outline-offset: 3px; }"
+    },
+    {
+      "name": "Question Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pressable question chip; selected fills Press Orange.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"true\">Best magnesium for evenings?</button><button class=\"ds-chip\" aria-pressed=\"false\">Is your D3 vegan?</button></div>",
+      "css": ".ds-chips { display: flex; gap: 8px; flex-wrap: wrap; } .ds-chip { font-family: Figtree, system-ui, sans-serif; font-size: 14px; font-weight: 500; color: #1d1d1f; background: #fffdfa; border: 1px solid #e2dbd2; border-radius: 9999px; padding: 8px 16px; cursor: pointer; transition: all 200ms; } .ds-chip:hover { background: #efeae4; border-color: rgba(29,29,31,0.3); } .ds-chip:active { transform: scale(0.97); } .ds-chip[aria-pressed=\"true\"] { background: #ff5a1f; border-color: #ff5a1f; } .ds-chip:focus-visible { outline: 2px solid #1d1d1f; outline-offset: 3px; }"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "nav",
+      "refersTo": "segment-selected",
+      "description": "Services tabs: stone track, orange selected segment.",
+      "html": "<div class=\"ds-seg\" role=\"tablist\"><button class=\"ds-seg-btn\" aria-selected=\"true\">Your website</button><button class=\"ds-seg-btn\" aria-selected=\"false\">Your app</button><button class=\"ds-seg-btn\" aria-selected=\"false\">AI marketplace</button></div>",
+      "css": ".ds-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: #efeae4; border-radius: 20px; padding: 6px; } .ds-seg-btn { font-family: Figtree, system-ui, sans-serif; font-size: 16px; font-weight: 600; color: #1d1d1f; background: transparent; border: none; border-radius: 16px; padding: 12px 8px; cursor: pointer; transition: background 200ms; } .ds-seg-btn:hover { background: rgba(255,253,250,0.6); } .ds-seg-btn[aria-selected=\"true\"] { background: #ff5a1f; box-shadow: 0 6px 14px -8px rgba(240,74,16,0.8); } .ds-seg-btn:focus-visible { outline: 2px solid #1d1d1f; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Card field with hairline border; focus shifts the border to ink.",
+      "html": "<label class=\"ds-field\"><span>Work email</span><input placeholder=\"you@yourbrand.com\" /></label>",
+      "css": ".ds-field { display: grid; gap: 8px; font-family: Figtree, system-ui, sans-serif; } .ds-field span { font-size: 14px; font-weight: 500; color: #1d1d1f; } .ds-field input { font-family: Figtree, system-ui, sans-serif; font-size: 16px; color: #1d1d1f; background: #fffdfa; border: 1px solid #e2dbd2; border-radius: 14px; padding: 14px 16px; transition: border-color 200ms; } .ds-field input::placeholder { color: #6b665f; } .ds-field input:hover { border-color: rgba(29,29,31,0.3); } .ds-field input:focus-visible { outline: none; border-color: #1d1d1f; }"
+    },
+    {
+      "name": "Container Card",
+      "kind": "card",
+      "refersTo": "card-container",
+      "description": "Top-level 28px card on stone with a warm floor shadow and a nested stone panel.",
+      "html": "<div class=\"ds-stage\"><div class=\"ds-card\"><h3>Answers come from your data</h3><p>Catalog, metafields and policies. When the data doesn't have the answer, it says so.</p><div class=\"ds-inner\"><span class=\"ds-price\">€24.90</span> Magnesium Glycinate 400</div></div></div>",
+      "css": ".ds-stage { background: #efeae4; padding: 24px; } .ds-card { background: #fffdfa; border-radius: 28px; padding: 32px; box-shadow: 0 30px 60px -45px rgba(60,40,20,0.5); font-family: Figtree, system-ui, sans-serif; color: #1d1d1f; } .ds-card h3 { margin: 0; font-size: 19px; font-weight: 600; } .ds-card p { margin: 6px 0 0; font-size: 16px; line-height: 1.625; color: #55524e; } .ds-inner { margin-top: 20px; background: #efeae4; border-radius: 22px; padding: 16px 20px; font-size: 15px; } .ds-price { font-weight: 600; font-variant-numeric: tabular-nums; margin-right: 8px; }"
+    },
+    {
+      "name": "Chat Bubbles",
+      "kind": "custom",
+      "refersTo": "bubble-assistant",
+      "description": "Ink user bubble, stone assistant bubble, one flattened corner toward the speaker, source caption.",
+      "html": "<div class=\"ds-chat\"><p class=\"ds-q\">Is your vitamin D3 vegan?</p><p class=\"ds-a\">Yes. The D3 + K2 drops use vitamin D3 from lichen, not lanolin.</p><p class=\"ds-src\">Source: Ingredient metafield</p></div>",
+      "css": ".ds-chat { display: flex; flex-direction: column; gap: 12px; background: #fffdfa; padding: 24px; border-radius: 28px; font-family: Figtree, system-ui, sans-serif; } .ds-q { align-self: flex-end; max-width: 80%; margin: 0; background: #1d1d1f; color: #fffdfa; font-size: 15px; line-height: 1.375; padding: 10px 16px; border-radius: 20px 20px 6px 20px; } .ds-a { align-self: flex-start; max-width: 88%; margin: 0; background: #efeae4; color: #1d1d1f; font-size: 15px; line-height: 1.625; padding: 12px 16px; border-radius: 20px 20px 20px 6px; } .ds-src { margin: 0; font-size: 12px; color: #6b665f; }"
+    },
+    {
+      "name": "Section Dock",
+      "kind": "nav",
+      "refersTo": "dock",
+      "description": "Floating ink pill nav; current item card-colored, ends in the orange action.",
+      "html": "<nav class=\"ds-dock\"><a class=\"ds-dock-item\" aria-current=\"true\" href=\"#\">Try it</a><a class=\"ds-dock-item\" href=\"#\">Services</a><a class=\"ds-dock-item\" href=\"#\">Pricing</a><a class=\"ds-dock-cta\" href=\"#\">Book a demo</a></nav>",
+      "css": ".ds-dock { display: inline-flex; align-items: center; gap: 4px; background: rgba(29,29,31,0.95); border-radius: 9999px; padding: 6px; box-shadow: 0 20px 40px -12px rgba(29,29,31,0.55); font-family: Figtree, system-ui, sans-serif; } .ds-dock-item { display: flex; align-items: center; height: 44px; padding: 0 16px; border-radius: 9999px; font-size: 14px; font-weight: 500; color: rgba(255,253,250,0.7); text-decoration: none; transition: color 200ms; } .ds-dock-item:hover { color: #fffdfa; } .ds-dock-item[aria-current=\"true\"] { background: #fffdfa; color: #1d1d1f; } .ds-dock-cta { display: flex; align-items: center; height: 44px; margin-left: 4px; padding: 0 16px; border-radius: 9999px; background: #ff5a1f; color: #1d1d1f; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 200ms; } .ds-dock-cta:hover { background: #f04a10; } .ds-dock a:focus-visible { outline: 2px solid #fffdfa; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Counter Conversation",
+    "overview": "The page behaves like the assistant it sells. A shopper at a warm, well-lit shop counter asks a real question and gets a straight answer with the right product in hand. So the ground is warm stone, surfaces are soft off-white cards that look like app UI rather than marketing panels, and the first thing on the page is a working chat widget, not a headline beside a screenshot.\n\nDensity is consumer-app, not SaaS-dashboard: large display headlines in Bricolage Grotesque, generous 19px lead copy in Figtree, big rounded containers holding smaller rounded app parts. Ink does almost all the work in three values. One saturated orange appears only where a finger or cursor can press. Depth comes from long, low, warm-brown shadows under cards and from a three.js helix of capsules, softgels, tablets, berries, leaves and almonds behind the hero.\n\nPhotography is editorial lifestyle at 35mm with natural light in warm rooms, and the app screens inside it belong to sample brands with their own muted colors, showing that the product is white-label.",
+    "keyCharacteristics": [
+      "Warm stone ground, off-white cards, ink text in three values",
+      "One action orange (#ff5a1f) on pressable things only, always with ink text",
+      "Nested radius language: 28px containers, 14 to 22px inner parts, full pills for chips and buttons",
+      "Bricolage Grotesque display (opsz 96) over Figtree text; tabular digits for every price, count and day",
+      "Motion is mostly quiet section reveals; the authored moments are the streaming assistant and the 3D nutrition helix"
+    ],
+    "rules": [
+      {
+        "name": "The One Press Rule",
+        "body": "Press Orange marks only things that can be pressed (or a mock of one inside a demo screen). Never use it for headings, icons, decorative fills, borders or section backgrounds. The logo mark is the only non-interactive exception.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink-On-Orange Rule",
+        "body": "Text and icons on Press Orange are ink (#1d1d1f), never white. White on this orange fails contrast; ink passes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Inks Rule",
+        "body": "Text uses ink, ink-2 or ink-3 only. Alpha variants of ink (ink/25, ink/30) are for underlines and hover borders, not for text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Every price, cart count, conversation count, step number, clock and result uses tabular digits (`tabular-nums`).",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Kicker Rule",
+        "body": "No eyebrow or kicker labels above headlines. A section starts with its headline.",
+        "section": "typography"
+      },
+      {
+        "name": "The Warm Shadow Rule",
+        "body": "Shadows are tinted warm brown (rgba 60,40,20) on stone, or ink on devices. Never neutral grey or black glows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** use Press Orange (#ff5a1f) only on pressable things, with ink text on it.",
+      "**Do** nest radii: 28px container, 14 to 22px inner surfaces, full pills for chips and buttons.",
+      "**Do** set every price, count and day in tabular digits.",
+      "**Do** start sections with a sentence-case headline in Bricolage Grotesque, followed by a 19px Figtree lead in ink-2.",
+      "**Do** keep motion to section-level Reveal (fade and 24px lift, spring, once) plus the authored moments: the streaming assistant and the helix. Respect reduced motion everywhere.",
+      "**Do** pause any continuous animation offscreen and when the tab is hidden.",
+      "**Do** label demo data and sample brands as samples, in a caption near them.",
+      "**Do** keep lifestyle photography unbranded, warm, natural-light and candid, and save a prompt sidecar for every generated raster."
+    ],
+    "donts": [
+      "**Don't** use orange for headings, icons, borders, backgrounds or decoration.",
+      "**Don't** put white text on Press Orange.",
+      "**Don't** add eyebrow or kicker labels above headlines.",
+      "**Don't** use the legacy indigo, cyan or amber tokens or Geist on home-world surfaces.",
+      "**Don't** use neutral grey or black glow shadows on stone; use the warm floor shadows.",
+      "**Don't** use sample-brand colors outside the phone screens they belong to.",
+      "**Don't** show real third-party logos or text in generated imagery."
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-# AskShop SEO & Marketing Strategy
+# Tapmerce SEO & Marketing Strategy
 
 ## Ahrefs keyword check — US, 2026-09-09
 
@@ -39,16 +39,36 @@ Ahrefs API (Keywords Explorer overview + matching terms).
 
 | Page | Primary keyword | Title tag | H1 |
 |---|---|---|---|
-| `/` | shopify mobile app builder, ai shopping | AskShop — Shopify Mobile App Builder with AI Shopping | Turn your Shopify store into a mobile AI shopping app |
+| `/` | shopify mobile app builder, ai shopping | Tapmerce — Shopify Mobile App Builder with AI Shopping | Turn your Shopify store into a mobile AI shopping app |
 | `/features` | shopify mobile app (features), ai shopping assistant | Shopify Mobile App Features & AI Shopping Assistant | Every feature your Shopify mobile app needs |
 | `/pricing` | shopify mobile app pricing | Shopify Mobile App Pricing — Plans from $99/month | Shopify mobile app pricing, without success fees |
-| `/about` | mobile commerce platform | About — Who Builds AskShop | The mobile commerce platform for every Shopify store |
+| `/about` | mobile commerce platform | About — Who Builds Tapmerce | The mobile commerce platform for every Shopify store |
 | `/blog` | ai shopping, agentic commerce | Blog — AI Shopping, Agentic Commerce & Shopify Mobile Apps | AI shopping and mobile commerce for Shopify stores |
-| `/compare/*` | [competitor] alternative | AskShop vs X — Shopify Mobile App Builder Comparison | AskShop vs X |
+| `/compare/*` | [competitor] alternative | Tapmerce vs X — Shopify Mobile App Builder Comparison | Tapmerce vs X |
 
 Home H2s now carry: "AI ecommerce", "mobile shopping experiences", "AI shopping assistant",
 "Shopify mobile app", "turn your Shopify store into a mobile app", "AI shopping marketplace",
 "agentic commerce" + "Universal Commerce Protocol (UCP)".
+
+### Feature keywords — US, 2026-09-09 (Ahrefs)
+
+| Keyword | Volume | KD | Where it lives now |
+|---|---|---|---|
+| shopify order tracking | 1,200 | **0** | Features "Shopify order tracking" section (eyebrow + H2); home bento card |
+| shopify subscription app | 1,000 | 25 | Features "Shopify subscriptions" section |
+| shopify chatbot / shopify ai chatbot | 500 / 400 | 31 / 24 | Features title tag, AI section |
+| shopify live chat app | 350 | 34 | Features "Shopify live chat" section |
+| ai chatbot for shopify | 300 | 31 | Features title tag |
+| shopify order tracking app | 200 | 9 | Features orders section |
+| shopify ai assistant | 200 | 5 | Features AI section eyebrow |
+| shopify product reviews app | 150 | 25 | Features reviews section |
+| shopify push notifications | 150 | 4 | Features push section (eyebrow + H2) |
+| abandoned cart push notifications | 60 | 2 | Not claimed — the app does not send abandoned-cart pushes yet |
+| app only discount | 0 | — | No search demand; kept as a conversion feature ("App-exclusive discount") |
+
+Claims deliberately NOT made (not in the code): abandoned-cart push, one-tap Apple Pay buttons
+(accelerated checkout is parked), per-store model fine-tuning (the assistant is retrieval-grounded
+with a store-specific persona), AR try-on, built-in loyalty.
 
 ### Next content to write (by opportunity)
 1. **What is agentic commerce?** — 2,400/mo, KD 1. Explainer for merchants; link to UCP post.
@@ -62,7 +82,7 @@ Home H2s now carry: "AI ecommerce", "mobile shopping experiences", "AI shopping 
 1. **AI Chat Shopping** — No competitor offers a conversational AI shopping experience
 2. **No Success Fees** — Tapcart charges 2.5%, Appbrew 1-2%, Plobal 1% on enterprise. We charge $0.
 3. **Two App Experiences** — AI Chat + Classic Store. No one else offers both.
-4. **Lowest Entry Price** — $99/mo vs Tapcart $200, Plobal $199, Shopney $149, Appbrew $499
+4. **No monthly platform fee** — one-time €10,000 build + usage-based AI plan from €99/mo; competitors charge $149–$499/mo, some plus success fees
 
 ### Competitor Overview
 | Competitor | Price | Success Fee | AI Chat | Rating |
@@ -73,7 +93,7 @@ Home H2s now carry: "AI ecommerce", "mobile shopping experiences", "AI shopping 
 | Appbrew | $499/mo | 1-2% | No | New |
 | Vajro | $99/mo | Varies | No | 4.x/5 |
 | MageNative | $49/mo | None | No | 4.8/5 (342 reviews) |
-| **AskShop** | **$99/mo** | **None** | **Yes** | New |
+| **Tapmerce** | **€10k build + AI from €99/mo** | **None** | **Yes** | 1 live merchant |
 
 ## Primary Keywords (Priority Order)
 1. shopify mobile app builder

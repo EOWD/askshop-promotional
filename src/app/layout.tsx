@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bricolage_Grotesque, Figtree } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { JsonLd, organizationSchema, websiteSchema, softwareAppSchema } from "@/components/StructuredData";
@@ -15,57 +15,70 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+  axes: ["opsz", "wdth"],
+});
+
+const figtree = Figtree({
+  variable: "--font-figtree",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tapmerce.com"),
   title: {
-    default: "AskShop — Shopify Mobile App Builder with AI Shopping",
-    template: "%s | AskShop",
+    default: "AI Shopping Assistant & Mobile Apps for Nutrition Brands | Tapmerce",
+    template: "%s | Tapmerce",
   },
   description:
-    "Turn your Shopify store into a native iOS and Android app with an AI shopping assistant built in. Native checkout, push notifications, no success fees.",
+    "AI shopping for nutrition brands (supplements, infant formula, sports nutrition, healthy food): an AI chatbot for your online store and your own iOS and Android app. Shopify and other platforms.",
   keywords: [
-    "shopify mobile app builder",
-    "shopify app builder",
-    "ai shopping",
-    "ai shopping app",
-    "turn shopify store into mobile app",
-    "shopify to mobile app",
-    "convert shopify to mobile app",
-    "shopify native app",
-    "mobile commerce shopify",
     "ai shopping assistant",
-    "conversational commerce",
-    "shopify push notifications",
-    "white label mobile app",
-    "shopify to ios app",
-    "shopify to android app",
-    "universal commerce protocol",
-    "ucp shopify",
-    "agentic commerce",
+    "ai chatbot for ecommerce",
+    "shopify ai chatbot",
+    "shopify chatbot",
+    "ecommerce ai chatbot",
+    "ai product recommendations",
+    "product recommendation quiz",
+    "shopify mobile app builder",
+    "ecommerce mobile app",
+    "ai agent for ecommerce",
     "ai shopping agent",
-    "ai visibility ecommerce",
-    "ecommerce retention app",
+    "agentic commerce",
+    "nutrition ecommerce",
+    "nutrition app",
+    "ecommerce ai assistant",
+    "supplement app",
+    "supplement marketing",
+    "shopify supplement store",
+    "supplement subscription",
+    "shopify subscription app",
+    "ai for nutrition brands",
+    "structure function claims",
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://askshop.app",
-    siteName: "AskShop",
-    title: "AskShop — Shopify Mobile App Builder with AI Shopping",
+    url: "https://tapmerce.com",
+    siteName: "Tapmerce",
+    title: "AI Shopping Assistant & Mobile Apps for Nutrition Brands",
     description:
-      "Turn your Shopify store into a native app with an AI shopping assistant built in. Native checkout, push notifications, no success fees.",
+      "An AI chatbot for your online store, your own mobile app, and a place in AI shopping marketplaces. Built for nutrition brands.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AskShop — Shopify Mobile App Builder with AI Shopping",
+    title: "AI Shopping Assistant & Mobile Apps for Nutrition Brands",
     description:
-      "Turn your Shopify store into a native app with an AI shopping assistant built in. Native checkout, push notifications, no success fees.",
+      "An AI chatbot for your online store, your own mobile app, and a place in AI shopping marketplaces. Built for nutrition brands.",
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://askshop.app",
+    canonical: "https://tapmerce.com",
   },
 };
 
@@ -77,7 +90,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} ${figtree.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <JsonLd data={organizationSchema} />

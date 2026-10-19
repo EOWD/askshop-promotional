@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCompetitor, getAllCompetitorSlugs } from "@/lib/compare-data";
 import { JsonLd, buildComparisonSchema, buildBreadcrumbSchema } from "@/components/StructuredData";
+import { aiPlanFrom, appSetupPrice } from "@/lib/pricing";
 
 export function generateStaticParams() {
   return getAllCompetitorSlugs().map((slug) => ({ competitor: slug }));
@@ -17,8 +18,8 @@ export async function generateMetadata({
   const comp = getCompetitor(slug);
   if (!comp) return { title: "Not Found" };
   return {
-    title: `AskShop vs ${comp.name} — Shopify Mobile App Builder Comparison`,
-    description: `Compare AskShop and ${comp.name} as Shopify mobile app builders: features, pricing, AI shopping assistant, and which is right for your store.`,
+    title: `Tapmerce vs ${comp.name} — Shopify Mobile App Builder Comparison`,
+    description: `Compare Tapmerce and ${comp.name} as Shopify mobile app builders: features, pricing, AI shopping assistant, and which is right for your store.`,
   };
 }
 
@@ -37,9 +38,9 @@ export default async function ComparePage({
     <>
       <JsonLd data={buildComparisonSchema(comp)} />
       <JsonLd data={buildBreadcrumbSchema([
-        { name: "Home", url: "https://askshop.app" },
-        { name: "Compare", url: "https://askshop.app/compare/tapcart" },
-        { name: `vs ${comp.name}`, url: `https://askshop.app/compare/${comp.slug}` },
+        { name: "Home", url: "https://tapmerce.com" },
+        { name: "Compare", url: "https://tapmerce.com/compare/tapcart" },
+        { name: `vs ${comp.name}`, url: `https://tapmerce.com/compare/${comp.slug}` },
       ])} />
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -64,7 +65,7 @@ export default async function ComparePage({
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
-            AskShop vs {comp.name}
+            Tapmerce vs {comp.name}
           </h1>
           <p className="mt-4 text-lg text-muted max-w-2xl">
             {comp.description}
@@ -80,9 +81,9 @@ export default async function ComparePage({
               <p className="text-sm text-muted">starting price</p>
             </div>
             <div className="rounded-xl border border-primary/20 bg-indigo-500/10 p-6">
-              <h3 className="text-sm font-medium text-primary">AskShop</h3>
-              <div className="mt-2 text-3xl font-bold text-foreground">$99/mo</div>
-              <p className="text-sm text-muted">starting price</p>
+              <h3 className="text-sm font-medium text-primary">Tapmerce</h3>
+              <div className="mt-2 text-3xl font-bold text-foreground">{aiPlanFrom}</div>
+              <p className="text-sm text-muted">AI plan · app add-on with {appSetupPrice} setup · no success fees</p>
             </div>
           </div>
 
@@ -98,7 +99,7 @@ export default async function ComparePage({
                       {comp.name}
                     </th>
                     <th className="text-center py-3 px-4 font-semibold text-primary">
-                      AskShop
+                      Tapmerce
                     </th>
                   </tr>
                 </thead>
@@ -143,10 +144,10 @@ export default async function ComparePage({
           <div className="mt-16 grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-xl font-bold text-foreground mb-4">
-                Why choose AskShop
+                Why choose Tapmerce
               </h3>
               <ul className="space-y-3">
-                {comp.askshopAdvantages.map((adv) => (
+                {comp.tapmerceAdvantages.map((adv) => (
                   <li key={adv} className="flex items-start gap-2 text-sm text-muted">
                     <svg className="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -181,10 +182,10 @@ export default async function ComparePage({
 
           {/* CTA */}
           <div className="mt-16 text-center">
-            <h3 className="text-2xl font-bold text-foreground">Try AskShop free for 14 days</h3>
+            <h3 className="text-2xl font-bold text-foreground">Try Tapmerce free for 14 days</h3>
             <p className="mt-2 text-muted">No credit card required. See the difference for yourself.</p>
             <Link
-              href="/#waitlist"
+              href="/#demo"
               className="mt-6 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary-dark transition-colors"
             >
               Join Waitlist

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 64 64" role="img" aria-label="Tapmerce">
+  <defs>
+    <clipPath id="l"><rect x="0" y="0" width="32" height="64"/></clipPath>
+    <clipPath id="r"><rect x="32" y="0" width="32" height="64"/></clipPath>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#1d1d1f"/>
+  <g transform="translate(32 33) scale(0.8) translate(-32 -32)">
+    <g clip-path="url(#l)">
+      <rect x="4" y="14" width="56" height="30" rx="15" fill="#ff5a1f"/>
+      <path d="M14 40 L10 54 L26 43 Z" fill="#ff5a1f"/>
+    </g>
+    <rect x="4" y="14" width="56" height="30" rx="15" fill="#fffdfa" clip-path="url(#r)"/>
+    <path d="M44 22 C45.26 27.74 45.26 27.74 51 29 C45.26 30.26 45.26 30.26 44 36 C42.74 30.26 42.74 30.26 37 29 C42.74 27.74 42.74 27.74 44 22Z" fill="#1d1d1f"/>
+  </g>
+</svg>

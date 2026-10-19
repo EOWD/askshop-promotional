@@ -41,9 +41,9 @@ export default async function BlogPostPage({
     <>
     <JsonLd data={buildArticleSchema(post)} />
     <JsonLd data={buildBreadcrumbSchema([
-      { name: "Home", url: "https://askshop.app" },
-      { name: "Blog", url: "https://askshop.app/blog" },
-      { name: post.title, url: `https://askshop.app/blog/${post.slug}` },
+      { name: "Home", url: "https://tapmerce.com" },
+      { name: "Blog", url: "https://tapmerce.com/blog" },
+      { name: post.title, url: `https://tapmerce.com/blog/${post.slug}` },
     ])} />
     <article className="py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -131,10 +131,10 @@ export default async function BlogPostPage({
             Ready to build your mobile app?
           </h3>
           <p className="mt-2 text-sm text-muted">
-            Start your 14-day free trial. No credit card required.
+            One-time build, one monthly AI plan, no success fees. Talk to us about your store.
           </p>
           <Link
-            href="/#waitlist"
+            href="/#demo"
             className="mt-4 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
           >
             Join Waitlist

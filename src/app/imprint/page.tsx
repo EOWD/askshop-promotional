@@ -5,7 +5,7 @@ import { JsonLd, buildBreadcrumbSchema } from "@/components/StructuredData";
 export const metadata: Metadata = {
   title: "Imprint — Legal Notice",
   description:
-    "Legal notice (Impressum) for askshop.app: who operates the site, how to reach them, and who is responsible for its content.",
+    "Legal notice (Impressum) for tapmerce.com: who operates the site, how to reach them, and who is responsible for its content.",
 };
 
 /** Imprint / Impressum. Operator details come from src/lib/site.ts — the street
@@ -40,7 +40,7 @@ export default function ImprintPage() {
               <h2 className="text-lg font-semibold text-foreground mb-3">Contact</h2>
               <p>
                 Email:{" "}
-                <a href={mailto("Hello AskShop")} className="text-primary hover:text-primary-dark">
+                <a href={mailto("Hello Tapmerce")} className="text-primary hover:text-primary-dark">
                   {site.contact.email}
                 </a>
               </p>

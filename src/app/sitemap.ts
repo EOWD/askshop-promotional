@@ -3,7 +3,7 @@ import { blogPosts } from "@/lib/blog-data";
 import { getAllCompetitorSlugs } from "@/lib/compare-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://askshop.app";
+  const baseUrl = "https://tapmerce.com";
 
   const staticPages = [
     { url: baseUrl, changeFrequency: "weekly" as const, priority: 1 },

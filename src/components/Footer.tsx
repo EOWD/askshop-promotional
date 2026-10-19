@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { site, mailto } from "@/lib/site";
+import { Logo } from "@/components/Logo";
 
 const footerLinks = {
   Product: [
     { name: "Features", href: "/features" },
     { name: "Pricing", href: "/pricing" },
-    { name: "AI Chat App", href: "/features#ai-chat" },
-    { name: "Classic Store App", href: "/features#classic" },
+    { name: "Website AI assistant", href: "/#services" },
+    { name: "Mobile app", href: "/#services" },
+    { name: "AI marketplace", href: "/#services" },
+    { name: "Organic's Best case study", href: "/#case-study" },
   ],
   Compare: [
     { name: "vs Tapcart", href: "/compare/tapcart" },
@@ -19,7 +22,7 @@ const footerLinks = {
   Resources: [
     { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
-    { name: "Contact", href: mailto("Hello AskShop") },
+    { name: "Contact", href: mailto("Hello Tapmerce") },
   ],
   Legal: [
     { name: "Privacy Policy", href: "/privacy" },
@@ -31,20 +34,13 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-surface text-white border-t border-white/5">
+    <footer className="bg-[#1d1d1f] text-[#fffdfa]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">A</span>
-              </div>
-              <span className="text-xl font-bold">
-                Ask<span className="text-indigo-400">Shop</span>
-              </span>
-            </div>
-            <p className="text-sm text-white/40">
-              {site.tagline}. Dedicated native apps and an AI shopping marketplace, built on Shopify.
+            <Logo tone="dark" className="mb-4" />
+            <p className="text-sm text-white/55">
+              {site.tagline}. An AI assistant for your website, your own iOS and Android app, and an AI marketplace listing.
             </p>
           </div>
 
@@ -56,7 +52,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-sm text-white/40 hover:text-white transition-colors"
+                      className="text-sm text-white/65 hover:text-white transition-colors"
                     >
                       {link.name}
                     </Link>
@@ -68,10 +64,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-white/30">
+          <p className="text-sm text-white/60">
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
-          <a href={mailto("Hello AskShop")} className="text-sm text-white/30 hover:text-white transition-colors">
+          <a href={mailto("Hello Tapmerce")} className="text-sm text-white/60 hover:text-white transition-colors">
             {site.contact.email}
           </a>
         </div>

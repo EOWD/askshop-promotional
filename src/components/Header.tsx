@@ -1,74 +1,89 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { mailto } from "@/lib/site";
+import { site, mailto } from "@/lib/site";
+import { Logo } from "@/components/Logo";
 
 const navigation = [
+  { name: "Website AI", href: "/#services" },
+  { name: "Mobile app", href: "/#services" },
   { name: "Features", href: "/features" },
   { name: "Pricing", href: "/pricing" },
   { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
-  { name: "Compare", href: "/compare/tapcart" },
 ];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Home and pricing use the light app-surface world; other pages keep the dark theme until redesigned.
+  const light = ["/", "/pricing"].includes(usePathname());
+
+  const t = light
+    ? {
+        bar: "bg-[#efeae4]/85 border-[#e2dbd2]",
+        link: "text-[#55524e] hover:text-[#1d1d1f]",
+        contact: "text-[#55524e] hover:text-[#1d1d1f]",
+        cta: "bg-[#ff5a1f] text-[#1d1d1f] hover:bg-[#f04a10]",
+        icon: "text-[#1d1d1f]",
+        sheet: "border-[#e2dbd2]",
+        ghost: "border-[#e2dbd2] text-[#1d1d1f]",
+        announce: "bg-[#1d1d1f] text-[#fffdfa] hover:bg-black",
+      }
+    : {
+        bar: "bg-[#17171a]/95 border-white/[0.06]",
+        link: "text-white/60 hover:text-white",
+        contact: "text-white/60 hover:text-white",
+        cta: "bg-[#ff5a1f] text-[#1d1d1f] hover:bg-[#f04a10]",
+        icon: "text-white",
+        sheet: "border-white/10",
+        ghost: "border-white/10 text-white",
+        announce: "bg-[#ff5a1f] text-[#1d1d1f] hover:bg-[#f04a10]",
+      };
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="sticky top-0 z-50 border-b bg-white/[0.04] backdrop-blur-2xl border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.2)]"
-    >
+    <header className={`sticky top-0 z-50 border-b backdrop-blur-xl ${t.bar}`}>
+      {/* Announcement bar: the launch guarantee, straight to the demo form */}
+      <Link href="/#demo" className={`block px-4 py-2 text-center text-xs font-medium transition-colors sm:text-sm ${t.announce}`}>
+        <span className="font-semibold">{site.guarantee.short}</span>
+        <span className="hidden sm:inline">, {site.guarantee.remedy}</span>
+        <span aria-hidden className="ml-2">→</span>
+      </Link>
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">A</span>
-            </div>
-            <span className="text-xl font-bold text-white">
-              Ask<span className="text-indigo-400">Shop</span>
-            </span>
+          <Link href="/" aria-label="Tapmerce home">
+            <Logo tone={light ? "light" : "dark"} />
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden items-center gap-7 md:flex">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm font-medium text-white/60 hover:text-white transition-colors"
-              >
+              <Link key={item.name} href={item.href} className={`text-sm font-medium transition-colors ${t.link}`}>
                 {item.name}
               </Link>
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
-            <a
-              href={mailto("Hello AskShop")}
-              className="text-sm font-medium text-white/60 hover:text-white transition-colors"
-            >
+          <div className="hidden items-center gap-5 md:flex">
+            <a href={mailto("Hello Tapmerce")} className={`text-sm font-medium transition-colors ${t.contact}`}>
               Contact
             </a>
-            <motion.a
-              href="/#waitlist"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/20"
+            <Link
+              href="/#demo"
+              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] ${t.cta}`}
             >
-              Join Waitlist
-            </motion.a>
+              Book a demo
+            </Link>
           </div>
 
           <button
-            className="md:hidden p-2"
+            className="cursor-pointer p-2 md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
-            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className={`h-6 w-6 ${t.icon}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               {mobileOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -85,31 +100,29 @@ export default function Header() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden border-t border-white/10"
+              className={`overflow-hidden border-t md:hidden ${t.sheet}`}
             >
               <div className="py-4">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block py-2 text-sm font-medium text-white/60 hover:text-white"
+                    className={`block py-2.5 text-[15px] font-medium ${t.link}`}
                     onClick={() => setMobileOpen(false)}
                   >
                     {item.name}
                   </Link>
                 ))}
                 <div className="mt-4 flex flex-col gap-2">
-                  <a
-                    href={mailto("Hello AskShop")}
-                    className="text-center rounded-lg border border-white/10 text-white px-4 py-2 text-sm font-medium"
-                  >
+                  <a href={mailto("Hello Tapmerce")} className={`rounded-full border px-4 py-2.5 text-center text-sm font-medium ${t.ghost}`}>
                     Contact
                   </a>
                   <Link
-                    href="/#waitlist"
-                    className="text-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white"
+                    href="/#demo"
+                    onClick={() => setMobileOpen(false)}
+                    className={`rounded-full px-4 py-2.5 text-center text-sm font-semibold ${t.cta}`}
                   >
-                    Join Waitlist
+                    Book a demo
                   </Link>
                 </div>
               </div>
@@ -117,6 +130,6 @@ export default function Header() {
           )}
         </AnimatePresence>
       </nav>
-    </motion.header>
+    </header>
   );
 }

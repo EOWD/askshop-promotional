@@ -3,17 +3,17 @@ import { site, mailto, founderInitials } from "@/lib/site";
 import { JsonLd, buildBreadcrumbSchema } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "About — Who Builds AskShop",
+  title: "About — Who Builds Tapmerce",
   description:
-    "AskShop is designed and built by founder Eiad Oraby: dedicated native apps and an AI shopping marketplace for Shopify stores. Learn about the mission and how to get in touch.",
+    "Tapmerce is designed and built by founder Eiad Oraby: dedicated native apps and an AI shopping marketplace for Shopify stores. Learn about the mission and how to get in touch.",
 };
 
 export default function AboutPage() {
   return (
     <>
       <JsonLd data={buildBreadcrumbSchema([
-        { name: "Home", url: "https://askshop.app" },
-        { name: "About", url: "https://askshop.app/about" },
+        { name: "Home", url: "https://tapmerce.com" },
+        { name: "About", url: "https://tapmerce.com/about" },
       ])} />
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -24,7 +24,7 @@ export default function AboutPage() {
             </h1>
             <p className="mt-6 text-lg text-muted">
               We believe every merchant deserves a dedicated mobile app — not a cookie-cutter
-              PWA, but a true native experience published under their brand. AskShop makes that
+              PWA, but a true native experience published under their brand. Tapmerce makes that
               possible without the $50k+ development cost.
             </p>
           </div>
@@ -36,7 +36,7 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-foreground mb-12">Our story</h2>
           <div className="max-w-3xl space-y-6 text-muted">
             <p>
-              We started AskShop after watching Shopify merchants struggle with the same problem:
+              We started Tapmerce after watching Shopify merchants struggle with the same problem:
               mobile traffic was growing every year, but mobile conversion rates stayed flat.
               The gap between desktop and mobile conversion was costing merchants millions in
               lost revenue.
@@ -47,13 +47,13 @@ export default function AboutPage() {
               transform the shopping experience.
             </p>
             <p>
-              So we built AskShop — a platform that gives every Shopify merchant two powerful
+              So we built Tapmerce — a platform that gives every Shopify merchant two powerful
               options: a conversational AI shopping app that feels like chatting with a personal
               shopper, and a classic store app that&apos;s fast, beautiful, and native. Both published
               under the merchant&apos;s brand, with their own App Store listing.
             </p>
             <p>
-              AskShop is founder-built and founder-run. Every feature is driven by one question:
+              Tapmerce is founder-built and founder-run. Every feature is driven by one question:
               will this help merchants sell more on mobile?
             </p>
           </div>
@@ -63,7 +63,7 @@ export default function AboutPage() {
       {/* Founder */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-foreground mb-12">Who builds AskShop</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-12">Who builds Tapmerce</h2>
           <div className="max-w-3xl rounded-2xl bg-surface border border-border p-8 flex flex-col sm:flex-row gap-6 items-start">
             <div className="w-16 h-16 shrink-0 rounded-2xl bg-primary flex items-center justify-center text-white text-xl font-bold">
               {founderInitials}
@@ -72,13 +72,13 @@ export default function AboutPage() {
               <h3 className="text-xl font-semibold text-foreground">{site.founder.name}</h3>
               <p className="mt-1 text-sm text-primary-light">{site.founder.role}</p>
               <p className="mt-4 text-muted">
-                AskShop is designed, engineered and run by its founder. The platform grew out of
+                Tapmerce is designed, engineered and run by its founder. The platform grew out of
                 building the Organic&apos;s Best app — a European organic baby-formula retailer —
                 now live on the App Store and Google Play. Every part of it — the native apps, the
                 Shopify admin, and the AI assistant — is built in-house.
               </p>
               <a
-                href={mailto("Hello AskShop")}
+                href={mailto("Hello Tapmerce")}
                 className="mt-6 inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-surface-dark transition-colors"
               >
                 {site.contact.email}
@@ -146,11 +146,11 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground">Get in touch</h2>
           <p className="mt-4 text-lg text-muted max-w-xl mx-auto">
-            Questions about AskShop? Want to discuss an Enterprise plan? We&apos;d love to hear from
+            Questions about Tapmerce? Want to discuss an Enterprise plan? We&apos;d love to hear from
             you.
           </p>
           <a
-            href={mailto("Hello AskShop")}
+            href={mailto("Hello Tapmerce")}
             className="mt-6 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary-dark transition-colors"
           >
             {site.contact.email}

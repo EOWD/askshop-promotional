@@ -13,8 +13,35 @@
   --color-surface: #0f0e1a;
   --color-surface-dark: #161427;
   --color-border: #1e1b3a;
+
+  /* Home world: warm consumer app surface. Orange marks only what can be pressed. */
+  --color-stone: #efeae4;
+  --color-stone-deep: #e5ded5;
+  --color-card: #fffdfa;
+  --color-line: #e2dbd2;
+  --color-ink: #1d1d1f;
+  --color-ink-2: #55524e;
+  --color-ink-3: #6b665f;
+  --color-action: #ff5a1f;
+  --color-action-press: #f04a10;
+  --color-action-soft: #ffe4d8;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bricolage);
+  --font-text: var(--font-figtree);
+
+  --animate-marquee: marquee 60s linear infinite;
+  --animate-marquee-reverse: marquee 68s linear infinite reverse;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 body {
@@ -25,4 +52,42 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Home world browser surfaces */
+.home-world {
+  font-family: var(--font-figtree), system-ui, sans-serif;
+  caret-color: var(--color-action);
+}
+.home-world ::selection {
+  background: var(--color-action-soft);
+  color: var(--color-ink);
+}
+.home-world :focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+.home-world .display {
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+  font-variation-settings: "opsz" 96;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
 }

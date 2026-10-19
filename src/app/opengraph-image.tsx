@@ -17,8 +17,8 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "96px",
-          background: "linear-gradient(135deg, #06050e 0%, #14122a 60%, #1e1b4b 100%)",
-          color: "#ffffff",
+          background: "#f4f0e6",
+          color: "#17251d",
           fontFamily: "sans-serif",
         }}
       >
@@ -28,27 +28,26 @@ export default function OpenGraphImage() {
               width: 88,
               height: 88,
               borderRadius: 24,
-              background: "#4f46e5",
+              background: "#2f6b45",
+              color: "#fbf9f4",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: 52,
               fontWeight: 700,
             }}
-          >
-            A
-          </div>
+          >T</div>
           <div style={{ fontSize: 72, fontWeight: 700, display: "flex" }}>
-            Ask<span style={{ color: "#818cf8" }}>Shop</span>
+            Tap<span style={{ color: "#2f6b45" }}>merce</span>
           </div>
         </div>
-        <div style={{ marginTop: 40, fontSize: 40, color: "rgba(255,255,255,0.72)", maxWidth: 900 }}>
+        <div style={{ marginTop: 40, fontSize: 40, color: "#17251d", maxWidth: 900 }}>
           {site.tagline}
         </div>
-        <div style={{ marginTop: 28, fontSize: 26, color: "rgba(255,255,255,0.4)" }}>
-          Dedicated native apps and an AI shopping marketplace, built on Shopify.
+        <div style={{ marginTop: 28, fontSize: 26, color: "#4b5850" }}>
+          An AI assistant for your website, your own app, and AI marketplace listings.
         </div>
-        <div style={{ position: "absolute", bottom: 56, left: 96, fontSize: 24, color: "rgba(255,255,255,0.35)" }}>
+        <div style={{ position: "absolute", bottom: 56, left: 96, fontSize: 24, color: "#7a847c" }}>
           {site.domain}
         </div>
       </div>

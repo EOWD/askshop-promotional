@@ -1,11 +1,15 @@
+import { aiPlanFrom, appFrom } from "./pricing";
+
+const TAPMERCE_PRICE = `AI from ${aiPlanFrom}, app ${appFrom}`;
+
 export interface Competitor {
   slug: string;
   name: string;
   tagline: string;
   priceFrom: string;
   description: string;
-  features: Record<string, [boolean | string, boolean | string]>; // [competitor, askshop]
-  askshopAdvantages: string[];
+  features: Record<string, [boolean | string, boolean | string]>; // [competitor, tapmerce]
+  tapmerceAdvantages: string[];
   competitorAdvantages: string[];
   verdict: string;
 }
@@ -21,7 +25,7 @@ export const competitors: Record<string, Competitor> = {
     features: {
       "AI Chat Shopping": ["No", "Yes"],
       "Traditional Store App": ["Yes", "Yes"],
-      "Starting Price": ["~$200/mo", "$99/mo"],
+      "Starting Price": ["~$200/mo", TAPMERCE_PRICE],
       "Success Fees": ["2.5% of in-app sales", "No"],
       "Push Notifications": ["Yes", "Yes"],
       "Native Checkout (Shop Pay)": ["Yes", "Yes"],
@@ -32,9 +36,9 @@ export const competitors: Record<string, Competitor> = {
       "Built-in Loyalty": ["Yes", "Via Shopify"],
       "Integration Ecosystem": ["Extensive", "Growing"],
     },
-    askshopAdvantages: [
+    tapmerceAdvantages: [
       "AI-powered conversational shopping (unique feature)",
-      "50% lower starting price ($99 vs ~$200/month)",
+      "No monthly platform fee and no success fees — one-time build plus a usage-based AI plan",
       "No success fees (Tapcart charges 2.5% of in-app sales)",
       "Two distinct app experiences (AI Chat + Classic)",
       "Modern tech stack (React Native + Expo SDK 55)",
@@ -46,7 +50,7 @@ export const competitors: Record<string, Competitor> = {
       "Built-in loyalty program",
     ],
     verdict:
-      "Choose Tapcart if you need an established platform with extensive integrations. Choose AskShop if you want AI shopping capabilities, lower pricing, and the flexibility of two app experiences.",
+      "Choose Tapcart if you need an established platform with extensive integrations. Choose Tapmerce if you want AI shopping capabilities, lower pricing, and the flexibility of two app experiences.",
   },
   shopney: {
     slug: "shopney",
@@ -58,7 +62,7 @@ export const competitors: Record<string, Competitor> = {
     features: {
       "AI Chat Shopping": ["No", "Yes"],
       "Traditional Store App": ["Yes", "Yes"],
-      "Starting Price": ["~$149/mo", "$99/mo"],
+      "Starting Price": ["~$149/mo", TAPMERCE_PRICE],
       "Push Notifications": ["Yes", "Yes"],
       "Native Checkout": ["Yes", "Yes"],
       "Custom Branding": ["Good", "Full"],
@@ -67,9 +71,9 @@ export const competitors: Record<string, Competitor> = {
       "Design Flexibility": ["Good", "Good"],
       "Revenue Attribution": ["Limited", "Yes"],
     },
-    askshopAdvantages: [
+    tapmerceAdvantages: [
       "AI-powered product recommendations and chat shopping",
-      "Lower starting price ($99 vs ~$149/month)",
+      "No monthly platform fee and no success fees — one-time build plus a usage-based AI plan",
       "Two app experiences instead of one",
       "AI replaces need for live chat support staff",
     ],
@@ -79,7 +83,7 @@ export const competitors: Record<string, Competitor> = {
       "Established market presence",
     ],
     verdict:
-      "Choose Shopney if you want human-powered in-app chat and more design templates. Choose AskShop if you want AI-driven shopping, lower pricing, and two distinct app experiences.",
+      "Choose Shopney if you want human-powered in-app chat and more design templates. Choose Tapmerce if you want AI-driven shopping, lower pricing, and two distinct app experiences.",
   },
   vajro: {
     slug: "vajro",
@@ -91,7 +95,7 @@ export const competitors: Record<string, Competitor> = {
     features: {
       "AI Chat Shopping": ["No", "Yes"],
       "Traditional Store App": ["Yes", "Yes"],
-      "Starting Price": ["~$99/mo", "$99/mo"],
+      "Starting Price": ["~$99/mo", TAPMERCE_PRICE],
       "Push Notifications": ["Yes", "Yes"],
       "Native Checkout": ["Yes", "Yes"],
       "Live Video Shopping": ["Yes", "No"],
@@ -100,7 +104,7 @@ export const competitors: Record<string, Competitor> = {
       "Custom Branding": ["Moderate", "Full"],
       "Analytics": ["Basic", "Advanced"],
     },
-    askshopAdvantages: [
+    tapmerceAdvantages: [
       "AI-powered conversational shopping",
       "Full custom branding (vs moderate)",
       "Two app experiences (AI Chat + Classic)",
@@ -112,7 +116,7 @@ export const competitors: Record<string, Competitor> = {
       "Gamification features",
     ],
     verdict:
-      "Choose Vajro if live video shopping is critical for your brand. Choose AskShop if you want AI shopping, better branding control, and more advanced analytics.",
+      "Choose Vajro if live video shopping is critical for your brand. Choose Tapmerce if you want AI shopping, better branding control, and more advanced analytics.",
   },
   magenative: {
     slug: "magenative",
@@ -124,7 +128,7 @@ export const competitors: Record<string, Competitor> = {
     features: {
       "AI Chat Shopping": ["No", "Yes"],
       "Traditional Store App": ["Yes", "Yes"],
-      "Starting Price": ["~$49/mo", "$99/mo"],
+      "Starting Price": ["~$49/mo", TAPMERCE_PRICE],
       "Push Notifications": ["Yes", "Yes"],
       "Native Checkout": ["Yes", "Yes"],
       "Custom Branding": ["Limited", "Full"],
@@ -133,7 +137,7 @@ export const competitors: Record<string, Competitor> = {
       "Push Segmentation": ["Basic", "Advanced"],
       "Build Quality": ["Basic", "Premium"],
     },
-    askshopAdvantages: [
+    tapmerceAdvantages: [
       "AI-powered shopping experience (unique)",
       "Full custom branding vs limited customization",
       "Premium build quality with modern tech stack",
@@ -141,11 +145,11 @@ export const competitors: Record<string, Competitor> = {
       "Two app experiences",
     ],
     competitorAdvantages: [
-      "Lower starting price ($49 vs $99/month)",
+      "Lower upfront cost ($49/month, no build fee)",
       "Good for stores with very basic needs",
     ],
     verdict:
-      "Choose MageNative if budget is your primary concern and you need only basic features. Choose AskShop if you want a premium experience with AI capabilities and full customization.",
+      "Choose MageNative if budget is your primary concern and you need only basic features. Choose Tapmerce if you want a premium experience with AI capabilities and full customization.",
   },
   appbrew: {
     slug: "appbrew",
@@ -157,7 +161,7 @@ export const competitors: Record<string, Competitor> = {
     features: {
       "AI Chat Shopping": ["No", "Yes"],
       "Traditional Store App": ["Yes", "Yes"],
-      "Starting Price": ["~$499/mo", "$99/mo"],
+      "Starting Price": ["~$499/mo", TAPMERCE_PRICE],
       "Success Fees": ["Yes (1-2%)", "No"],
       "Push Notifications": ["Yes", "Yes"],
       "Native Checkout": ["Yes", "Yes"],
@@ -166,9 +170,9 @@ export const competitors: Record<string, Competitor> = {
       "Dedicated App Builds": ["Yes", "Yes"],
       "Analytics": ["Advanced", "Advanced"],
     },
-    askshopAdvantages: [
+    tapmerceAdvantages: [
       "AI-powered conversational shopping (unique feature)",
-      "80% lower starting price ($99 vs ~$499/month)",
+      "No monthly platform fee and no success fees — one-time build plus a usage-based AI plan",
       "No success fees or commissions (Appbrew charges 1-2%)",
       "Two distinct app experiences (AI Chat + Classic)",
     ],
@@ -179,7 +183,7 @@ export const competitors: Record<string, Competitor> = {
       "More third-party integrations",
     ],
     verdict:
-      "Choose Appbrew if you want a well-funded platform with extensive integrations and don't mind the higher price + success fees. Choose AskShop if you want AI shopping, transparent pricing without commissions, and the flexibility of two app experiences at a fraction of the cost.",
+      "Choose Appbrew if you want a well-funded platform with extensive integrations and don't mind the higher price + success fees. Choose Tapmerce if you want AI shopping, transparent pricing without commissions, and the flexibility of two app experiences at a fraction of the cost.",
   },
   plobal: {
     slug: "plobal",
@@ -191,7 +195,7 @@ export const competitors: Record<string, Competitor> = {
     features: {
       "AI Chat Shopping": ["No", "Yes"],
       "Traditional Store App": ["Yes", "Yes"],
-      "Starting Price": ["~$199/mo", "$99/mo"],
+      "Starting Price": ["~$199/mo", TAPMERCE_PRICE],
       "Push Notifications": ["Yes", "Yes"],
       "Native Checkout": ["Yes", "Yes"],
       "Built for Shopify Badge": ["Yes", "Pending"],
@@ -200,9 +204,9 @@ export const competitors: Record<string, Competitor> = {
       "Success Fees": ["On Enterprise (1%)", "No"],
       "Analytics": ["Advanced", "Advanced"],
     },
-    askshopAdvantages: [
+    tapmerceAdvantages: [
       "AI-powered conversational shopping (unique feature)",
-      "50% lower starting price ($99 vs ~$199/month)",
+      "No monthly platform fee and no success fees — one-time build plus a usage-based AI plan",
       "No success fees on any plan",
       "Two distinct app experiences (AI Chat + Classic)",
       "True native builds (not iframe-based)",
@@ -214,7 +218,7 @@ export const competitors: Record<string, Competitor> = {
       "Deeper Klaviyo/Yotpo/Recharge integrations",
     ],
     verdict:
-      "Choose Plobal Apps if you value the 'Built for Shopify' badge and need deep integrations with specific third-party tools. Choose AskShop if you want AI shopping, lower pricing, and true native app builds without iframe workarounds.",
+      "Choose Plobal Apps if you value the 'Built for Shopify' badge and need deep integrations with specific third-party tools. Choose Tapmerce if you want AI shopping, lower pricing, and true native app builds without iframe workarounds.",
   },
 };
 
