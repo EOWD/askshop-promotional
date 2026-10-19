@@ -83,7 +83,7 @@ export default async function ComparePage({
             <div className="rounded-xl border border-primary/20 bg-indigo-500/10 p-6">
               <h3 className="text-sm font-medium text-primary">Tapmerce</h3>
               <div className="mt-2 text-3xl font-bold text-foreground">{aiPlanFrom}</div>
-              <p className="text-sm text-muted">AI plan · app add-on with {appSetupPrice} setup · no success fees</p>
+              <p className="text-sm text-muted">AI plan · app {appSetupPrice} one-time build · no success fees</p>
             </div>
           </div>
 

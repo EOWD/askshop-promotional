@@ -30,7 +30,7 @@ export function PricingPlans({
   overage: string;
   app: { monthly: number; setup: number; includes: readonly string[] };
 }) {
-  const [annual, setAnnual] = useState(true);
+  const [annual, setAnnual] = useState(false);
   const reduce = useReducedMotion();
   const perMonth = (m: number) => (annual ? Math.round((m * (12 - freeMonths)) / 12) : m);
 
@@ -90,7 +90,7 @@ export function PricingPlans({
             <div className={`mt-6 rounded-[16px] px-4 py-3 ${p.highlighted ? "bg-white/10" : "bg-stone"}`}>
               <div className="text-[16px] font-semibold tabular-nums">{p.conversations.toLocaleString("en-US")} shopper conversations</div>
               <div className={`text-[13px] ${p.highlighted ? "text-card/70" : "text-ink-2"}`}>
-                About {p.perConversation} each, then {overage} per extra conversation
+                Then {overage} per extra conversation
               </div>
             </div>
 
@@ -128,22 +128,17 @@ export function PricingPlans({
               <h3 className="display mt-2 text-[2rem] font-bold leading-tight tracking-[-0.02em]">Your branded app, AI built in</h3>
             </div>
           </div>
-          <div className="mt-5 flex flex-wrap items-end gap-x-6 gap-y-2">
-            <div className="flex items-end gap-2">
-              <span className="display text-[3rem] font-bold leading-none tracking-[-0.04em] tabular-nums">+{eur.format(perMonth(app.monthly))}</span>
-              <span className="pb-1 text-[16px] text-ink-2">/month</span>
+          <div className="mt-5 flex flex-wrap items-end gap-x-8 gap-y-3">
+            <div>
+              <div className="flex items-end gap-2">
+                <span className="display text-[3rem] font-bold leading-none tracking-[-0.04em] tabular-nums">{eur.format(app.setup)}</span>
+                <span className="pb-1 text-[16px] text-ink-2">one-time build</span>
+              </div>
             </div>
-            <p className="pb-1 text-[15px] text-ink-2">
-              {annual ? (
-                <>
-                  Setup <s className="tabular-nums">{eur.format(app.setup)}</s> <span className="font-semibold text-ink">waived</span> on annual billing
-                </>
-              ) : (
-                <>
-                  Plus <span className="font-semibold tabular-nums text-ink">{eur.format(app.setup)}</span> one-time setup
-                </>
-              )}
-            </p>
+            <div className="flex items-end gap-2 pb-1">
+              <span className="text-[22px] font-semibold tabular-nums">+{eur.format(perMonth(app.monthly))}</span>
+              <span className="text-[15px] text-ink-2">/month for hosting, push and updates</span>
+            </div>
           </div>
           <ul className="mt-7 grid gap-x-8 gap-y-3 sm:grid-cols-2">
             {app.includes.map((f) => (
@@ -156,7 +151,7 @@ export function PricingPlans({
           <p className="mt-6 text-[14px] text-ink-2">
             Example: Growth plus your app is{" "}
             <span className="font-semibold tabular-nums text-ink">{eur.format(perMonth(plans[1].monthly) + perMonth(app.monthly))}</span>{" "}
-            a month, with the same assistant on your website and in your app. Live in three weeks or the setup fee back.
+            a month after the one-time build, with the same assistant on your website and in your app. Live in three weeks or the build fee back.
           </p>
         </article>
 

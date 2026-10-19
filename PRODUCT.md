@@ -32,7 +32,7 @@ The only offer that pairs a nutrition-aware AI shopping assistant (grounded in t
 - Hand-off to the brand's human support team inside the same chat.
 - App: Subscribe & Save, buy again, order tracking, shipping push notifications, app-only automatic discount (Shopify Function), native checkout with Apple Pay, Google Pay and Shop Pay.
 - App launch guarantee: submitted to both stores within 21 days of kickoff or the build fee is refunded (conditions in src/lib/site.ts).
-- Pricing (rebuilt 2026-10-19, all derived in src/lib/pricing.ts from cost + target margin): AI assistant Starter €69/mo (250 conversations), Growth €259 (1,000), Scale €989 (4,000), €0.25 per extra conversation; branded app add-on €189/mo + €1,490 setup (waived on annual); AI marketplace listing included with every plan; annual = 2 months free; 0% commission. Real AI cost is ~€0.12 per conversation. Never name the AI provider or model on the site.
+- Pricing (founder decisions, 2026-10-19; derived in src/lib/pricing.ts): servers cost at least €100 per merchant per month, so AI plans = (AI usage + €100 servers) + 45-50% margin: Starter €239/mo (250 conversations), Growth €439 (1,000), Scale €1,190 (4,000), €0.25 per extra conversation. Branded app = €4,990 one-time build + €49/mo app fee. Marketplace listing included; annual = 2 months free on monthly fees; 0% commission; guarantee: live in 3 weeks or build fee back. Never name the AI provider or model on the site.
 
 ## Capabilities and Constraints
 

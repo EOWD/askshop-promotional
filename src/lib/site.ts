@@ -33,9 +33,9 @@ export const site = {
     headline: "Your store app live within 3 weeks. Guaranteed.",
     short: "Live in 3 weeks, guaranteed",
     promise: "Your iOS and Android apps submitted to the App Store and Google Play within 21 days of kickoff",
-    remedy: "or your setup fee back",
+    remedy: "or your build fee back",
     conditions:
-      "The 21 days count from kickoff, once your brand assets and your Apple and Google developer accounts are in place. Store review typically adds a few days and is outside our control. If we miss the date, the app setup fee is refunded in full.",
+      "The 21 days count from kickoff, once your brand assets and your Apple and Google developer accounts are in place. Store review typically adds a few days and is outside our control. If we miss the date, the app build fee is refunded in full.",
     reasons: [
       "The platform is already built — your app is a configuration, not a software project",
       "The first Tapmerce app is live in both stores today",

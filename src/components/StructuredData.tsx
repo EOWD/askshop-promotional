@@ -80,7 +80,7 @@ export function buildPricingSchemas() {
     "@context": "https://schema.org",
     "@type": "Offer",
     name: `Tapmerce ${app.name}`,
-    description: `${app.summary} One-time setup of €${app.setupEur.toLocaleString("en-US")}, waived on annual billing.`,
+    description: `${app.summary} One-time build of €${app.setupEur.toLocaleString("en-US")}, then a monthly app fee.`,
     price: String(app.monthlyEur),
     priceSpecification: {
       "@type": "UnitPriceSpecification",

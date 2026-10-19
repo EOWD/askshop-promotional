@@ -32,8 +32,8 @@ export const pricingAssumptions = {
     memoryInputTokens: 3_000, // post-chat memory/profile update on the small model
     memoryOutputTokens: 300,
   },
-  /** Hosting, database, monitoring and the support bridge per store, per month. */
-  infraPerStoreEur: 8,
+  /** Dedicated servers per merchant (AI backend, database, monitoring, support bridge), per month. */
+  infraPerStoreEur: 100,
   /** Website AI assistant tiers. Margin is gross margin on (tokens + infra). */
   tiers: [
     { id: "starter", name: "Starter", conversations: 250, margin: 0.45, blurb: "For brands launching their first AI assistant." },
@@ -42,18 +42,16 @@ export const pricingAssumptions = {
   ] as const,
   /** Gross margin on conversations beyond the plan allowance. */
   overageMargin: 0.5,
-  /** Branded iOS + Android app, sold as an add-on to any AI plan. */
+  /**
+   * Branded iOS + Android app, added to any AI plan. Set prices (founder decision,
+   * 2026-10-19): a one-time build, then a small monthly fee for app hosting, push
+   * delivery, OS updates and store resubmissions. The build is ~20 hours of work.
+   */
   app: {
-    /** One-time: configuration, branding, store listings and submission (~20 hours). */
-    setupHours: 20,
-    hourlyCostEur: 60,
-    setupMargin: 0.2,
-    /** Monthly: app backend, push delivery, OS updates and store resubmissions. */
-    hostingEur: 15,
-    maintenanceHours: 2,
-    monthlyMargin: 0.3,
+    buildEur: 4_990,
+    monthlyEur: 49,
   },
-  /** Annual billing: this many months free, and the app setup fee is waived. */
+  /** Annual billing: this many months free on monthly fees (not on the one-time build). */
   annualFreeMonths: 2,
 } as const;
 
@@ -118,12 +116,11 @@ export const overagePerConversationEur =
 /** The branded app add-on. */
 export const app = (() => {
   const a = A.app;
-  const setupEur = charm(withMargin(a.setupHours * a.hourlyCostEur, a.setupMargin));
-  const monthlyEur = charm(withMargin(a.hostingEur + a.maintenanceHours * a.hourlyCostEur, a.monthlyMargin));
   return {
     name: "Branded app",
-    setupEur,
-    monthlyEur,
+    /** One-time build fee. (Kept as `setupEur` so existing callers keep working.) */
+    setupEur: a.buildEur,
+    monthlyEur: a.monthlyEur,
     summary: "Your own iOS and Android app in your brand, published under your accounts, with the AI shopping assistant built in.",
     includes: [
       "Native iOS and Android apps in your logo, colors and fonts",
@@ -148,7 +145,7 @@ export const formatEur = (value: number) => eur.format(value);
 export const formatEurCents = (value: number) => eurCents.format(value);
 /** "€69/mo" — the cheapest AI plan, for hero and comparison copy. */
 export const aiPlanFrom = `${formatEur(aiPlans[0].priceEur)}/mo`;
-/** "+€199/mo" — the app add-on. */
+/** "+€49/mo" — the app's monthly fee. */
 export const appFrom = `+${formatEur(app.monthlyEur)}/mo`;
-/** "€1,490" — the one-time app setup. */
+/** "€4,990" — the one-time app build. */
 export const appSetupPrice = formatEur(app.setupEur);

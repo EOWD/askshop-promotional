@@ -16,10 +16,16 @@ const navigation = [
   { name: "About", href: "/about" },
 ];
 
+const LIGHT_SECTIONS = ["/pricing", "/features", "/about", "/blog"];
+
+function isLightRoute(pathname: string): boolean {
+  return pathname === "/" || LIGHT_SECTIONS.some((base) => pathname === base || pathname.startsWith(`${base}/`));
+}
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  // Home and pricing use the light app-surface world; other pages keep the dark theme until redesigned.
-  const light = ["/", "/pricing"].includes(usePathname());
+  // Redesigned routes use the light app-surface world; compare and legal pages keep the dark theme until redesigned.
+  const light = isLightRoute(usePathname());
 
   const t = light
     ? {

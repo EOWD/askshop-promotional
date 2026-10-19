@@ -52,7 +52,6 @@ const market = [
   { what: "Mobile app builders", unit: "per month", price: "about €100 to €2,400", note: "AI usually extra; some take up to 3% of app sales" },
 ];
 
-const perConvRange = `${formatEurCents(aiPlans[aiPlans.length - 1].perConversationEur)} to ${formatEurCents(aiPlans[0].perConversationEur)}`;
 
 const faqs = [
   {
@@ -65,7 +64,7 @@ const faqs = [
   },
   {
     q: "Can I start with the website assistant only?",
-    a: `Yes. Most brands start with the assistant on their store and add the app later. The app adds ${formatEur(app.monthlyEur)} a month to any plan, plus a ${appSetupPrice} one-time setup that is waived on annual billing.`,
+    a: `Yes. Most brands start with the assistant on their store and add the app later. The app is a one-time build of ${appSetupPrice}, then ${formatEur(app.monthlyEur)} a month for hosting, push and updates.`,
   },
   {
     q: "Do you take a commission on sales?",
@@ -73,7 +72,7 @@ const faqs = [
   },
   {
     q: "How do annual plans work?",
-    a: `Pay for ${12 - pricingAssumptions.annualFreeMonths} months and get 12, and the app setup fee is waived.`,
+    a: `Pay for ${12 - pricingAssumptions.annualFreeMonths} months of your plan and get 12. The one-time app build is paid once and never again.`,
   },
   {
     q: "What does the 3-week guarantee cover?",
@@ -114,7 +113,7 @@ export default function PricingPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="display text-[2.8rem] font-extrabold leading-[0.98] tracking-[-0.035em] sm:text-6xl lg:text-7xl">
-              Affordable AI shopping, no commission
+              Clear pricing, no commission on sales
             </h1>
             <p className="mx-auto mt-5 max-w-[36rem] text-[17px] leading-relaxed text-ink-2 sm:text-[19px]">
               Start with the AI assistant on your store from {aiPlanFrom}. Add your own branded app when you&apos;re
@@ -144,7 +143,7 @@ export default function PricingPage() {
         <div className="mx-auto max-w-7xl">
           <h2 className={`${h2} max-w-3xl`}>How it compares to what the market charges</h2>
           <p className="mt-5 max-w-[38rem] text-[17px] leading-relaxed text-ink-2 sm:text-[19px]">
-            {`Typical published prices, October 2026. Tapmerce costs ${perConvRange} per conversation and includes the app's AI, with no commission.`}
+            {`Typical published prices, October 2026. Tapmerce bundles the assistant, your branded app and nutrition-safe answers, with no commission on sales.`}
           </p>
           <div className="mt-10 grid gap-4 lg:grid-cols-4">
             {market.map((m) => (
@@ -157,8 +156,8 @@ export default function PricingPage() {
             ))}
             <div className="rounded-[24px] bg-ink p-6 text-card">
               <div className="text-[15px] font-semibold">Tapmerce</div>
-              <div className="display mt-4 text-[1.7rem] font-bold leading-tight tracking-[-0.02em] tabular-nums">{perConvRange}</div>
-              <div className="text-[14px] text-card/70">per conversation, app {appFrom}</div>
+              <div className="display mt-4 text-[1.7rem] font-bold leading-tight tracking-[-0.02em] tabular-nums">AI from {aiPlanFrom}</div>
+              <div className="text-[14px] text-card/70">app {appSetupPrice} once, then {appFrom}</div>
               <p className="mt-4 text-[14px] leading-relaxed text-card/75">
                 Nutrition-safe answers, your brand everywhere, 0% commission.
               </p>

@@ -144,7 +144,7 @@ const faqs = [
   },
   {
     q: "How much does it cost?",
-    a: `The AI assistant starts at ${formatEur(aiPlans[0].priceEur)} a month for ${aiPlans[0].conversations} shopper conversations, then ${formatEurCents(overagePerConversationEur)} per extra conversation. Your branded app adds ${formatEur(app.monthlyEur)} a month plus a one-time ${appSetupPrice} setup, waived on annual billing. No commission on your sales, ever.`,
+    a: `The AI assistant starts at ${formatEur(aiPlans[0].priceEur)} a month for ${aiPlans[0].conversations} shopper conversations, then ${formatEurCents(overagePerConversationEur)} per extra conversation. Your branded iOS and Android app is a one-time build of ${appSetupPrice}, then ${formatEur(app.monthlyEur)} a month for hosting, push and updates. No commission on your sales, ever.`,
   },
 ];
 
@@ -650,17 +650,17 @@ export default function HomePage() {
             <div>
               <h3 className="text-[19px] font-semibold text-ink">Add your own app</h3>
               <div className="mt-4 flex items-end gap-2">
-                <span className="display text-5xl font-bold tracking-[-0.035em] tabular-nums text-ink sm:text-6xl">+{formatEur(app.monthlyEur)}</span>
-                <span className="pb-2 text-[17px] text-ink-2">/month</span>
+                <span className="display text-5xl font-bold tracking-[-0.035em] tabular-nums text-ink sm:text-6xl">{appSetupPrice}</span>
+                <span className="pb-2 text-[17px] text-ink-2">one-time</span>
               </div>
               <p className="mt-2 text-[16px] text-ink-2">
-                iOS and Android in your brand, AI built in. {appSetupPrice} one-time setup, waived on annual billing.
+                iOS and Android in your brand, AI built in. Then {formatEur(app.monthlyEur)} a month for hosting, push and updates.
               </p>
             </div>
             <ul className="space-y-3 text-[16px] text-ink">
               <li>No success fees or commission on your sales</li>
               <li>AI marketplace listing included with every plan</li>
-              <li>Live in three weeks or the setup fee back</li>
+              <li>Live in three weeks or the build fee back</li>
             </ul>
             <Link
               href="/pricing"
